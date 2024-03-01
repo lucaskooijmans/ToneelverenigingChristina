@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $historyItemData = HistoryItem::factory()->make()->toArray();
-        dump($historyItemData);
         HistoryItem::factory(10)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
