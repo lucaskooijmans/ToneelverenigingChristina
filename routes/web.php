@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/history', function () {
+    $historyItems = \App\Models\HistoryItem::all();
+    return view('history.index', ['historyItems' => $historyItems]);
+});
