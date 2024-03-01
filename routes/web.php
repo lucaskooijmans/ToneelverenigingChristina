@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/history', function () {
-    $historyItems = \App\Models\HistoryItem::all();
-    return view('history.index', ['historyItems' => $historyItems]);
-});
+Route::get('/history', [HistoryController::class, 'index']);
