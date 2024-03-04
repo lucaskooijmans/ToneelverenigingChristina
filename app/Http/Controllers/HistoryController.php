@@ -9,7 +9,7 @@ class HistoryController extends Controller
 {
     public function index()
     {
-        $historyItems = HistoryItem::orderBy('created_at', 'desc')->get();
+        $historyItems = HistoryItem::orderBy('date', 'desc')->get();
         return view('history.index', compact('historyItems'));
     }
 }

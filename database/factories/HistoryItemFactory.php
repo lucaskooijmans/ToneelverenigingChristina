@@ -22,6 +22,7 @@ class HistoryItemFactory extends Factory
             'image_path' => 'images/placeholder.jpg',
             'optional_text_two' => $this->faker->paragraph(3),
             'optional_footer' => $this->faker->paragraph(1),
+            'date' => $this->faker->date()
         ];
     }
 }

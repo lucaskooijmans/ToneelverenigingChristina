@@ -6,4 +6,5 @@
     <img src="{{ $historyItem->image_path }}" alt="" style="display: block; max-width: 100%; border-radius: 5px; margin-bottom: 10px;">
     <p>{{ $historyItem->optional_text_two }}</p>
     <h3>{{ $historyItem->optional_footer }}</h3>
+    <p>{{ $historyItem->date }}</p>
 </div>
