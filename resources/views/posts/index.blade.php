@@ -9,11 +9,14 @@
         @foreach($posts as $post)
             <li class="list-group-item">
                 <h2>{{ $post->title }}</h2>
+                <p>Aangemaakt: {{ $post->created_at->format('j-n-Y H:i') }}</p>
                 <p>{{ $post->body }}</p>
                 <div class="btn-group" role="group" aria-label="Post Actions">
-                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Aanpassen</a>
+                    <a href="{{ route('posts.edit', $post->id) }}">
+                        <button class="btn btn-primary">Aanpassen</button>
+                    </a>
                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                        @csrf
+                        @csrf {{-- https://laravel.com/docs/10.x/csrf --}}
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Verwijderen</button>
                     </form>
