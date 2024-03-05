@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -15,37 +16,57 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        if (Gate::allows('isAdmin')) {
+            return view('posts.create');
+        } else {
+            return redirect()->route('posts.index')->with('error', 'Unauthorized action');
+        }
     }
 
     public function store(Request $request)
     {
-        $post = new Post;
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->save();
+        if (Gate::allows('isAdmin')) {
+            $post = new Post;
+            $post->title = $request->title;
+            $post->body = $request->body;
+            $post->save();
 
-        return redirect()->route('posts.index');
+            return redirect()->route('posts.index');
+        } else {
+            return redirect()->route('posts.index')->with('error', 'Unauthorized action');
+        }
     }
 
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        if (Gate::allows('isAdmin')) {
+            return view('posts.edit', compact('post'));
+        } else {
+            return redirect()->route('posts.index')->with('error', 'Unauthorized action');
+        }
     }
 
     public function update(Request $request, Post $post)
     {
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->save();
+        if (Gate::allows('isAdmin')) {
+            $post->title = $request->title;
+            $post->body = $request->body;
+            $post->save();
 
-        return redirect()->route('posts.index');
+            return redirect()->route('posts.index');
+        } else {
+            return redirect()->route('posts.index')->with('error', 'Unauthorized action');
+        }
     }
 
     public function destroy(Post $post)
     {
-        $post->delete();
+        if (Gate::allows('isAdmin')) {
+            $post->delete();
 
-        return redirect()->route('posts.index');
+            return redirect()->route('posts.index');
+        } else {
+            return redirect()->route('posts.index')->with('error', 'Unauthorized action');
+        }
     }
 }
