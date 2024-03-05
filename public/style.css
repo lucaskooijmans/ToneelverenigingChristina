@@ -23,17 +23,15 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
     /* Primaire voorgrondkleur */
     --primary-foreground-color: #000;
     /* Secundaire achtergrondkleur (Sections, nieuwsberichten etc) */
-    --secondary-color: #fff;
+    --secondary-color: #1d1d1b;
     /* Secundaire voorgrondkleur (Sections, nieuwsberichten etc) */
-    --secondary-foreground-color: #333;
+    --secondary-foreground-color: #fff;
     /* Tertiaire achtergrondkleur (Tekst, links etc) */
     --tertiary-color: #333;
     /* Tertiaire voorgrondkleur (Tekst, links etc) */
     --tertiary-foreground-color: #fff;
     /* Accentkleur (Links, knoppen etc) */
-    --accent-color: #f008;
-    /* Voorgrondkleur van accentkleur (Links, knoppen etc) */
-    --accent-foreground-color: #fff;
+    --accent-color: #8b001b;
 }
 
 body {
@@ -53,9 +51,21 @@ nav {
     background-color: var(--secondary-color);
     color: var(--secondary-foreground-color);
     font-size: 1.3rem;
+    z-index: 5;
 }
 
-nav h1 {
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: row;
+}
+
+.brand img {
+    height: 4.5rem;
+}
+
+.brand h1 {
     font-size: 1.5rem;
     line-height: 1.6rem;
     font-weight: 600;
@@ -70,11 +80,10 @@ nav h1 {
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
-    transition: background-color 0.3s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .menu-button:hover {
-    color: var(--accent-foreground-color);
     background-color: var(--accent-color);
 }
 
@@ -89,11 +98,10 @@ nav h1 {
     padding: 0.5rem 1rem;
     border-radius: 5px;
     text-decoration: none;
-    transition: background-color 0.3s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .links a:hover {
-    color: var(--accent-foreground-color);
     background-color: var(--accent-color);
 }
 
@@ -111,10 +119,13 @@ nav h1 {
         gap: 0;
         background-color: var(--secondary-color);
         transition: transform 0.3s ease-in-out;
+        overflow-y: auto;
+        z-index: 4;
     }
 
     .links[data-visible="true"] {
         transform: translateX(0);
+        box-shadow: #1d1d1b 0px 0px 10px;
     }
 
     .menu-button {
