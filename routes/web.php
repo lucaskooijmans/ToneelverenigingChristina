@@ -14,12 +14,16 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('welcome', function () {
     return view('welcome');
 });
 
 Route::get('/nieuws', [PostController::class, 'index']);
 Route::resource('posts', PostController::class);
+
+Route::get('/', function () {
+    return view('home');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
