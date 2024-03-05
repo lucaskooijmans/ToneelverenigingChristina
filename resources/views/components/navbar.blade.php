@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="style.css">
 <nav>
     <div class="brand">
-        <img src="/logo.jpg" alt="Logo van toneelvereniging Christina">
+        <img src="images/logo.jpg" alt="Logo van toneelvereniging Christina">
         <h1>Toneelvereniging<br>Christina<br>Ravenswaaij</h1>
     </div>
     <button class="menu-button" onclick="toggleNavbar()">Menu</button>

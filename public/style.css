@@ -19,7 +19,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
 
 :root {
     /* Primaire achtergrondkleur */
-    --primary-color: #aaa;
+    --primary-color: #fff;
     /* Primaire voorgrondkleur */
     --primary-foreground-color: #000;
     /* Secundaire achtergrondkleur (Sections, nieuwsberichten etc) */
@@ -43,8 +43,12 @@ body {
     min-height: 100svh;
 }
 
+/* Navigatie */
+
 nav {
     display: flex;
+    position: sticky;
+    top: 0;
     justify-content: space-between;
     align-items: center;
     padding: .5rem 1rem;
@@ -69,6 +73,7 @@ nav {
     font-size: 1.5rem;
     line-height: 1.6rem;
     font-weight: 600;
+    margin: 0;
 }
 
 .menu-button {
@@ -105,7 +110,185 @@ nav {
     background-color: var(--accent-color);
 }
 
+h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    margin-bottom: 1rem;
+
+}
+
+/* Hero (Welkom + intro + foto) */
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    /* background-color: var(--primary-color); */
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("/images/groepsfoto.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    color: var(--primary-foreground-color);
+}
+
+.hero .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-direction: row;
+    max-width: 1200px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+.hero.text {
+    flex-direction: column;
+    justify-content: start;
+    align-content: start;
+}
+
+.hero img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+/* Countdown tot volgende voorstelling */
+
+.aankomend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+}
+
+.aankomend h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    margin-bottom: .5rem;
+}
+
+.countdown {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
+.aankomend .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+}
+
+.countdown-item span {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.countdown-item p {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Homepagina nieuws */
+
+.aankondigingen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: var(--primary-color);
+    color: var(--primary-foreground-color);
+}
+
+.aankondigingen .items {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    gap: 2rem;
+    max-width: 1200px;
+    height: 100%;
+}
+
+.aankondiging {
+    display: flex;
+    flex: 1 1 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+}
+
+.aankondiging h1 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: .5rem;
+    font-weight: 600;
+}
+
+.aankondiging p {
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.meerzien {
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.meerzien a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out, border 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    border: none;
+}
+
+.meerzien a:hover {
+    color: var(--primary-foreground-color);
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.meerzien a svg {
+    margin-left: .5rem;
+}
+
+/* Media Queries */
+
 @media screen and (max-width: 1280px) {
+
     /* Laptop */
     /* Verstop navigatielinks offscreen, wanneer data-visible = true, toon hem vanaf de linkerkant, onder de H1 in de navbar */
     .links {
@@ -132,4 +315,53 @@ nav {
         display: block;
     }
 
+    .hero {
+        padding: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+
+    /* Tablet */
+    .hero .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .aankondigingen .items {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    /* Tablet */
+    .hero {
+        padding: 1rem 0;
+    }
+
+    .aankondigingen {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    /* Mobiel */
+    .aankondigingen {
+        padding: .1rem 1rem;
+    }
+
+    .countdown-item span {
+        font-size: 1.5rem;
+    }
+
+    .countdown-item p {
+        font-size: .8rem;
+    }
+
+    .countdown-item {
+        min-width: 50px;
+    }
 }

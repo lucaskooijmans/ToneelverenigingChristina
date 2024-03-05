@@ -6,3 +6,11 @@ function toggleNavbar() {
     x.setAttribute("data-visible", "true");
   }
 }
+
+// If user clicks outside of the navbar, close it
+document.addEventListener("click", function(event) {
+  if(event.target.closest("nav") === null) {
+    var x = document.querySelector(".links");
+    x.setAttribute("data-visible", "false");
+  }
+});
