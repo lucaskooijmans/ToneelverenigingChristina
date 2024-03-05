@@ -1,7 +1,7 @@
 <?php
-
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\PostController;
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('welcome', function () {
     return view('welcome');
 });
+
+Route::get('/nieuws', [PostController::class, 'index']);
+Route::resource('posts', PostController::class);
 
 Route::get('/', function () {
     return view('home');
