@@ -3,12 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-<<<<<<< HEAD
-use App\Models\HistoryItem;
-=======
 use App\Models\Post;
 use App\Models\User;
->>>>>>> developer
+use App\Models\HistoryItem;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-<<<<<<< HEAD
         // \App\Models\User::factory(10)->create();
         $historyItemData = HistoryItem::factory()->make()->toArray();
         HistoryItem::factory(10)->create();
@@ -27,7 +23,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-=======
         Post::create(
             [
                 'title' => 'Post 1',
@@ -48,6 +43,5 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin'),
             'role' => 'admin'
         ]);
->>>>>>> developer
     }
 }
