@@ -215,8 +215,8 @@ h1 {
     flex-direction: row;
     gap: 2rem;
     padding: 2rem;
-    background-color: var(--primary-color);
-    color: var(--primary-foreground-color);
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
 }
 
 .aankondigingen .items {
@@ -258,15 +258,14 @@ h1 {
 
 .meerzien {
     display: inline-block;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: var(--accent-color);
+    font-size: 2rem;
+    color: var(--secondary-foreground-color-color);
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 }
 
 .meerzien a {
-    color: var(--accent-color);
+    color: var(--secondary-foreground-color-color);
     text-decoration: none;
     transition: color 0.3s ease-in-out, border 0.3s ease-in-out;
     display: flex;
@@ -277,12 +276,101 @@ h1 {
 }
 
 .meerzien a:hover {
-    color: var(--primary-foreground-color);
-    border-bottom: 1px solid var(--accent-color);
+    border-bottom: 1px solid var(--primary-color);
 }
 
 .meerzien a svg {
     margin-left: .5rem;
+}
+
+/* Nieuwspagina */
+
+.nieuws {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
+    min-height: calc(100svh - 5.8rem);
+}
+
+.nieuws h1 {
+    margin: 2rem 0 0;
+}
+
+.nieuws .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+
+}
+
+.post-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-direction: row;
+}
+
+.posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+
+}
+
+.button {
+    display: inline-block;
+    padding: .5rem 1rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+    background-color: var(--accent-color);
+    cursor: pointer;
+}
+
+.green-button {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.green-button:hover {
+    background-color: #2e7d32;
+}
+
+.red-button {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.red-button:hover {
+    background-color: #c62828;
 }
 
 /* Media Queries */
@@ -295,10 +383,10 @@ h1 {
         position: fixed;
         transform: translateX(-100%);
         flex-direction: column;
-        top: 5.5rem;
+        top: 5.8rem;
         left: 0;
         min-width: 200px;
-        height: calc(100svh - 5.5rem);
+        height: calc(100svh - 5.8rem);
         gap: 0;
         background-color: var(--secondary-color);
         transition: transform 0.3s ease-in-out;
