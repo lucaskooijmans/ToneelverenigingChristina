@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="https://kit.fontawesome.com/2a5648d90a.js" crossorigin="anonymous"></script>
+    <title>Nieuws</title>
+    <script src="https://kit.fontawesome.com/2a5648d90a.js" crossorigin="anonymous" defer></script>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
             @auth
                 @if (auth()->user()->isAdmin())
                     <a href="{{ route('posts.create') }}" class="button">
-                        Toevoegen <i class="fas fa-plus"></i>
+                        <i class="fas fa-plus"></i> Toevoegen
                     </a>
                 @endif
             @endauth
@@ -34,7 +34,7 @@
                     @foreach ($posts as $post)
                         <div class="list-group-item post">
                             <h2>{{ $post->title }}</h2>
-                            <p>Aangemaakt: {{ $post->created_at->format('j-n-Y H:i') }}</p>
+                            <p class="date">Aangemaakt: {{ $post->created_at->format('j-n-Y H:i') }}</p>
                             <p>{{ $post->body }}</p>
                             @auth
                                 @if (auth()->user()->isAdmin())
@@ -42,14 +42,16 @@
 
 
                                         <a href="{{ route('posts.edit', $post->id) }}">
-                                            <button class="button green-button">Aanpassen <i
-                                                    class="fas fa-pencil"></i></button>
+                                            <button class="button blue-button">
+                                                <i class="fas fa-pencil"></i> Aanpassen
+                                            </button>
                                         </a>
                                         <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                                             @csrf {{-- https://laravel.com/docs/10.x/csrf --}}
                                             @method('DELETE')
-                                            <button type="submit" class="button red-button">Verwijderen <i
-                                                    class="fas fa-trash"></i></button>
+                                            <button type="submit" class="button red-button">
+                                                <i class="fas fa-trash"></i> Verwijderen
+                                            </button>
                                         </form>
                                     </div>
                                 @endif
