@@ -20,7 +20,7 @@ Route::get('welcome', function () {
     return view('welcome');
 });
 
-Route::get('/history', [HistoryController::class, 'index']);
+Route::get('/historie', [HistoryController::class, 'index']);
 Route::get('/nieuws', [PostController::class, 'index']);
 Route::resource('posts', PostController::class);
 
@@ -38,4 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/history/create', function(){
+    return view('history.create');
+})->name('history.create');;
+
+Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
 require __DIR__.'/auth.php';
