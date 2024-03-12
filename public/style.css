@@ -329,11 +329,11 @@ h1 {
 
 .tree {
     position: absolute;
-    top: 28%;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
     width: 1px;
-    height: 72%;
+    height: 90%;
     background-color: var(--tertiary-foreground-color);
 }
 
@@ -345,6 +345,16 @@ h1 {
     font-size: 1rem;
     color: var(--tertiary-foreground-color);
 
+}
+
+.posts > :nth-child(2)::before {
+    position: absolute;
+    top: 0;
+    right: -3rem;
+    width: 2rem;
+    height: calc(50% - 1px);
+    background-color: var(--tertiary-color);
+    content: ' ';
 }
 
 .post:nth-child(odd)::before {
@@ -516,6 +526,10 @@ textarea {
 
 @media screen and (max-width: 1160px){
     .tree {
+        display: none;
+    }
+
+    .posts > :nth-child(2)::before {
         display: none;
     }
 
