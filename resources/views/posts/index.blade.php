@@ -31,6 +31,7 @@
                 <p>Er is op dit moment geen nieuws...</p>
             @else
                 <div class="list-group posts">
+                    <div class="tree"></div>
                     @foreach ($posts as $post)
                         <div class="list-group-item post">
                             <h2>{{ $post->title }}</h2>
@@ -58,6 +59,7 @@
                             @endauth
                         </div>
                     @endforeach
+                    <p class="tree-bottom-text">U heeft het eind van deze pagina bereikt</p>
                 </div>
             @endif
         </div>
