@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BoardMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('board_members', BoardMemberController::class)->names([
+    'store' => 'board_members.store',
+    'index' => 'board_members.index',
+    // Define other names if necessary
+]);
 
 Route::get('/bestuursleden', function () {
     return view('bestuurleden');
