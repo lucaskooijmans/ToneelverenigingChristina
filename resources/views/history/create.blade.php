@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Historie Toevoegen</title>
 </head>
-    <x-navbar />
     <body>
+    <x-navbar />
         <p>hello</p>
         <form action="{{ route('history.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
