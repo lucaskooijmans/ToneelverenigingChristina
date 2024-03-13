@@ -126,7 +126,7 @@ h1 {
     align-items: center;
     padding: 2rem;
     /* background-color: var(--primary-color); */
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("/images/groepsfoto.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/groepsfoto.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: scroll;
@@ -347,7 +347,7 @@ h1 {
 
 }
 
-.posts > :nth-child(2)::before {
+.posts> :nth-child(2)::before {
     position: absolute;
     top: 0;
     right: -3rem;
@@ -381,13 +381,18 @@ h1 {
     display: flex;
     position: relative;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
     padding: 1rem;
     background-color: var(--secondary-color);
     color: var(--secondary-foreground-color);
     border-radius: 5px;
     box-shadow: #1d1d1b 0px 0px 10px;
+    max-height: 30rem;
+}
+
+.post-content {
+    overflow-y: auto;
 }
 
 .post h2 {
@@ -524,12 +529,12 @@ textarea {
 
 }
 
-@media screen and (max-width: 1160px){
+@media screen and (max-width: 1160px) {
     .tree {
         display: none;
     }
 
-    .posts > :nth-child(2)::before {
+    .posts> :nth-child(2)::before {
         display: none;
     }
 

@@ -34,9 +34,11 @@
                     <div class="tree"></div>
                     @foreach ($posts as $post)
                         <div class="list-group-item post">
-                            <h2>{{ $post->title }}</h2>
-                            <p class="date">Aangemaakt: {{ $post->created_at->format('j-n-Y H:i') }}</p>
-                            <p>{{ $post->body }}</p>
+                            <div class="post-content">
+                                <h2>{{ $post->title }}</h2>
+                                <p class="date">Aangemaakt: {{ $post->created_at->format('j-n-Y H:i') }}</p>
+                                <p>{{ $post->body }}</p>
+                            </div>
                             @auth
                                 @if (auth()->user()->isAdmin())
                                     <div class="post-buttons" role="group" aria-label="Post Actions">
