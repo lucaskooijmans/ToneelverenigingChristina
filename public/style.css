@@ -27,9 +27,9 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
     /* Secundaire voorgrondkleur (Sections, nieuwsberichten etc) */
     --secondary-foreground-color: #fff;
     /* Tertiaire achtergrondkleur (Tekst, links etc) */
-    --tertiary-color: #333;
+    --tertiary-color: #aac3e8;
     /* Tertiaire voorgrondkleur (Tekst, links etc) */
-    --tertiary-foreground-color: #fff;
+    --tertiary-foreground-color: #000;
     /* Accentkleur (Links, knoppen etc) */
     --accent-color: #8b001b;
 }
@@ -260,7 +260,7 @@ h1 {
 .meerzien {
     display: inline-block;
     font-size: 2rem;
-    color: var(--secondary-foreground-color-color);
+    color: var(--tertiary-foreground-color);
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 }
@@ -277,7 +277,7 @@ h1 {
 }
 
 .meerzien a:hover {
-    border-bottom: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--tertiary-foreground-color);
 }
 
 .meerzien a svg {
