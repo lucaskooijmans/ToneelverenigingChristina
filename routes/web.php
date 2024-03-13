@@ -3,9 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\BestuursledenController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BoardMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,9 +55,3 @@ Route::middleware('auth')->group(function () {
 
 // Auth routes
 require __DIR__.'/auth.php';
-Route::resource('bestuursleden', BestuursledenController::class)->names([
-    'store' => 'bestuursleden.store',
-    'index' => 'bestuursleden.index',
-    // Define other names if necessary
-]);
-
