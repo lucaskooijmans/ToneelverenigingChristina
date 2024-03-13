@@ -1,37 +1,73 @@
-<h1>Nieuws</h1>
+<!DOCTYPE html>
+<html lang="nl">
 
-@auth
-    @if (auth()->user()->isAdmin())
-        <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">Toevoegen</a>
-    @endif
-@endauth
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nieuws</title>
+    <script src="https://kit.fontawesome.com/2a5648d90a.js" crossorigin="anonymous" defer></script>
+</head>
 
-@if($posts->isEmpty())
-    <p>Er is op dit moment geen nieuws...</p>
-@else
-    <ul class="list-group">
-        @foreach($posts as $post)
-            <li class="list-group-item">
-                <h2>{{ $post->title }}</h2>
-                <p>Aangemaakt: {{ $post->created_at->format('j-n-Y H:i') }}</p>
-                <p>{{ $post->body }}</p>
-                @auth
-                    @if (auth()->user()->isAdmin())
-                        <div class="btn-group" role="group" aria-label="Post Actions">
+<body>
+
+    <x-navbar />
+
+    <div class="nieuws">
+
+        <div class="container">
+
+            <h1>Nieuws</h1>
+
+            @auth
+                @if (auth()->user()->isAdmin())
+                    <a href="{{ route('posts.create') }}" class="button">
+                        <i class="fas fa-plus"></i> Toevoegen
+                    </a>
+                @endif
+            @endauth
+
+            @if ($posts->isEmpty())
+                <p>Er is op dit moment geen nieuws...</p>
+            @else
+                <div class="list-group posts">
+                    <div class="tree"></div>
+                    @foreach ($posts as $post)
+                        <div class="list-group-item post">
+                            <div class="post-content">
+                                <h2>{{ $post->title }}</h2>
+                                <p class="date">Aangemaakt: {{ $post->created_at->format('j-n-Y H:i') }}</p>
+                                <p>{{ $post->body }}</p>
+                            </div>
+                            @auth
+                                @if (auth()->user()->isAdmin())
+                                    <div class="post-buttons" role="group" aria-label="Post Actions">
 
 
-                            <a href="{{ route('posts.edit', $post->id) }}">
-                                <button class="btn btn-primary">Aanpassen</button>
-                            </a>
-                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                @csrf {{-- https://laravel.com/docs/10.x/csrf --}}
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Verwijderen</button>
-                            </form>
+                                        <a href="{{ route('posts.edit', $post->id) }}">
+                                            <button class="button blue-button">
+                                                <i class="fas fa-pencil"></i> Aanpassen
+                                            </button>
+                                        </a>
+                                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                            @csrf {{-- https://laravel.com/docs/10.x/csrf --}}
+                                            @method('DELETE')
+                                            <button type="submit" class="button red-button">
+                                                <i class="fas fa-trash"></i> Verwijderen
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            @endauth
                         </div>
-                    @endif
-                @endauth
-            </li>
-        @endforeach
-    </ul>
-@endif
+                    @endforeach
+                    <p class="tree-bottom-text">U heeft het eind van deze pagina bereikt</p>
+                </div>
+            @endif
+        </div>
+
+    </div>
+
+</body>
+
+</html>
