@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bestuursleden;
+use App\Models\Bestuurslid;
 use Illuminate\Http\Request;
 use App\Models\BoardMember;
 
-class BoardMemberController extends Controller
+class BestuursledenController extends Controller
 {
+
+    // TODO: ADD ADMIN AUTHENTICATION
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $boardMembers = BoardMember::all();
-        return view('board_members.index', compact('boardMembers'));
+        $bestuursleden = Bestuursleden::all();
+        return view('bestuursleden.index', compact('bestuursleden'));
     }
 
     /**
@@ -21,7 +26,7 @@ class BoardMemberController extends Controller
      */
     public function create()
     {
-        return view('board_members.create');
+        return view('bestuursleden.create');
     }
 
     /**
@@ -31,7 +36,7 @@ class BoardMemberController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:board_members,email',
+            'email' => 'required|email|unique:bestuursleden,email',
             'phone' => 'required',
             'description' => 'required',
             'image_url' => 'required|url',
@@ -39,8 +44,8 @@ class BoardMemberController extends Controller
 
         $data = $request->except('_token');
         
-        BoardMember::create($request->all());
-        return redirect()->route('board-members.index')
+        Bestuursleden::create($request->all());
+        return redirect()->route('bestuursleden.index')
                          ->with('success', 'Board member created successfully.');
     }
 
@@ -73,6 +78,10 @@ class BoardMemberController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $bestuurslid = Bestuursleden::findOrFail($id);
+        $bestuurslid->delete();
+
+        return redirect()->route('bestuursleden.index')
+                        ->with('success', 'Bestuurslid succesvol verwijderd.');
     }
 }

@@ -9,7 +9,7 @@
 <body>
     <div class="container mt-5">
         <h2>Voeg een nieuwe bestuurslid toe</h2>
-        <form action="{{ route('board_members.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('bestuursleden.store') }}" method="POST" enctype="multipart/form-data">
             @csrf <!-- CSRF token is required for form submissions in Laravel -->
 
             <div class="form-group">
