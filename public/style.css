@@ -27,9 +27,9 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
     /* Secundaire voorgrondkleur (Sections, nieuwsberichten etc) */
     --secondary-foreground-color: #fff;
     /* Tertiaire achtergrondkleur (Tekst, links etc) */
-    --tertiary-color: #333;
+    --tertiary-color: #aac3e8;
     /* Tertiaire voorgrondkleur (Tekst, links etc) */
-    --tertiary-foreground-color: #fff;
+    --tertiary-foreground-color: #000;
     /* Accentkleur (Links, knoppen etc) */
     --accent-color: #8b001b;
 }
@@ -41,6 +41,11 @@ body {
     color: var(--tertiary-foreground-color);
     background-color: var(--tertiary-color);
     min-height: 100svh;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 0 1rem;
 }
 
 /* Navigatie */
@@ -291,7 +296,7 @@ h1 {
 .meerzien {
     display: inline-block;
     font-size: 2rem;
-    color: var(--secondary-foreground-color-color);
+    color: var(--tertiary-foreground-color);
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 }
@@ -308,7 +313,7 @@ h1 {
 }
 
 .meerzien a:hover {
-    border-bottom: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--tertiary-foreground-color);
 }
 
 .meerzien a svg {
@@ -438,6 +443,8 @@ h1 {
     margin-bottom: 1rem;
 }
 
+/* Buttons */
+
 .button {
     display: inline-block;
     padding: .5rem 1rem;
@@ -497,7 +504,7 @@ h1 {
     min-width: 300px;
 }
 
-.post-form .form-group {
+.form-group {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -505,12 +512,12 @@ h1 {
     width: 100%;
 }
 
-.post-form .form-group label {
+.form-group label {
     font-size: 1.5rem;
     margin-bottom: .5rem;
 }
 
-.post-form .form-group .form-control {
+.form-group .form-control {
     padding: .5rem;
     border-radius: 5px;
     border: 1px solid var(--secondary-foreground-color);
@@ -518,8 +525,102 @@ h1 {
     width: calc(100% - 1rem);
 }
 
+label b {
+    color: red;
+
+}
+
 textarea {
     font-family: 'Arial', sans-serif;
+    resize: vertical;
+    min-height: 4lh;
+}
+
+/* Contact pagina */
+
+.contact {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
+    min-height: calc(100svh - 5.8rem);
+}
+
+.contact .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 1200px;
+}
+
+.contact h1 {
+    margin: 2rem 0 1rem;
+}
+
+.contact-form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    min-width: 500px;
+}
+
+.contact-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    min-width: 300px;
+}
+
+.contact-info h1 {
+    margin: 0;
+}
+
+.contact-info.label:first-child {
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+.alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f44336;
+    color: #fff;
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+.alert-success {
+    background-color: #4caf50;
+    color: #fff;
 }
 
 /* Historie pagina */
@@ -704,6 +805,11 @@ textarea {
     .aankondigingen .items {
         flex-direction: column;
     }
+
+    .contact-split {
+        flex-direction: column;
+    
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -729,6 +835,8 @@ textarea {
 
     .section {
         width: 80%;
+    .contact-form {
+        min-width: 400px;
     }
 }
 
@@ -754,4 +862,9 @@ textarea {
     .posts {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
+
+    .contact-form {
+        min-width: 300px;
+    }
+}
 }
