@@ -38,9 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/history/create', function(){
-    return view('history.create');
-})->name('history.create');;
+Route::get('/history/create', [HistoryController::class, 'create'])->name('history.create');
+Route::get('/history/edit/{id}', [HistoryController::class, 'edit'])->name('history.edit');
+Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->name('history.delete');
 
 Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
 require __DIR__.'/auth.php';
