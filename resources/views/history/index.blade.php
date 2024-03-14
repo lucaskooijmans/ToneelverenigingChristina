@@ -15,9 +15,9 @@
     <div class="historie">
 
         <h1>Historie</h1>
-
+        @if (Gate::allows('isAdmin'))
         <a href="{{ route('history.create') }}" class="add-item button"><i class="fas fa-plus"></i> Toevoegen</a>
-
+        @endif
         <div class="container">
             <div class="section">
                 <h1>Onze bijdragen</h1>

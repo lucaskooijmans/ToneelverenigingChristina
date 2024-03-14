@@ -12,6 +12,7 @@
     <p>{{ $historyItem->optional_text_two }}</p>
     <h3>{{ $historyItem->optional_footer }}</h3>
     <p class="date">{{ $historyItem->date }}</p>
+    @if (Gate::allows('isAdmin'))
     <div class="post-buttons">
         <a href="{{ route('history.edit', ['id' => $historyItem->id]) }}" class="button blue-button"><i class="fa fa-pencil"></i> Aanpassen</a>
         <form action="{{ route('history.delete', ['id' => $historyItem->id]) }}" method="POST" style="display: inline-block;">
@@ -20,6 +21,7 @@
             <button type="submit" class="button red-button" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Verwijderen</button>
         </form>
     </div>
+    @endif
     
 </div>
 

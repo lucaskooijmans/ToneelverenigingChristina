@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HistoryItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HistoryController extends Controller
 {
@@ -67,6 +68,8 @@ class HistoryController extends Controller
 
     public function delete($id){
         $historyItem = HistoryItem::find($id);
+        $tempphoto = $historyItem->image_path;
+        Storage::disk('public')->delete($tempphoto);
         $historyItem->delete();
         return $this->index();
     }
