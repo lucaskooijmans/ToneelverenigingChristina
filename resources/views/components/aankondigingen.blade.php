@@ -28,10 +28,10 @@
     </div>
     <div class="meerzien">
         <a href="/nieuws">
-            Meer aankondigingen
+            Meer
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2">
-                <path d="M0 0 L10 10 L0 20" fill="none" stroke="black" stroke-width="2" />
+                <path d="M0 0 L10 10 L0 20" fill="none" stroke="white" stroke-width="2" />
             </svg>
         </a>
     </div>
