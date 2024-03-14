@@ -17,7 +17,7 @@
 
         <h1>Foto toevoegen</h1>
 
-        <form action="{{ route('gallery.store') }}" method="POST" class="photo-form" enctype="multipart/form-data">
+        <form action="{{ route('gallery.store') }}" method="POST" class="post-form" enctype="multipart/form-data">
             @csrf {{-- https://laravel.com/docs/10.x/csrf --}}
             <div class="form-group">
                 <label for="image">Afbeelding</label>
