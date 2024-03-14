@@ -573,6 +573,37 @@ textarea {
     min-width: 500px;
 }
 
+.contact-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    min-width: 300px;
+}
+
+.contact-info h1 {
+    margin: 0;
+}
+
+.contact-info.label:first-child {
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
 .alert {
     display: flex;
     justify-content: center;
@@ -678,6 +709,11 @@ textarea {
 
     .aankondigingen .items {
         flex-direction: column;
+    }
+
+    .contact-split {
+        flex-direction: column;
+    
     }
 }
 
