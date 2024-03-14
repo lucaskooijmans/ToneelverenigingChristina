@@ -67,17 +67,29 @@ class BestuursledenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Bestuursleden $bestuurslid)
+    public function update(Request $request, $id)
     {
+        $bestuurslid = Bestuursleden::findOrFail($id);
         if (Gate::allows('isAdmin')) {
+            
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+                'description' => 'required',
+                'image_url' => 'required',
+            ]);
+        
+            // Use update method to save the validated data
+            
             $bestuurslid->name = $request->name;
             $bestuurslid->email = $request->email;
             $bestuurslid->phone = $request->phone;
             $bestuurslid->description = $request->description;
             $bestuurslid->image_url = $request->image_url;
-            $bestuurslid->update();
+            $bestuurslid->save();
 
-            return redirect()->route('bestuursleden.index');
+            return redirect()->route('bestuursleden.index')->with('success', 'Bestuurslid succesvol bijgewerkt.');
         } else {
             return redirect()->route('bestuursleden.index')->with('error', 'Unauthorized action');
         }

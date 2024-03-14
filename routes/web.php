@@ -29,8 +29,11 @@ Route::get('/nieuws', [PostController::class, 'index']);
 Route::resource('posts', PostController::class);
 
 // Bestuursleden
-Route::get('/bestuursleden', [BestuursledenController::class, 'index']);
+// Route::get('/bestuursleden', [BestuursledenController::class, 'index']);
 Route::resource('bestuursleden', BestuursledenController::class);
+// Route::put('/bestuursleden/{bestuurslid}', [BestuursledenController::class, 'update'])->name('bestuursleden.update');
+
+
 
 // Contact page
 Route::get('/contact', function () {
