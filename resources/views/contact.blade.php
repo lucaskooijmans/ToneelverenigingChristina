@@ -15,15 +15,15 @@
 
         <div class="container">
 
+            <h1>
+                Contact
+            </h1>
+
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
             @endif
-
-            <h1>
-                Contact
-            </h1>
 
             <form method="POST" action="{{ route('contact.submit') }}" class="contact-form">
                 @csrf
