@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Nieuws</title>
-    <script src="https://kit.fontawesome.com/2a5648d90a.js" crossorigin="anonymous" defer></script>
 </head>
 
 <body>
@@ -43,12 +42,12 @@
                                 @if (auth()->user()->isAdmin())
                                     <div class="post-buttons" role="group" aria-label="Post Actions">
 
-
                                         <a href="{{ route('posts.edit', $post->id) }}">
                                             <button class="button blue-button">
                                                 <i class="fas fa-pencil"></i> Aanpassen
                                             </button>
                                         </a>
+
                                         <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                                             @csrf {{-- https://laravel.com/docs/10.x/csrf --}}
                                             @method('DELETE')

@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BestuursledenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,19 +28,25 @@ Route::get('/nieuws', [PostController::class, 'index']);
 // Posts resource
 Route::resource('posts', PostController::class);
 
+// Bestuursleden
+// Route::get('/bestuursleden', [BestuursledenController::class, 'index']);
+Route::resource('bestuursleden', BestuursledenController::class);
+// Route::put('/bestuursleden/{bestuurslid}', [BestuursledenController::class, 'update'])->name('bestuursleden.update');
+
+
+
 // Contact page
 Route::get('/contact', function () {
     return view('contact');
 });
 
-
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
-
 
 // Home page
 Route::get('/', function () {
     return view('home');
 });
+
 
 // Dashboard page
 Route::get('/dashboard', function () {
