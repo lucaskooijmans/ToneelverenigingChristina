@@ -38,8 +38,8 @@ body {
     font-family: 'Arial', sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    color: var(--primary-foreground-color);
-    background-color: var(--primary-color);
+    color: var(--tertiary-foreground-color);
+    background-color: var(--tertiary-color);
     min-height: 100svh;
 }
 
@@ -279,6 +279,13 @@ h1 {
     font-size: 1rem;
     line-height: 1.5rem;
     margin-bottom: 1rem;
+    max-height: 10lh;
+    overflow-y: auto;
+}
+
+.aankondiging .body {
+    min-width: 30svw;
+    min-height: 5lh;
 }
 
 .meerzien {
@@ -345,7 +352,7 @@ h1 {
 .posts {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 1rem 4rem;
     padding: 1rem;
     min-height: 60svh;
@@ -515,6 +522,12 @@ textarea {
 
 /* Media Queries */
 
+@media screen and (min-width: 1920px) {
+    .aankondiging .body {
+        min-width: 0;
+    }
+}
+
 @media screen and (max-width: 1280px) {
 
     /* Laptop */
@@ -578,6 +591,10 @@ textarea {
 
     .post:nth-child(even)::after {
         display: none;
+    }
+
+    .posts {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
 }
 
