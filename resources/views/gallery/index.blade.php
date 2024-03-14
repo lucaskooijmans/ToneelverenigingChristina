@@ -17,18 +17,18 @@
 
         <div class="container">
 
-            <h1>Photo Gallery</h1>
+            <h1>Foto Gallerij</h1>
 
             @auth
                 @if (auth()->user()->isAdmin())
                     <a href="{{ route('gallery.create') }}" class="button">
-                        <i class="fas fa-plus"></i> Add Photo
+                        <i class="fas fa-plus"></i> Foto toevoegen
                     </a>
                 @endif
             @endauth
 
             @if ($photos->isEmpty())
-                <p>No photos available at the moment...</p>
+                <p>Geen foto's beschikbaar op dit moment...</p>
             @else
                 <div class="photo-grid">
                     @foreach ($photos as $photo)
@@ -36,8 +36,7 @@
                             <img src="{{ asset('storage/' . $photo->image) }}">
                             <h2>{{ $photo->title }}</h2>
                             <p>{{ $photo->description }}</p>
-                        </div>
-                        @auth
+                            @auth
                                 @if (auth()->user()->isAdmin())
                                     <div class="post-buttons" role="group" aria-label="Post Actions">
 
@@ -55,12 +54,14 @@
                                             </button>
                                         </form>
                                     </div>
-                                    <div class="popup-image">
+                                    
+                                @endif
+                            @endauth
+                        </div>
+                            <div class="popup-image">
                                         <span>&times;</span>
                                         <img src="{{ asset('storage/' . $photo->image) }}">
                                     </div>
-                                @endif
-                            @endauth
                     @endforeach
                 </div>
             @endif

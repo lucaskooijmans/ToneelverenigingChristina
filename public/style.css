@@ -209,9 +209,69 @@ h1 {
 
 /* Fotogallerij */
 
-.container .popup-image{
+.gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
+    min-height: calc(100vh - 5.8rem); /* Adjust as needed */
+}
+
+.gallery h1 {
+    margin: 2rem 0 1rem;
+}
+
+.gallery .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 1200px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust column width as needed */
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.photo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 100%;
+    height: auto;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+}
+
+.photo-item img {
+    width: 100%;
+}
+
+.photo-item h2 {
+    margin: 0;
+}
+
+.photo-item p {
+    max-width: 40ch;
+    max-height: 8lh;
+    overflow-y: auto;
+}
+
+/* Styling for the image popup */
+.popup-image {
     position: fixed;
-    top:0; left:0;
+    top: 0;
+    left: 0;
     background: rgba(0, 0, 0, 0.9);
     height: 100%;
     width: 100%;
@@ -219,25 +279,29 @@ h1 {
     display: none;
 }
 
-.container .popup-image span{
+.popup-image span {
     position: absolute;
-    top:6.8rem; right: 2rem;
-    font-size: 40px;
-    font-weight: bolder;
-    color:#fff;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
     cursor: pointer;
     z-index: 100;
 }
 
-.container .popup-image img{
+.popup-image img {
     position: absolute;
-    top:50%; left:50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     border: 4px solid #fff;
     border-radius: 5px;
-    width:750px;
-    object-fit: cover;
+    max-width: 90%; /* Adjust as needed */
+    max-height: 90%; /* Adjust as needed */
 }
+   
+
 
 /* Homepagina nieuws */
 
