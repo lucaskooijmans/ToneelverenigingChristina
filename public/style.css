@@ -259,6 +259,11 @@ h1 {
     overflow-y: auto;
 }
 
+.aankondiging .body {
+    min-width: 30svh;
+    min-height: 5lh;
+}
+
 .meerzien {
     display: inline-block;
     font-size: 2rem;
@@ -323,7 +328,7 @@ h1 {
 .posts {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 1rem 4rem;
     padding: 1rem;
     min-height: 60svh;
@@ -546,6 +551,10 @@ textarea {
 
     .post:nth-child(even)::after {
         display: none;
+    }
+
+    .posts {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
 }
 

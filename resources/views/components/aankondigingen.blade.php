@@ -14,7 +14,7 @@ $posts = Post::orderBy('created_at', 'desc')->take(2)->get();
                     <div class="aankondiging">
                         <h1>{{ $post->title }}</h1>
                         <p class="date">Aangemaakt: {{ $post->created_at->format('j-n-Y H:i') }}</p>
-                        <p>{{ $post->body }}</p>
+                        <p class="body">{{ $post->body }}</p>
                     </div>
                 @endforeach
             @endif
