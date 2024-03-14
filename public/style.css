@@ -447,6 +447,8 @@ h1 {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease-in-out;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
 .button:hover {
@@ -518,6 +520,94 @@ h1 {
 
 textarea {
     font-family: 'Arial', sans-serif;
+}
+
+/* Historie pagina */
+
+.historie {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
+    min-height: calc(100svh - 5.8rem);
+}
+
+.historie h1 {
+    margin: 2rem 0 1rem;
+}
+
+.historie .container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: row;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    width: 40%;
+}
+
+.section h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    margin-bottom: .5rem;
+}
+
+.section p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.section img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 5px;
+
+}
+
+.historie-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    border: 1px solid var(--tertiary-foreground-color);
+    width: calc(100% - 4rem);
+}
+
+.historie-item h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: .5rem;
+    font-weight: 600;
+}
+
+.historie-item p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 /* Media Queries */
@@ -624,6 +714,16 @@ textarea {
 
     .posts {
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+
+    .historie .container {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .section {
+        width: 80%;
     }
 }
 
