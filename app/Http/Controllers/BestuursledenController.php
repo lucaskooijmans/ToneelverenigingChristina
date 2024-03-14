@@ -42,9 +42,10 @@ class BestuursledenController extends Controller
             'phone' => 'required',
             'description' => 'required',
             'image_url' => 'required|url',
+        ], [
+            'image_url.required' => 'Vul alstublieft de URL naar de foto in.',
+            'image_url.url' => 'De URL naar de foto moet een geldige URL zijn die naar een foto leidt.',
         ]);
-
-        $data = $request->except('_token');
 
         Bestuursleden::create($request->all());
         return redirect()->route('bestuursleden.index')
@@ -71,17 +72,20 @@ class BestuursledenController extends Controller
     {
         $bestuurslid = Bestuursleden::findOrFail($id);
         if (Gate::allows('isAdmin')) {
-            
+
             $request->validate([
                 'name' => 'required',
                 'email' => 'required|email',
                 'phone' => 'required',
                 'description' => 'required',
                 'image_url' => 'required',
+            ], [
+                'image_url.required' => 'Vul alstublieft de URL naar de foto in.',
+                'image_url.url' => 'De URL naar de foto moet een geldige URL zijn die naar een foto leidt.',
             ]);
-        
+
             // Use update method to save the validated data
-            
+
             $bestuurslid->name = $request->name;
             $bestuurslid->email = $request->email;
             $bestuurslid->phone = $request->phone;

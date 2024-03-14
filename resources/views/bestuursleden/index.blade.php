@@ -21,7 +21,7 @@
 
         @auth
             @if (auth()->user()->isAdmin())
-                <a href="{{ route('bestuursleden.create') }}" class="btn btn-primary mb-3">Toevoegen</a>
+                <a href="{{ route('bestuursleden.create') }}"><button>Toevoegen</button></a>
             @endif
         @endauth
 
@@ -41,7 +41,7 @@
 
                         @auth
                             @if (auth()->user()->isAdmin())
-                                <a href="{{ route('bestuursleden.edit', $bestuurslid->id) }}">Edit</a>
+                                <a href="{{ route('bestuursleden.edit', $bestuurslid->id) }}"><button>Edit</button></a>
                                 <form action="{{ route('bestuursleden.destroy', $bestuurslid->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

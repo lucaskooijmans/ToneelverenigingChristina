@@ -35,6 +35,9 @@
             <div class="form-group">
                 <label for="image_url">URL naar foto:</label>
                 <input type="text" class="form-control" id="image_url" name="image_url" required>
+                @error('image_url')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Toevoegen</button>
