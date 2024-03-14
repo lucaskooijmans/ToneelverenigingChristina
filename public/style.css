@@ -498,6 +498,12 @@ textarea {
 
 /* Media Queries */
 
+@media screen and (min-width: 1920px) {
+    .aankondiging .body {
+        min-width: 0;
+    }
+}
+
 @media screen and (max-width: 1280px) {
 
     /* Laptop */
