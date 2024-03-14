@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,9 @@ Route::get('welcome', function () {
 
 // News page
 Route::get('/nieuws', [PostController::class, 'index']);
+
+// Photos resource
+Route::resource('gallery', GalleryController::class);
 
 // Posts resource
 Route::resource('posts', PostController::class);
