@@ -610,6 +610,11 @@ textarea {
     margin-bottom: 1rem;
 }
 
+.milestone {
+    background-color: #ff660050;
+    color: #fff;
+}
+
 /* Media Queries */
 
 @media screen and (min-width: 1920px) {

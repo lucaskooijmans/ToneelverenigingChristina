@@ -1,6 +1,6 @@
 @props(['historyItem'])
 
-<div class="historie-item">
+<div class="historie-item @if($historyItem->milestone) milestone @endif">
     <h2>{{ $historyItem->header }}</h2>
     <p>{{ $historyItem->optional_text_one }}</p>
     <img src="{{ asset('storage/' . $historyItem->image_path) }}" alt="">
