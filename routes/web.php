@@ -28,24 +28,22 @@ Route::get('/nieuws', [PostController::class, 'index']);
 // Posts resource
 Route::resource('posts', PostController::class);
 
+// Bestuursleden
+Route::get('/bestuursleden', [BestuursledenController::class, 'index']);
+Route::resource('bestuursleden', BestuursledenController::class);
+
 // Contact page
 Route::get('/contact', function () {
     return view('contact');
 });
 
-
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
-
 
 // Home page
 Route::get('/', function () {
     return view('home');
 });
 
-Route::resource('bestuursleden', BestuursledenController::class)->names([
-    'store' => 'bestuursleden.store',
-    'index' => 'bestuursleden.index',
-   ]);
 
 // Dashboard page
 Route::get('/dashboard', function () {

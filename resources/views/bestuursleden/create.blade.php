@@ -37,7 +37,7 @@
                 <input type="text" class="form-control" id="image_url" name="image_url" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Creëer</button>
+            <button type="submit" class="btn btn-primary">Toevoegen</button>
         </form>
     </div>
 </body>

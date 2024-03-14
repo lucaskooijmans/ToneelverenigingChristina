@@ -6,12 +6,10 @@ use App\Models\Bestuursleden;
 use App\Models\Bestuurslid;
 use Illuminate\Http\Request;
 use App\Models\BoardMember;
+use Illuminate\Support\Facades\Gate;
 
 class BestuursledenController extends Controller
 {
-
-    // TODO: ADD ADMIN AUTHENTICATION
-
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +24,11 @@ class BestuursledenController extends Controller
      */
     public function create()
     {
-        return view('bestuursleden.create');
+        if (Gate::allows('isAdmin')) {
+            return view('bestuursleden.create');
+        } else {
+            return redirect()->route('bestuursleden.index')->with('error', 'Unauthorized action');
+        }
     }
 
     /**
@@ -50,27 +52,35 @@ class BestuursledenController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $bestuurslid = Bestuursleden::findOrFail($id);
+        if (Gate::allows('isAdmin')) {
+            return view('bestuursleden.edit', compact('bestuurslid'));
+        } else {
+            return redirect()->route('bestuursleden.index')->with('error', 'Unauthorized action');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Bestuursleden $bestuurslid)
     {
-        //
+        if (Gate::allows('isAdmin')) {
+            $bestuurslid->name = $request->name;
+            $bestuurslid->email = $request->email;
+            $bestuurslid->phone = $request->phone;
+            $bestuurslid->description = $request->description;
+            $bestuurslid->image_url = $request->image_url;
+            $bestuurslid->update();
+
+            return redirect()->route('bestuursleden.index');
+        } else {
+            return redirect()->route('bestuursleden.index')->with('error', 'Unauthorized action');
+        }
     }
 
     /**
@@ -78,10 +88,13 @@ class BestuursledenController extends Controller
      */
     public function destroy(string $id)
     {
-        $bestuurslid = Bestuursleden::findOrFail($id);
-        $bestuurslid->delete();
+        if (Gate::allows('isAdmin')) {
+            $bestuurslid = Bestuursleden::findOrFail($id);
+            $bestuurslid->delete();
 
-        return redirect()->route('bestuursleden.index')
-                        ->with('success', 'Bestuurslid succesvol verwijderd.');
+            return redirect()->route('bestuursleden.index');
+        } else {
+            return redirect()->route('bestuursleden.index')->with('error', 'Unauthorized action');
+        }
     }
 }

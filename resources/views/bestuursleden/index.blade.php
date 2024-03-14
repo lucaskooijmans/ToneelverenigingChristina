@@ -1,34 +1,62 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bestuurleden</title>
-    <link href="/css/style.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bestuursleden</title>
+    <script src="https://kit.fontawesome.com/2a5648d90a.js" crossorigin="anonymous" defer></script>
 </head>
+
 <body>
-    <div class="grid-container">
-        @foreach ($bestuursleden as $bestuurslid)
 
+<x-navbar/>
 
-            <div class="member-card">
-                <div class="member-image">
-                    <img src="{{ $bestuurslid->image_url }}" alt="Board Member">
-                </div>
-                <h3>{{ $bestuurslid->name }}</h3>
-                <p>Email: {{ $bestuurslid->email }}</p>
-                <p>Telefoonnummer: {{ $bestuurslid->phone }}</p>
-                <p>Beschrijving: {{ $bestuurslid->description }}</p>
+<div class="nieuws">
 
-                <!-- Delete button -->
-                <form action="{{ route('bestuursleden.destroy', $bestuurslid->id) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Weet je zeker dat je dit bestuurslid wilt verwijderen?')">Verwijder</button>
-                </form>
+    <div class="container">
+
+        <h1>Overzicht bestuursleden</h1>
+
+        @auth
+            @if (auth()->user()->isAdmin())
+                <a href="{{ route('bestuursleden.create') }}" class="btn btn-primary mb-3">Toevoegen</a>
+            @endif
+        @endauth
+
+        @if ($bestuursleden->isEmpty())
+            <p>Er zijn op dit moment geen bestuursleden...</p>
+        @else
+            <div class="list-group boardmembers">
+                @foreach ($bestuursleden as $bestuurslid)
+                    <div class="member-card">
+                        <div class="member-image">
+                            <img src="{{ $bestuurslid->image_url }}" width="200" height="200" alt="Board Member">
+                        </div>
+                        <h3>{{ $bestuurslid->name }}</h3>
+                        <p>Email: {{ $bestuurslid->email }}</p>
+                        <p>Telefoonnummer: {{ $bestuurslid->phone }}</p>
+                        <p>Beschrijving: {{ $bestuurslid->description }}</p>
+
+                        @auth
+                            @if (auth()->user()->isAdmin())
+                                <a href="{{ route('bestuursleden.edit', $bestuurslid->id) }}">Edit</a>
+                                <form action="{{ route('bestuursleden.destroy', $bestuurslid->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
+                            @endif
+                        @endauth
+                    </div>
+                @endforeach
             </div>
-        @endforeach
-        <a href="{{ route('bestuursleden.create') }}" class="btn btn-success mb-2">Nieuwe toevoegen</a>
+        @endif
     </div>
+
+</div>
+
 </body>
+
 </html>
