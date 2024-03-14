@@ -115,7 +115,30 @@ h1 {
     font-size: 2.5rem;
     line-height: 3rem;
     margin-bottom: 1rem;
+}
 
+.social-media {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    position: fixed;
+    left: 0;
+    top: 5.8rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    padding: 1rem;
+    border-radius: 0 0 10px 0;
+    z-index: 5;
+}
+
+.social-media a {
+    color: var(--secondary-foreground-color);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.social-media a:hover {
+    color: var(--accent-color);
 }
 
 /* Hero (Welkom + intro + foto) */
@@ -125,6 +148,7 @@ h1 {
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    padding-top: 4rem;
     /* background-color: var(--primary-color); */
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/groepsfoto.jpg");
     background-size: cover;
@@ -519,12 +543,22 @@ textarea {
         transition: transform 0.3s ease-in-out;
     }
 
+    .links[data-visible="true"] ~ .social-media {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .links[data-visible="false"] ~ .social-media {
+        transform: translateX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+
     .menu-button {
         display: block;
     }
 
     .hero {
-        padding: 1rem;
+        padding: 4rem 1rem 1rem;
     }
 
 }
@@ -564,7 +598,7 @@ textarea {
 
     /* Tablet */
     .hero {
-        padding: 1rem 0;
+        padding: 4rem 0 1rem;
     }
 
     .aankondigingen {
