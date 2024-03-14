@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BestuursledenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,11 @@ Route::post('/contact', [ContactController::class, 'submit'])->name('contact.sub
 Route::get('/', function () {
     return view('home');
 });
+
+Route::resource('bestuursleden', BestuursledenController::class)->names([
+    'store' => 'bestuursleden.store',
+    'index' => 'bestuursleden.index',
+   ]);
 
 // Dashboard page
 Route::get('/dashboard', function () {
