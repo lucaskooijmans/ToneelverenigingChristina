@@ -55,6 +55,10 @@
                                             </button>
                                         </form>
                                     </div>
+                                    <div class="popup-image">
+                                        <span>&times;</span>
+                                        <img src="{{ asset('storage/' . $photo->image) }}">
+                                    </div>
                                 @endif
                             @endauth
                     @endforeach
@@ -65,5 +69,18 @@
     </div>
 
 </body>
+
+<script>
+    document.querySelectorAll('.photo-grid img').forEach(image => {
+        image.onclick = () => {
+            document.querySelector('.popup-image').style.display = 'block';
+            document.querySelector('.popup-image img').src = image.getAttribute('src');
+        }
+    });
+
+    document.querySelector('.popup-image span').onclick = () => {
+        document.querySelector('.popup-image').style.display = 'none';
+    }
+</script>
 
 </html>
