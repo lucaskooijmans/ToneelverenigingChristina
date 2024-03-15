@@ -338,7 +338,7 @@ h1 {
     max-width: 90%; /* Adjust as needed */
     max-height: 90%; /* Adjust as needed */
 }
-   
+
 
 
 /* Homepagina nieuws */
@@ -559,8 +559,6 @@ h1 {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease-in-out;
-    font-size: 1rem;
-    line-height: 1.5rem;
 }
 
 .button:hover {
@@ -728,10 +726,66 @@ textarea {
     color: #fff;
 }
 
-
 /* Bestuursleden pagina */
 
 .bestuursleden {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
+    min-height: calc(100svh - 5.8rem);
+}
+
+.bestuursleden h1 {
+    margin: 2rem 0 1rem;
+}
+
+.bestuursleden .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 1200px;
+}
+
+.boardmembers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin-top: 1rem;
+}
+
+.member-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    min-width: 300px;
+
+}
+
+.member-card p {
+    max-width: 40ch;
+    max-height: 8lh;
+    overflow-y: auto;
+}
+
+/* Historie pagina */
+
+.historie {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -791,31 +845,6 @@ textarea {
 }
 
 .historie-item {
-.bestuursleden h1 {
-    margin: 2rem 0 1rem;
-}
-
-.bestuursleden .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 2rem;
-    max-width: 1200px;
-}
-
-.boardmembers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 2rem;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin-top: 1rem;
-}
-
-.member-card {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -845,15 +874,6 @@ textarea {
 .milestone {
     background-color: #ff660050;
     color: #fff;
-    box-shadow: #1d1d1b 0px 0px 10px;
-    min-width: 300px;
-
-}
-
-.member-card p {
-    max-width: 40ch;
-    max-height: 8lh;
-    overflow-y: auto;
 }
 
 /* Media Queries */
@@ -948,7 +968,7 @@ textarea {
 
     .contact-split {
         flex-direction: column;
-    
+
     }
 }
 
@@ -967,20 +987,18 @@ textarea {
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
 
+    .container .popup-image img{
+        width: 95%;
+    }
+
+    .contact-form {
+        min-width: 400px;
+    }
+
     .historie .container {
         flex-direction: column;
         gap: 2rem;
         align-items: center;
-    }
-
-    .section {
-        width: 80%;
-    .container .popup-image img{
-        width: 95%;
-    }
-    
-    .contact-form {
-        min-width: 400px;
     }
 }
 
@@ -1010,5 +1028,4 @@ textarea {
     .contact-form {
         min-width: 300px;
     }
-}
 }
