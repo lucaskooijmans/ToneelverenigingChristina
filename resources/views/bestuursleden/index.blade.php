@@ -13,7 +13,7 @@
 
 <x-navbar/>
 
-<div class="nieuws">
+<div class="bestuursleden">
 
     <div class="container">
 
@@ -21,7 +21,7 @@
 
         @auth
             @if (auth()->user()->isAdmin())
-                <a href="{{ route('bestuursleden.create') }}"><button>Toevoegen</button></a>
+                <a href="{{ route('bestuursleden.create') }}"><button class="button"><i class="fas fa-plus"></i> Toevoegen</button></a>
             @endif
         @endauth
 
@@ -38,17 +38,18 @@
                         <p>Email: {{ $bestuurslid->email }}</p>
                         <p>Telefoonnummer: {{ $bestuurslid->phone }}</p>
                         <p>Beschrijving: {{ $bestuurslid->description }}</p>
-
-                        @auth
-                            @if (auth()->user()->isAdmin())
-                                <a href="{{ route('bestuursleden.edit', $bestuurslid->id) }}"><button>Edit</button></a>
-                                <form action="{{ route('bestuursleden.destroy', $bestuurslid->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Delete</button>
-                                </form>
-                            @endif
-                        @endauth
+                        <div class="post-buttons">
+                            @auth
+                                @if (auth()->user()->isAdmin())
+                                    <a href="{{ route('bestuursleden.edit', $bestuurslid->id) }}"><button class="button blue-button"><i class="fas fa-pencil"></i> Edit</button></a>
+                                    <form action="{{ route('bestuursleden.destroy', $bestuurslid->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="button red-button"><i class="fas fa-trash"></i> Delete</button>
+                                    </form>
+                                @endif
+                            @endauth
+                        </div>
                     </div>
                 @endforeach
             </div>

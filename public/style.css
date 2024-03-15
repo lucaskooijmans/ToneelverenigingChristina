@@ -236,6 +236,111 @@ h1 {
     font-weight: 400;
 }
 
+/* Fotogallerij */
+
+.photo-form {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: left; /* Align everything to the left */
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
+    min-height: calc(100vh - 5.8rem); /* Adjust as needed */
+}
+
+.gallery h1 {
+    margin: 2rem 0 1rem;
+}
+
+.gallery .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 1200px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust column width as needed */
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.photo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 100%;
+    height: auto;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+}
+
+.photo-item img {
+    width: 100%;
+}
+
+.photo-item h2 {
+    margin: 0;
+}
+
+.photo-item p {
+    max-width: 40ch;
+    max-height: 8lh;
+    overflow-y: auto;
+}
+
+/* Styling for the image popup */
+.popup-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    display: none;
+}
+
+.popup-image span {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.popup-image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid #fff;
+    border-radius: 5px;
+    max-width: 90%; /* Adjust as needed */
+    max-height: 90%; /* Adjust as needed */
+}
+   
+
+
 /* Homepagina nieuws */
 
 .aankondigingen {
@@ -623,9 +728,10 @@ textarea {
     color: #fff;
 }
 
-/* Historie pagina */
 
-.historie {
+/* Bestuursleden pagina */
+
+.bestuursleden {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -685,6 +791,31 @@ textarea {
 }
 
 .historie-item {
+.bestuursleden h1 {
+    margin: 2rem 0 1rem;
+}
+
+.bestuursleden .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 1200px;
+}
+
+.boardmembers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin-top: 1rem;
+}
+
+.member-card {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -714,6 +845,15 @@ textarea {
 .milestone {
     background-color: #ff660050;
     color: #fff;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    min-width: 300px;
+
+}
+
+.member-card p {
+    max-width: 40ch;
+    max-height: 8lh;
+    overflow-y: auto;
 }
 
 /* Media Queries */
@@ -835,6 +975,10 @@ textarea {
 
     .section {
         width: 80%;
+    .container .popup-image img{
+        width: 95%;
+    }
+    
     .contact-form {
         min-width: 400px;
     }
