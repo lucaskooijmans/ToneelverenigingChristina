@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
@@ -22,6 +23,8 @@ use App\Http\Controllers\BestuursledenController;
 Route::get('welcome', function () {
     return view('welcome');
 });
+
+Route::get('/historie', [HistoryController::class, 'index']);
 
 // News page
 Route::get('/nieuws', [PostController::class, 'index']);
@@ -64,5 +67,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/history/create', [HistoryController::class, 'create'])->name('history.create');
+Route::get('/history/edit/{id}', [HistoryController::class, 'edit'])->name('history.edit');
+Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->name('history.delete');
+
+Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
+
 // Auth routes
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
