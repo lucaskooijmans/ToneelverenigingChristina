@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BestuursledenController;
+use App\Http\Controllers\SponsorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ Route::resource('posts', PostController::class);
 // Route::get('/bestuursleden', [BestuursledenController::class, 'index']);
 Route::resource('bestuursleden', BestuursledenController::class);
 // Route::put('/bestuursleden/{bestuurslid}', [BestuursledenController::class, 'update'])->name('bestuursleden.update');
+
+// Sponsors page
+Route::resource('sponsors', SponsorController::class);
 
 
 

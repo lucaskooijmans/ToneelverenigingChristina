@@ -12,7 +12,8 @@ class SponsorController extends Controller
      */
     public function index()
     {
-        //
+        $sponsors = Sponsor::all();
+        return view('sponsors.index', compact('sponsors'));
     }
 
     /**
@@ -20,7 +21,7 @@ class SponsorController extends Controller
      */
     public function create()
     {
-        return view("sponsors.create");
+        return view('sponsors.create');
     }
 
     /**
@@ -28,7 +29,25 @@ class SponsorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'url' => 'required',
+            'logo' => 'image|nullable',
+        ]);
+        
+        $path = null;
+        if($request->hasFile('logo') && $request->file('logo')->isValid()) {
+            $path = $request->logo->store('images', 'public');
+        
+        }
+
+        Sponsor::create([
+            'name' => $request->name,
+            'url' => $request->url,
+            'logo' => $path,
+        ]);
+
+        return redirect()->route('sponsors.index');
     }
 
     /**

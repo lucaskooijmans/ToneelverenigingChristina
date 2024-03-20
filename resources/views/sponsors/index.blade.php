@@ -28,5 +28,7 @@
             </a>
         @endforeach
     </div>
+    <a href="{{ route('sponsors.create') }}" class="btn btn-primary">Create Sponsor</a>
+
 </body>
 </html>

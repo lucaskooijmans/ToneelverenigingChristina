@@ -24,7 +24,7 @@
         </div>
     @endif
 
-    <form action="{{ route('sponsors.create') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('sponsors.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div>
             <label for="name">Name:</label>
@@ -35,8 +35,8 @@
             <input type="url" id="url" name="url" value="{{ old('url') }}" required>
         </div>
         <div>
-            <label for="photo">Photo:</label>
-            <input type="file" id="photo" name="photo" accept="image/*" required>
+            <label for="logo">Photo:</label>
+            <input type="file" id="logo" name="logo" accept="image/*" required>
         </div>
         <div>
             <button type="submit">Submit</button>
