@@ -73,5 +73,7 @@ Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->nam
 
 Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
 
+Route::get('/sponsors/create', [SponsorController::class, 'create'])->name('sponsors.create');
+
 // Auth routes
 require __DIR__ . '/auth.php';

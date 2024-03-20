@@ -20,7 +20,7 @@ class SponsorController extends Controller
      */
     public function create()
     {
-        //
+        return view("sponsors.create");
     }
 
     /**
