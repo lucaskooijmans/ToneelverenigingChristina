@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,10 @@ Route::get('welcome', function () {
     return view('welcome');
 });
 
+// Performances page
+Route::get('/voorstellingen', [PerformanceController::class, 'index']);
+
+// History page
 Route::get('/historie', [HistoryController::class, 'index']);
 
 // News page

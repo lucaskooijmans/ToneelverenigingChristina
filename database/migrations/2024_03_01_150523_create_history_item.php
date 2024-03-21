@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('video_path')->nullable();
             $table->string('image_path')->nullable();
             $table->string('optional_text_two')->nullable();
-            $table->string('optional_footer')->nullable();           
+            $table->string('optional_footer')->nullable();
             $table->timestamps();
         });
     }
