@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('starttime');
             $table->dateTime('endtime');
-            $table->string('image_url')->nullable();
+            $table->string('image')->nullable();
             $table->string('location');
             $table->integer('available_seats')->nullable();
             $table->integer('tickets_remaining')->nullable();

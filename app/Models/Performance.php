@@ -19,7 +19,7 @@ class Performance extends Model
         'description',
         'starttime',
         'endtime',
-        'image_url',
+        'image',
         'location',
         'available_seats',
         'tickets_remaining',

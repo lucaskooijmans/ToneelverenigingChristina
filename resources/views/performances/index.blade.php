@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Voorstellingen</title>
 </head>
 <body>
     <x-navbar />
     <div class="performances">
-        <h1>Performances</h1>
+        <h1>Voorstellingen</h1>
+
+        @auth
+            @if (auth()->user()->isAdmin())
+                <a href="{{ route('performances.create') }}" class="button">
+                    <i class="fas fa-plus"></i> Toevoegen
+                </a>
+            @endif
+        @endauth
 
         @foreach ($performances as $performance)
             <div>
                 <h2>{{ $performance->name }}</h2>
-
-                <a href="{{ route('performances.edit', $performance) }}">Edit</a>
-
-                <form method="POST" action="{{ route('performances.destroy', $performance) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>
-                </form>
             </div>
         @endforeach
     </div>

@@ -26,7 +26,11 @@ Route::get('welcome', function () {
 });
 
 // Performances page
-Route::get('/voorstellingen', [PerformanceController::class, 'index']);
+Route::get('/voorstellingen', [PerformanceController::class, 'index'])->name('performances.index');
+Route::get('/voorstellingen/create', [PerformanceController::class, 'create'])->name('performances.create');
+Route::post('/voorstellingen', [PerformanceController::class, 'store'])->name('performances.store');
+
+
 
 // History page
 Route::get('/historie', [HistoryController::class, 'index']);
