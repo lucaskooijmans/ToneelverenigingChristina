@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BestuursledenController;
+use App\Http\Controllers\SponsorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,9 @@ Route::resource('posts', PostController::class);
 Route::resource('bestuursleden', BestuursledenController::class);
 // Route::put('/bestuursleden/{bestuurslid}', [BestuursledenController::class, 'update'])->name('bestuursleden.update');
 
+// Sponsors page
+Route::resource('sponsors', SponsorController::class);
+
 
 
 // Contact page
@@ -72,6 +76,8 @@ Route::get('/history/edit/{id}', [HistoryController::class, 'edit'])->name('hist
 Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->name('history.delete');
 
 Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
+
+Route::get('/sponsors/create', [SponsorController::class, 'create'])->name('sponsors.create');
 
 // Auth routes
 require __DIR__ . '/auth.php';
