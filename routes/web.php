@@ -29,7 +29,8 @@ Route::get('welcome', function () {
 Route::get('/voorstellingen', [PerformanceController::class, 'index'])->name('performances.index');
 Route::get('/voorstellingen/create', [PerformanceController::class, 'create'])->name('performances.create');
 Route::post('/voorstellingen', [PerformanceController::class, 'store'])->name('performances.store');
-
+Route::get('/voorstellingen/{performance}/edit', [PerformanceController::class, 'edit'])->name('performances.edit');
+Route::delete('/voorstellingen/delete/{id}', [PerformanceController::class, 'delete'])->name('performances.delete');
 
 
 // History page

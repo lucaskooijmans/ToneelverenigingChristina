@@ -20,7 +20,7 @@
 
         @foreach ($performances as $performance)
             <div>
-                <h2>{{ $performance->name }}</h2>
+                <x-performance_item :performanceItem="$performance" />
             </div>
         @endforeach
     </div>

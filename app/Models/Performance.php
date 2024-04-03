@@ -25,4 +25,5 @@ class Performance extends Model
         'tickets_remaining',
         'price',
     ];
+    protected $table = 'performances';
 }
