@@ -15,7 +15,7 @@
             <label for="name">Naam:</label><br>
             <input type="text" id="name" name="name" value="{{ old('name', $performance->name ?? '') }}" required><br>
             <label for="description">Beschrijving:</label><br>
-            <textarea id="description" name="description" value="{{ old('description', $performance->description ?? '') }}"></textarea><br>
+            <textarea id="description" name="description">{{ old('description', $performance->description ?? '') }}</textarea><br>
             <label for="starttime">Starttijd:</label><br>
             <input type="datetime-local" id="starttime" name="starttime" required value="{{ old('starttime', $performance->starttime ?? '') }}"><br>
             <label for="endtime">Eindtijd:</label><br>
