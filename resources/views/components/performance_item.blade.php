@@ -9,6 +9,7 @@
     <p>Available Seats: {{ $performanceItem->available_seats }}</p>
     <p>Tickets Remaining: {{ $performanceItem->tickets_remaining }}</p>
     <p>Price: {{ $performanceItem->price }}</p>
+    <img src="{{ asset('images/' . $performanceItem->image) }}" alt="Performance Image">
 </div>
 @if (Gate::allows('isAdmin'))
 <button onclick="window.location='{{ route('performances.edit', $performanceItem->id) }}'">Bewerken</button>
@@ -18,21 +19,3 @@
     <button type="submit" class="button red-button" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Verwijderen</button>
 </form>
 @endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

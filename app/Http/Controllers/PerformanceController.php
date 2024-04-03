@@ -59,7 +59,6 @@ class PerformanceController extends Controller
         
             return redirect()->route('performances.index');
         }
-
     }
 
     public function edit(Request $request, $id)
