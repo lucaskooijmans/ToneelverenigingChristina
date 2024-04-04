@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -25,6 +26,15 @@ Route::get('welcome', function () {
     return view('welcome');
 });
 
+// Performances page
+Route::get('/voorstellingen', [PerformanceController::class, 'index'])->name('performances.index');
+Route::get('/voorstellingen/create', [PerformanceController::class, 'create'])->name('performances.create');
+Route::post('/voorstellingen', [PerformanceController::class, 'store'])->name('performances.store');
+Route::get('/voorstellingen/{performance}/edit', [PerformanceController::class, 'edit'])->name('performances.edit');
+Route::delete('/voorstellingen/delete/{id}', [PerformanceController::class, 'delete'])->name('performances.delete');
+
+
+// History page
 Route::get('/historie', [HistoryController::class, 'index']);
 
 // News page
