@@ -9,6 +9,7 @@ use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BestuursledenController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\SponsorCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,9 @@ Route::post('/history/store', [HistoryController::class, 'store'])->name('histor
 // TODO: Middleware voor admin alleen
 Route::get('/sponsors/create', [SponsorController::class, 'create'])->name('sponsors.create');
 Route::post('/sponsors/update-order', [SponsorController::class, 'updateOrder'])->name('sponsors.updateOrder');
+
+Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorscategory.create');
+Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorscategory.store');
 
 
 // Auth routes

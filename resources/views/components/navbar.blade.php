@@ -14,6 +14,7 @@
         <a href="/historie" tabindex="1">Historie</a>
         <a href="/gallery" tabindex="1">Gallerij</a>
         <a href="/bestuursleden" tabindex="1">Bestuursleden</a>
+        <a href="/sponsors" tabindex="1">Sponsoren</a>
         <a href="/contact" tabindex="1">Contact</a>
         <a href="/registreren" tabindex="1">Lid Worden</a>
     </div>
