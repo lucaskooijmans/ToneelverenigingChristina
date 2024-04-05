@@ -12,13 +12,13 @@
     <img src="{{ asset('images/' . $performanceItem->image) }}" alt="Performance Image">
     @if (Gate::allows('isAdmin'))
         <div class="post-buttons">
-            <button class="button blue-button"
+            <button class="button blue-button" tabindex="4"
                 onclick="window.location='{{ route('performances.edit', $performanceItem->id) }}'"><i class="fas fa-pencil"></i> Bewerken</button>
             <form action="{{ route('performances.delete', ['id' => $performanceItem->id]) }}" method="POST"
                 style="display: inline-block;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="button red-button" onclick="return confirm('Are you sure?')"><i
+                <button tabindex="4" type="submit" class="button red-button" onclick="return confirm('Are you sure?')"><i
                         class="fa fa-trash"></i> Verwijderen</button>
             </form>
         </div>
