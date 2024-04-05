@@ -902,7 +902,7 @@ textarea {
 
 .performance-item {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     gap: 1rem;
@@ -934,7 +934,7 @@ textarea {
 .performance-items-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     flex-direction: row;
     gap: 2rem;
     flex-wrap: wrap;
