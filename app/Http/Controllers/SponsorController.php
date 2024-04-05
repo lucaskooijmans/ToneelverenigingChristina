@@ -12,7 +12,7 @@ class SponsorController extends Controller
      */
     public function index()
     {
-        $sponsors = Sponsor::all();
+        $sponsors = Sponsor::orderBy('position', 'asc')->get();
         return view('sponsors.index', compact('sponsors'));
     }
 
@@ -24,9 +24,6 @@ class SponsorController extends Controller
         return view('sponsors.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -49,6 +46,16 @@ class SponsorController extends Controller
 
         return redirect()->route('sponsors.index');
     }
+
+    public function updateOrder(Request $request)
+    {
+        foreach ($request->order as $position => $id) {
+            Sponsor::where('id', $id)->update(['position' => $position]);
+        }
+
+        return response()->json(['status' => 'success'], 200);
+    }
+
 
     /**
      * Display the specified resource.

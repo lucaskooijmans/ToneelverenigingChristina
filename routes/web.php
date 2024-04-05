@@ -87,7 +87,10 @@ Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->nam
 
 Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
 
+// TODO: Middleware voor admin alleen
 Route::get('/sponsors/create', [SponsorController::class, 'create'])->name('sponsors.create');
+Route::post('/sponsors/update-order', [SponsorController::class, 'updateOrder'])->name('sponsors.updateOrder');
+
 
 // Auth routes
 require __DIR__ . '/auth.php';
