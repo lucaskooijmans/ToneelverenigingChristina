@@ -22,11 +22,11 @@
                 @endif
             @endauth
 
-            @foreach ($performances as $performance)
-                <div>
+            <div class="performance-items-container">
+                @foreach ($performances as $performance)
                     <x-performance_item :performanceItem="$performance" />
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 </body>
