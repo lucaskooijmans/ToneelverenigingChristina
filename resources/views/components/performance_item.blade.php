@@ -1,6 +1,6 @@
 @props(['performanceItem'])
 
-<div>
+<div class=performance-item>
     <h2>{{ $performanceItem->name }}</h2>
     <p>{{ $performanceItem->description }}</p>
     <p>Start Time: {{ $performanceItem->starttime }}</p>
@@ -10,12 +10,17 @@
     <p>Tickets Remaining: {{ $performanceItem->tickets_remaining }}</p>
     <p>Price: {{ $performanceItem->price }}</p>
     <img src="{{ asset('images/' . $performanceItem->image) }}" alt="Performance Image">
+    @if (Gate::allows('isAdmin'))
+        <div class="post-buttons">
+            <button class="button blue-button" tabindex="4"
+                onclick="window.location='{{ route('performances.edit', $performanceItem->id) }}'"><i class="fas fa-pencil"></i> Bewerken</button>
+            <form action="{{ route('performances.delete', ['id' => $performanceItem->id]) }}" method="POST"
+                style="display: inline-block;">
+                @csrf
+                @method('DELETE')
+                <button tabindex="4" type="submit" class="button red-button" onclick="return confirm('Are you sure?')"><i
+                        class="fa fa-trash"></i> Verwijderen</button>
+            </form>
+        </div>
+    @endif
 </div>
-@if (Gate::allows('isAdmin'))
-<button onclick="window.location='{{ route('performances.edit', $performanceItem->id) }}'">Bewerken</button>
-<form action="{{ route('performances.delete', ['id' => $performanceItem->id]) }}" method="POST" style="display: inline-block;">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="button red-button" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Verwijderen</button>
-</form>
-@endif
