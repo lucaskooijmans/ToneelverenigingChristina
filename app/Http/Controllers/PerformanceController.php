@@ -84,6 +84,7 @@ class PerformanceController extends Controller
         foreach ($performances as $performance) {
             $events[] = [
                 'title' => $performance->name,
+                'description' => $performance->description,
                 'start' => $performance->starttime,
                 'end' => $performance->endtime
                 // You can add more event properties if needed

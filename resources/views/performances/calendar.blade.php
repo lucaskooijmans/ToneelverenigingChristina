@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let calendarEl = document.getElementById('calendar');
@@ -15,19 +15,28 @@
                 initialView: 'timeGridWeek',
                 slotMinTime: '8:00:00',
                 slotMaxTime: '24:00:00',
-                events: @json($events)
+                firstDay: 1,
+                locale: 'nl',
+                buttonText: { today: 'Vandaag'},
+                events: @json($events),
+                eventDidMount: function(info) {
+                    var tooltip = new Tooltip(info.el, {
+                        title: info.event.extendedProps.description,
+                        placement: 'top',
+                        trigger: 'hover',
+                        container: 'body'
+                    });
+                }
             });
 
             calendar.render();
         });
     </script>
-    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid/main.css" rel="stylesheet" />
+
 </head>
 
 <body>
-<x-navbar />
+    <x-navbar />
     <h1>Agenda</h1>
     <div id="calendar"></div>
 </body>
