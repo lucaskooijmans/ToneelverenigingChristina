@@ -18,15 +18,7 @@
                 firstDay: 1,
                 locale: 'nl',
                 buttonText: { today: 'Vandaag'},
-                events: @json($events),
-                eventDidMount: function(info) {
-                    var tooltip = new Tooltip(info.el, {
-                        title: info.event.extendedProps.description,
-                        placement: 'top',
-                        trigger: 'hover',
-                        container: 'body'
-                    });
-                }
+                events: @json($events)
             });
 
             calendar.render();
