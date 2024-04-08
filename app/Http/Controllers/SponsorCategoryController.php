@@ -3,22 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Sponsorcategories;
 
 class SponsorCategoryController extends Controller
 {
     public function create()
     {
-        return view('sponsorcategory.create');
+        return view('sponsorcategories.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'categoryname' => 'required',
+            'sponsorcategories' => 'required',
         ]);
 
-        Sponsorcategory::create([
-            'sponsorcategories' => $request->sponsorcategory,
+        Sponsorcategories::create([
+            'sponsorcategories' => $request->sponsorcategories,
         ]);
 
         return redirect()->route('sponsors.index');

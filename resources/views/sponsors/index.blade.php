@@ -28,7 +28,7 @@
         @endforeach
         </div>
         <a href="{{ route('sponsors.create') }}" class="btn btn-primary" style="display: block; width: max-content; margin: 20px auto; padding: 10px 15px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">Voeg een sponsor</a>
-        <a href="{{ route('sponsorscategory.create') }}" class="btn btn-primary" style="display: block; width: max-content; margin: 20px auto; padding: 10px 15px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">Voeg een categorie toe</a>
+        <a href="{{ route('sponsorcategory.create') }}" class="btn btn-primary" style="display: block; width: max-content; margin: 20px auto; padding: 10px 15px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">Voeg een categorie toe</a>
     </div>
 
     

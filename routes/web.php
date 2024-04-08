@@ -92,8 +92,8 @@ Route::post('/history/store', [HistoryController::class, 'store'])->name('histor
 Route::get('/sponsors/create', [SponsorController::class, 'create'])->name('sponsors.create');
 Route::post('/sponsors/update-order', [SponsorController::class, 'updateOrder'])->name('sponsors.updateOrder');
 
-Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorscategory.create');
-Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorscategory.store');
+Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
+Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
 
 
 // Auth routes
