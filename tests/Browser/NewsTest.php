@@ -27,8 +27,8 @@ class NewsTest extends DuskTestCase
                     ->visit('/nieuws')
                     ->assertSee('Test nieuws')
                     ->assertSee('Dit is een test nieuwsbericht')
-                    ->press('Verwijderen')
-                    ->screenshot('nieuwsCreate');
+                    ->screenshot('nieuwsCreate')
+                    ->press('Verwijderen');
         });
     }
 
@@ -82,8 +82,26 @@ class NewsTest extends DuskTestCase
                     ->visit('/nieuws')
                     ->assertSee('Test nieuws bewerkt')
                     ->assertSee('Dit is een test nieuwsbericht bewerkt')
-                    ->press('Verwijderen')
-                    ->screenshot('nieuwsEdit');
+                    ->screenshot('nieuwsEdit')
+                    ->press('Verwijderen');
+        });
+    }
+
+    /**
+     * Test validation when creating a news item.
+     */
+    public function testValidationCreate(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1))
+                    ->visit('/nieuws')
+                    ->assertSee('Toevoegen')
+                    ->clickLink('Toevoegen')
+                    ->assertSee('Toevoegen')
+                    ->press('Toevoegen')
+                    ->assertSee('The title field is required.')
+                    ->assertSee('The body field is required.')
+                    ->screenshot('nieuwsValidationCreate');
         });
     }
 }
