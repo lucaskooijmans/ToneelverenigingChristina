@@ -22,13 +22,23 @@
                 <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->name }}" style="width: 250px; height: 250px; border: 1px solid #ddd; border-radius: 4px; padding: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                 <div style="margin-top: 10px;">
                     <strong style="display: block; margin-bottom: 5px;">{{ $sponsor->name }}</strong>
-                    <a href="{{ $sponsor->url }}" style="color: #007bff; text-decoration: none; font-size: 14px;" target="_blank">Bezoek de website</a>
+                    <a href="{{ $sponsor->url }}" style="color: #007bff; text-decoration: none; font-size: 14px;" target="_blank">Website</a>
+                   
+                    @auth
+                        @if(auth()->user()->isAdmin())
+                            <a href="{{ route('sponsors.edit', $sponsor->id) }}" style="display: inline-block; margin-top: 10px; padding: 5px 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Edit</a>
+                        @endif
+                    @endauth   
                 </div>
             </div>
-        @endforeach
+            @endforeach
         </div>
-        <a href="{{ route('sponsors.create') }}" class="btn btn-primary" style="display: block; width: max-content; margin: 20px auto; padding: 10px 15px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">Voeg een sponsor</a>
-        <a href="{{ route('sponsorcategory.create') }}" class="btn btn-primary" style="display: block; width: max-content; margin: 20px auto; padding: 10px 15px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">Voeg een categorie toe</a>
+        @auth
+            @if(auth()->user()->isAdmin())
+                <a href="{{ route('sponsors.create') }}" class="btn btn-primary" style="display: block; width: max-content; margin: 20px auto; padding: 10px 15px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">Voeg een sponsor</a>
+                <a href="{{ route('sponsorcategory.create') }}" class="btn btn-primary" style="display: block; width: max-content; margin: 20px auto; padding: 10px 15px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">Voeg een categorie toe</a>
+            @endif
+        @endauth
     </div>
 
     

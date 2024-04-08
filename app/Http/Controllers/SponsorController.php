@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class SponsorController extends Controller
 {
@@ -12,13 +14,19 @@ class SponsorController extends Controller
      */
     public function index()
     {
-        $sponsors = Sponsor::orderBy('position', 'asc')->get();
+        if(auth()->check() && auth()->user()->isAdmin()) {
+            // Admins get to see all sponsors, regardless of their active status
+            $sponsors = Sponsor::orderBy('position', 'asc')->get();
+        } else {
+            // Non-admins see only active sponsors
+            $sponsors = Sponsor::where('isActive', 1) // Assuming isActive is stored as 1 for true
+                            ->orderBy('position', 'asc')
+                            ->get();
+        }
+
         return view('sponsors.index', compact('sponsors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('sponsors.create');
@@ -42,6 +50,7 @@ class SponsorController extends Controller
             'name' => $request->name,
             'url' => $request->url,
             'logo' => $path,
+            'isActive' => true,
         ]);
 
         return redirect()->route('sponsors.index');
@@ -56,6 +65,39 @@ class SponsorController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $sponsor = Sponsor::findOrFail($id);
+        return view('sponsors.edit', compact('sponsor'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'url' => 'required',
+            'logo' => 'image|nullable',
+            'isActive' => 'boolean'
+        ]);
+        
+        $sponsor = Sponsor::findOrFail($id);
+        $sponsor->name = $request->name;
+        $sponsor->url = $request->url;
+        $sponsor->isActive = $request->has('isActive') ? 1 : 0;
+        
+        if($request->hasFile('logo') && $request->file('logo')->isValid()) {
+            Storage::delete('public/'.$sponsor->logo);
+            $path = $request->logo->store('images', 'public');
+            $sponsor->logo = $path;
+        }
+
+        $sponsor->save();
+
+        return redirect()->route('sponsors.index')->with('success', 'Sponsor updated successfully');
+    }
 
     /**
      * Display the specified resource.
@@ -64,22 +106,7 @@ class SponsorController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Sponsor $sponsor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Sponsor $sponsor)
-    {
-        //
-    }
+   
 
     /**
      * Remove the specified resource from storage.

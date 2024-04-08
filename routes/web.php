@@ -54,6 +54,11 @@ Route::resource('bestuursleden', BestuursledenController::class);
 
 // Sponsors page
 Route::resource('sponsors', SponsorController::class);
+// TODO: Middleware voor admin alleen
+Route::get('/sponsors/create', [SponsorController::class, 'create'])->name('sponsors.create');
+Route::post('/sponsors/update-order', [SponsorController::class, 'updateOrder'])->name('sponsors.updateOrder');
+Route::get('/sponsors/{id}/edit', [SponsorController::class, 'edit'])->name('sponsors.edit');
+Route::put('/sponsors/{id}', [SponsorController::class, 'update'])->name('sponsors.update');
 
 
 
@@ -87,10 +92,6 @@ Route::get('/history/edit/{id}', [HistoryController::class, 'edit'])->name('hist
 Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->name('history.delete');
 
 Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
-
-// TODO: Middleware voor admin alleen
-Route::get('/sponsors/create', [SponsorController::class, 'create'])->name('sponsors.create');
-Route::post('/sponsors/update-order', [SponsorController::class, 'updateOrder'])->name('sponsors.updateOrder');
 
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
