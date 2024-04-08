@@ -96,5 +96,6 @@ Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'creat
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
 
 
+
 // Auth routes
 require __DIR__ . '/auth.php';
