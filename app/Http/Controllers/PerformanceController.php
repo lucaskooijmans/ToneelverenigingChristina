@@ -78,7 +78,7 @@ class PerformanceController extends Controller
 
     public function calendar()
     {
-        $performances = Performance::where('endtime', '>=', Carbon::now())->get();
+        $performances = Performance::all();
 
         $events = [];
         foreach ($performances as $performance) {

@@ -21,6 +21,7 @@
                 firstDay: 1,
                 locale: 'nl',
                 buttonText: buttonText,
+                nowIndicator: true,
                 events: @json($events),
 
                 eventContent: function(info) {
@@ -33,7 +34,12 @@
                     window.location.href = "{{ route('performances.show', ':id') }}".replace(':id', info.event.id);
                 },
 
-
+                eventDidMount: function(info) {
+                    // Check if the performance has ended
+                    if (info.event.end < new Date()) {
+                        info.el.style.backgroundColor = 'grey';
+                    }
+                }
 
             });
 
