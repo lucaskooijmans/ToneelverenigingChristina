@@ -46,6 +46,13 @@
 <body>
     <x-navbar />
     <h1>Agenda</h1>
+    @auth
+        @if(auth()->user()->isAdmin())
+            <a href="{{ route('performances.index') }}" class="button" tabindex="3">
+                <i class="fas fa-info-circle"></i> Beheer voorstellingen
+            </a>
+        @endif
+    @endauth
     <div id="calendar"></div>
 </body>
 

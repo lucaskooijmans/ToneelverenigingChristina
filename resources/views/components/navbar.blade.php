@@ -9,7 +9,6 @@
     <button class="menu-button" onclick="toggleNavbar()" tabindex="-1">Menu</button>
     <div class="links">
         <a href="/" tabindex="1">Home</a>
-        <a href="/voorstellingen" tabindex="1">Voorstellingen</a>
         <a href="/agenda" tabindex="1">Agenda</a>
         <a href="/nieuws" tabindex="1">Nieuws</a>
         <a href="/historie" tabindex="1">Historie</a>
