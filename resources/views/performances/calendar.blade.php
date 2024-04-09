@@ -35,10 +35,31 @@
                 },
 
                 eventDidMount: function(info) {
-                    // Check if the performance has ended
                     if (info.event.end < new Date()) {
-                        info.el.style.backgroundColor = 'grey';
+                        info.el.style.backgroundColor = 'lightgrey';
+                        info.el.style.borderColor = 'lightgrey';
+                        info.event.setProp('title', info.event.title + ' (VERLOPEN)');
                     }
+
+
+                    if (info.event.extendedProps.available_seats > 10 && info.event.end > new Date()) {
+                        info.el.style.backgroundColor = 'green';
+                        info.el.style.borderColor = 'green';
+                    }
+                    else if(info.event.extendedProps.available_seats > 5 && info.event.extendedProps.available_seats <= 10 && info.event.end > new Date()) {
+                        info.el.style.backgroundColor = 'orange';
+                        info.el.style.borderColor = 'orange';
+                    }
+                    else if(info.event.extendedProps.available_seats > 0 && info.event.extendedProps.available_seats <= 5 && info.event.end > new Date()) {
+                        info.el.style.backgroundColor = 'orangered';
+                        info.el.style.borderColor = 'orangered';
+                    }
+                    else if (info.event.extendedProps.available_seats === 0 && info.event.end > new Date()) {
+                        info.el.style.backgroundColor = 'red';
+                        info.el.style.borderColor = 'red';
+                        info.event.setProp('title', info.event.title + ' (UITVERKOCHT)');
+                    }
+
                 }
 
             });
