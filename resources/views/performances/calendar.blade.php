@@ -11,13 +11,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             let calendarEl = document.getElementById('calendar');
 
+            let initialView = window.innerWidth < 768 ? 'timeGridDay' : 'timeGridWeek';
+            let buttonText = window.innerWidth < 768 ? { today: 'Vandaag'} : { today: 'Deze week'};
+
             let calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'timeGridWeek',
+                initialView: initialView,
                 slotMinTime: '8:00:00',
                 slotMaxTime: '24:00:00',
                 firstDay: 1,
                 locale: 'nl',
-                buttonText: { today: 'Deze week'},
+                buttonText: buttonText,
                 events: @json($events),
 
                 eventContent: function(info) {
@@ -37,6 +40,13 @@
             calendar.render();
         });
     </script>
+
+    <style>
+        #calendar {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+    </style>
 
 </head>
 
