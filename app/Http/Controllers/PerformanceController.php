@@ -87,11 +87,19 @@ class PerformanceController extends Controller
                 'title' => $performance->name,
                 'description' => $performance->description,
                 'start' => $performance->starttime,
-                'end' => $performance->endtime
+                'end' => $performance->endtime,
+                'available_seats' => $performance->available_seats
                 // You can add more event properties if needed
             ];
         }
 
         return view('performances.calendar', compact('events'));
     }
+
+    public function show($id)
+    {
+        $performance = Performance::findOrFail($id);
+        return view('performances.show', compact('performance'));
+    }
+
 }

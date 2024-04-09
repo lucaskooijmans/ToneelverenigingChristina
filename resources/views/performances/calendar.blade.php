@@ -17,12 +17,20 @@
                 slotMaxTime: '24:00:00',
                 firstDay: 1,
                 locale: 'nl',
-                buttonText: { today: 'Vandaag'},
+                buttonText: { today: 'Deze week'},
                 events: @json($events),
 
+                eventContent: function(info) {
+                    return {
+                        html: '<b>' + info.timeText + '</b><br>' + info.event.title + ' (' + info.event.extendedProps.available_seats + ')'
+                    };
+                },
+
                 eventClick: function(info) {
-                    alert('Performance ID: ' + info.event.id);
-                }
+                    window.location.href = "{{ route('performances.show', ':id') }}".replace(':id', info.event.id);
+                },
+
+
 
             });
 
