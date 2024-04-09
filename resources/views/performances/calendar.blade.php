@@ -18,7 +18,12 @@
                 firstDay: 1,
                 locale: 'nl',
                 buttonText: { today: 'Vandaag'},
-                events: @json($events)
+                events: @json($events),
+
+                eventClick: function(info) {
+                    alert('Performance ID: ' + info.event.id);
+                }
+
             });
 
             calendar.render();

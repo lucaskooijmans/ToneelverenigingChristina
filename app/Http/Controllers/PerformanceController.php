@@ -83,6 +83,7 @@ class PerformanceController extends Controller
         $events = [];
         foreach ($performances as $performance) {
             $events[] = [
+                'id' => $performance->id,
                 'title' => $performance->name,
                 'description' => $performance->description,
                 'start' => $performance->starttime,
