@@ -41,13 +41,6 @@
         });
     </script>
 
-    <style>
-        #calendar {
-            max-width: 100%;
-            margin: 0 auto;
-        }
-    </style>
-
 </head>
 
 <body>
