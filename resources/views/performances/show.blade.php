@@ -8,23 +8,27 @@
 </head>
 
 <body>
-<x-navbar />
-<div class="performances">
+    <x-navbar />
+    <div class="performances">
 
-    <div class="container">
-        <h1>Voorstelling (dit moet links van het scherm)</h1>
+        <div class="container">
+            <div class="split">
 
-        <div class="performance-items-container">
-            <x-performance_item :performanceItem="$performance" />
-        </div>
+                <div class="performance-item-showcase">
+                    <h1>Voorstelling</h1>
+                    <x-performance_item_expanded :performanceItem="$performance" />
+                </div>
 
-        <div class="checkout">
-            <h1>
-                Bestel kaartjes (dit moet rechts)
-            </h1>
+                <div class="checkout">
+                    <h1>
+                        Bestel kaartjes
+                    </h1>
+                </div>
+            </div>
+
+
         </div>
     </div>
-</div>
 </body>
 
 </html>
