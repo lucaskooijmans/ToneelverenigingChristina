@@ -25,7 +25,7 @@
         </div>
     @endif
 
-    <form action="{{ route('sponsorcategories.store') }}" method="post" enctype="multipart/form-data" style="max-width: 500px; margin: auto; background: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-family: 'Arial', sans-serif;">
+    <form action="{{ route('sponsorcategory.store') }}" method="post" enctype="multipart/form-data" style="max-width: 500px; margin: auto; background: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-family: 'Arial', sans-serif;">
         @csrf
         <div style="margin-bottom: 20px;">
             <label for="sponsorcategories" style="display: block; margin-bottom: 5px;">Naam:</label>

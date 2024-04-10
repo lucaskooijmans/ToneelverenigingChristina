@@ -9,7 +9,7 @@ class SponsorCategoryController extends Controller
 {
     public function create()
     {
-        return view('sponsorcategories.create');
+        return view('sponsorcategory.create');
     }
 
     public function store(Request $request)
