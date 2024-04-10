@@ -43,12 +43,18 @@
             @endif
         </div>
         <div style="margin-bottom: 20px;">
-            <input type="checkbox" id="isActive" name="isActive" {{ $sponsor->isActive == 1 ? 'checked' : '' }}>
+            <input type="hidden" name="isActive" value="0">
+            <input type="checkbox" id="isActive" name="isActive" value="1" {{ $sponsor->isActive ? 'checked' : '' }}>
             <label for="isActive">Is sponsor?</label>
         </div>
         <div>
             <button type="submit" style="padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Update</button>
         </div>
+    </form>
+    <form action="{{ route('sponsors.destroy', $sponsor->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this sponsor? This action cannot be undone.');">
+        @csrf
+        @method('DELETE')
+        <button type="submit" style="padding: 10px 15px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete Sponsor</button>
     </form>
 
 </body>

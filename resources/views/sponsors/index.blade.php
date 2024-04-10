@@ -5,9 +5,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alle Sponsors</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{{ asset('js/sponsor-sortable.js') }}"></script>
+    @if(auth()->check() && auth()->user()->isAdmin())
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="{{ asset('js/sponsor-sortable.js') }}"></script>
+    @endif
 </head>
 <body>
 

@@ -9,6 +9,11 @@ class Sponsor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'url', 'logo', 'isActive'];
+    protected $fillable = ['name', 'url', 'logo', 'isActive', 'category_id'];
+
+    public function category()
+    {
+        return $this->belongsTo('sponsorcategories', 'category_id');
+    }
     
 }

@@ -10,4 +10,9 @@ class Sponsorcategories extends Model
     use HasFactory;
 
     protected $fillable = ['sponsorcategories'];
+
+    public function sponsors()
+    {
+        return $this->hasMany('sponsor', 'category_id');
+    }
 }
