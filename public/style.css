@@ -1030,6 +1030,43 @@ textarea {
     margin-top: 1rem;
 }
 
+.calendar .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.calendar h1 {
+    margin: 2rem 0 1rem;
+}
+
+#calendar {
+    min-width: 100%;
+}
+
+#calendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar th {
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
+    border: 1px solid var(--primary-foreground-color);
+}
+
+#calendar td {
+    border: 1px solid var(--primary-foreground-color);
+}
+
+div.fc-event-main {
+    overflow-y: auto;
+}
+
 /* Media Queries */
 
 @media screen and (min-width: 1920px) {
@@ -1163,7 +1200,7 @@ textarea {
         gap: 2rem;
         align-items: center;
     }
-    
+
     .performance-items-container {
         flex-direction: column;
         gap: 2rem;

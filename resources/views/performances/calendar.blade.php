@@ -12,7 +12,11 @@
             let calendarEl = document.getElementById('calendar');
 
             let initialView = window.innerWidth < 768 ? 'timeGridDay' : 'timeGridWeek';
-            let buttonText = window.innerWidth < 768 ? { today: 'Vandaag'} : { today: 'Deze week'};
+            let buttonText = window.innerWidth < 768 ? {
+                today: 'Vandaag'
+            } : {
+                today: 'Deze week'
+            };
 
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: initialView,
@@ -26,12 +30,14 @@
 
                 eventContent: function(info) {
                     return {
-                        html: '<b>' + info.timeText + '</b><br>' + info.event.title + ' (' + info.event.extendedProps.available_seats + ')'
+                        html: '<b>' + info.timeText + '</b><br>' + info.event.title + ' (' + info.event
+                            .extendedProps.available_seats + ')'
                     };
                 },
 
                 eventClick: function(info) {
-                    window.location.href = "{{ route('performances.show', ':id') }}".replace(':id', info.event.id);
+                    window.location.href = "{{ route('performances.show', ':id') }}".replace(':id', info
+                        .event.id);
                 },
 
                 eventDidMount: function(info) {
@@ -45,16 +51,16 @@
                     if (info.event.extendedProps.available_seats > 10 && info.event.end > new Date()) {
                         info.el.style.backgroundColor = 'green';
                         info.el.style.borderColor = 'green';
-                    }
-                    else if(info.event.extendedProps.available_seats > 5 && info.event.extendedProps.available_seats <= 10 && info.event.end > new Date()) {
+                    } else if (info.event.extendedProps.available_seats > 5 && info.event.extendedProps
+                        .available_seats <= 10 && info.event.end > new Date()) {
                         info.el.style.backgroundColor = 'orange';
                         info.el.style.borderColor = 'orange';
-                    }
-                    else if(info.event.extendedProps.available_seats > 0 && info.event.extendedProps.available_seats <= 5 && info.event.end > new Date()) {
+                    } else if (info.event.extendedProps.available_seats > 0 && info.event.extendedProps
+                        .available_seats <= 5 && info.event.end > new Date()) {
                         info.el.style.backgroundColor = 'orangered';
                         info.el.style.borderColor = 'orangered';
-                    }
-                    else if (info.event.extendedProps.available_seats === 0 && info.event.end > new Date()) {
+                    } else if (info.event.extendedProps.available_seats === 0 && info.event.end >
+                        new Date()) {
                         info.el.style.backgroundColor = 'red';
                         info.el.style.borderColor = 'red';
                         info.event.setProp('title', info.event.title + ' (UITVERKOCHT)');
@@ -72,15 +78,19 @@
 
 <body>
     <x-navbar />
-    <h1>Agenda</h1>
-    @auth
-        @if(auth()->user()->isAdmin())
-            <a href="{{ route('performances.index') }}" class="button" tabindex="3">
-                <i class="fas fa-info-circle"></i> Beheer voorstellingen
-            </a>
-        @endif
-    @endauth
-    <div id="calendar"></div>
+    <div class="calendar">
+        <div class="container">
+            <h1>Agenda</h1>
+            @auth
+                @if (auth()->user()->isAdmin())
+                    <a href="{{ route('performances.index') }}" class="button blue-button" tabindex="3">
+                        <i class="fas fa-info-circle"></i> Beheer voorstellingen
+                    </a>
+                @endif
+            @endauth
+            <div id="calendar"></div>
+        </div>
+    </div>
 </body>
 
 </html>
