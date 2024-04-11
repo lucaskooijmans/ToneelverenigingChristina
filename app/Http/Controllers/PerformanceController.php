@@ -35,6 +35,12 @@ class PerformanceController extends Controller
         if($request->edit){
             $performance = Performance::find($request->id);
 
+            // Calculate the difference in available seats
+            $seatDifference = $request->available_seats - $performance->available_seats;
+
+            // Apply the difference to tickets_remaining
+            $performance->tickets_remaining += $seatDifference;
+
             $formFields = $request->all();
 
             if($request->hasFile('image')){
@@ -46,8 +52,9 @@ class PerformanceController extends Controller
             $performance->update($formFields);
             return $this->index();
         } else {
-
             $formFields = $request->all();
+
+            $formFields['tickets_remaining'] = $request->available_seats;
 
             if($request->hasFile('image')){
                 $imageName = time().'.'.$request->image->extension();
@@ -56,7 +63,6 @@ class PerformanceController extends Controller
             }
 
             $performance = Performance::create($formFields);
-            $performance->tickets_remaining = $request->available_seats;
             $performance->save();
 
             return redirect()->route('performances.index');
