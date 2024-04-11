@@ -28,7 +28,7 @@ class PerformanceController extends Controller
             'starttime' => ['required', 'date', new PerformanceTimeOverlap($request)],
             'endtime' => ['required', 'date', 'after:starttime', new PerformanceTimeOverlap($request)],
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'location' => 'required|string',
+            'location' => 'nullable|string',
             'available_seats' => 'required|integer',
             'price' => 'required|numeric',
         ]);
@@ -54,6 +54,10 @@ class PerformanceController extends Controller
             return $this->index();
         } else {
             $formFields = $request->all();
+
+            if (is_null($formFields['location'])) {
+                unset($formFields['location']);
+            }
 
             $formFields['tickets_remaining'] = $request->available_seats;
 

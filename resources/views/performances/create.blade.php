@@ -42,8 +42,9 @@
                 </div>
                 <div class="form-group">
                     <label for="location">Locatie:</label>
-                    <input type="text" id="location" name="location" required class="form-control"
-                    value="{{ old('location', $performance->location ?? '') }}">
+                    <input type="text" id="location" name="location" class="form-control"
+                        value="{{ old('location', $performance->location ?? '') }}"
+                        placeholder="Laat leeg voor 'Dorpshuis de Rozenhoek'">
                 </div>
                 <div class="form-group">
                     <label for="available_seats">Aantal plekken:</label>
