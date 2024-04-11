@@ -12,7 +12,7 @@
     <div class="sponsors">
         <div class="container">
 
-            <h1 style="font-family: 'Arial', sans-serif;">Creër Sponsor</h1>
+            <h1 style="font-family: 'Arial', sans-serif; text-align: center;">Creër Sponsor</h1>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -55,6 +55,7 @@
                 </div>
                 <div>
                     <button type="submit" class="button green-button"><i class="fas fa-check"></i> Opslaan</button>
+                    <button type="button" onclick="window.history.back();" class="button gray-button"><i class="fas fa-times"></i> Annuleren</button>
                 </div>
             </form>
 
