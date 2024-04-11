@@ -45,6 +45,7 @@
                         <label for="message">Bericht:</label>
                         <textarea id="message" name="message" class="form-control"></textarea>
                     </div>
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAW38y6G28Abmhjw" data-callback="javascriptCallback"></div>
                     <div class="form-group">
                         <button type="submit" class="button green-button">Verstuur</button>
                     </div>
@@ -81,6 +82,7 @@
             </div>
         </div>
     </div>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
 </body>
 
 </html>
