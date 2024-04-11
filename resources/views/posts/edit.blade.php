@@ -23,10 +23,16 @@
                 <label for="title">Titel</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}"
                     required>
+                @error('title')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="content">Omschrijving</label>
                 <textarea class="form-control" id="body" name="body" rows="6" required>{{ $post->body }}</textarea>
+                @error('body')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
             <button type="submit" class="button green-button"><i class="fas fa-check"></i> Aanpassen</button>
         </form>

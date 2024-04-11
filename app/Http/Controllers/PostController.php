@@ -25,6 +25,11 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
         if (Gate::allows('isAdmin')) {
             $post = new Post;
             $post->title = $request->title;
@@ -48,6 +53,11 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+        
         if (Gate::allows('isAdmin')) {
             $post->title = $request->title;
             $post->body = $request->body;
