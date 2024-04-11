@@ -21,6 +21,17 @@ class PerformanceController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable',
+            'starttime' => 'required|date',
+            'endtime' => 'required|date|after:starttime',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'location' => 'required|string',
+            'available_seats' => 'required|integer',
+            'price' => 'required|numeric',
+        ]);
+
         if($request->edit){
             $performance = Performance::find($request->id);
 
@@ -35,16 +46,6 @@ class PerformanceController extends Controller
             $performance->update($formFields);
             return $this->index();
         } else {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'description' => 'required|string',
-                'starttime' => 'required|date',
-                'endtime' => 'required|date|after:starttime',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'location' => 'required|string',
-                'available_seats' => 'required|integer',
-                'price' => 'required|numeric',
-            ]);
 
             $formFields = $request->all();
 
