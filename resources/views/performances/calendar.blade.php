@@ -44,7 +44,9 @@
                     if (info.event.end < new Date()) {
                         info.el.style.backgroundColor = 'lightgrey';
                         info.el.style.borderColor = 'lightgrey';
-                        info.event.setProp('title', info.event.title + ' (VERLOPEN)');
+                        if (!info.event.title.includes('(VERLOPEN)')) {
+                            info.event.setProp('title', info.event.title + ' (VERLOPEN)');
+                        }
                     }
 
 
@@ -63,7 +65,9 @@
                         new Date()) {
                         info.el.style.backgroundColor = 'red';
                         info.el.style.borderColor = 'red';
-                        info.event.setProp('title', info.event.title + ' (UITVERKOCHT)');
+                        if (!info.event.title.includes('(UITVERKOCHT)')) {
+                            info.event.setProp('title', info.event.title + ' (UITVERKOCHT)');
+                        }
                     }
 
                 }
