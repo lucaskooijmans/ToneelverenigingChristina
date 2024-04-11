@@ -36,7 +36,7 @@ class SponsorController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'url' => 'required',
+            'url' => 'nullable',
             'logo' => 'image|nullable',
             'category_id' => 'required|exists:sponsorcategories,id'
         ]);
@@ -97,7 +97,7 @@ class SponsorController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'url' => 'required',
+            'url' => 'nullable',
             'logo' => 'image|nullable',
             'isActive' => 'boolean'
         ]);
