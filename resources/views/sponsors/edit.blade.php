@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bewerk Sponsor</title>
+    </head>
+    <body>
+        <x-navbar />
+        <div class="sponsors">
+            <div class="container">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bewerk Sponsor</title>
-</head>
+                <h1>Bewerk Sponsor</h1>
 
-<body>
-    <x-navbar />
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
     <div class="sponsors">
         <div class="container">
+            <div id="confirmationMessage" style="display: none; background-color: #4CAF50; color: white; padding: 10px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 9999;">
+            Sponsor succesvol gewijzigd!
+            </div>
 
             <h1>Bewerk Sponsor</h1>
 
@@ -31,7 +46,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('sponsors.update', $sponsor->id) }}" method="post" enctype="multipart/form-data"
+            <form id="myForm" action="{{ route('sponsors.update', $sponsor->id) }}" method="post" enctype="multipart/form-data"
                 class="post-form">
                 @csrf
                 @method('PUT') <!-- Important: Specify the method as PUT -->
@@ -61,7 +76,7 @@
                 </div>
                 <div class="post-buttons">
                     <button type="submit" class="button green-button"><i class="fas fa-save"></i> Bijwerken</button>
-                    
+                    <button type="button" onclick="window.history.back();" class="button gray-button"><i class="fas fa-times"></i> Annuleren</button>
                 </div>
             </form>
             <form action="{{ route('sponsors.destroy', $sponsor->id) }}" method="POST"
@@ -72,6 +87,19 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+                    // Show the confirmation message
+            document.getElementById("confirmationMessage").style.display = "block";
+
+                    // Delay the form submission for 3 seconds (3000 milliseconds)
+            setTimeout(function() {
+                        // Allow the form to be submitted after the delay
+                document.getElementById("myForm").submit();
+            }, 1000);
+        });
+    </script>
 
 
 </body>

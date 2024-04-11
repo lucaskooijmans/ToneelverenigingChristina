@@ -11,8 +11,11 @@
     <x-navbar />
     <div class="sponsors">
         <div class="container">
+            <div id="confirmationMessage" style="display: none; background-color: #4CAF50; color: white; padding: 10px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 9999;">
+            Sponsor succesvol aangemaakt!
+            </div>
 
-            <h1 style="font-family: 'Arial', sans-serif;">Creër Sponsor</h1>
+            <h1 style="font-family: 'Arial', sans-serif; text-align: center;">Creër Sponsor</h1>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -30,7 +33,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('sponsors.store') }}" method="post" enctype="multipart/form-data" class="post-form">
+            <form id="myForm" action="{{ route('sponsors.store') }}" method="post" enctype="multipart/form-data" class="post-form">
                 @csrf
                 <div class="form-group">
                     <label for="name">Naam:</label>
@@ -55,8 +58,22 @@
                 </div>
                 <div>
                     <button type="submit" class="button green-button"><i class="fas fa-check"></i> Opslaan</button>
+                    <button type="button" onclick="window.history.back();" class="button gray-button"><i class="fas fa-times"></i> Annuleren</button>
                 </div>
             </form>
+
+            <script>
+                document.getElementById("myForm").addEventListener("submit", function(event) {
+                    // Show the confirmation message
+                    document.getElementById("confirmationMessage").style.display = "block";
+
+                    // Delay the form submission for 3 seconds (3000 milliseconds)
+                    setTimeout(function() {
+                        // Allow the form to be submitted after the delay
+                        document.getElementById("myForm").submit();
+                    }, 1000);
+                });
+            </script>
 
         </div>
     </div>
