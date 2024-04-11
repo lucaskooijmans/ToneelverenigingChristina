@@ -10,7 +10,7 @@ class Sponsorcategories extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['sponsorcategories'];
+    protected $fillable = ['sponsorcategories', 'category_position'];
 
     public function sponsors()
     {

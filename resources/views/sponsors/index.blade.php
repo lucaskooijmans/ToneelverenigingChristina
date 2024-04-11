@@ -12,7 +12,6 @@
     @endif
 </head>
     <body>
-
         <x-navbar/>
 
         <div style="text-align: center; font-family: 'Arial', sans-serif;">
@@ -20,7 +19,7 @@
             <div class="sponsors-list">
                 @foreach($categories as $category)
                     <div class="category-group" style="margin: 20px; text-align: center;">
-                        <h2 style="font-weight: bold;">{{ $category->sponsorcategories }}</h2>
+                        <h2>{{ $category->sponsorcategories }}</h2>
                         <div class="category" data-category-id="{{ $category->id }}" style="margin-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: center; min-height: 120px;">
                         @foreach($category->sponsors as $sponsor)
                             <div data-sponsor-id="{{ $sponsor->id }}" style="margin: 10px; text-align: center; flex: 0 1 auto;">

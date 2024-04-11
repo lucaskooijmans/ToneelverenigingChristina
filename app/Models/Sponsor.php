@@ -10,7 +10,7 @@ class Sponsor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'url', 'logo', 'isActive', 'category_id'];
+    protected $fillable = ['name', 'url', 'logo', 'isActive', 'category_id', 'position'];
 
     public function category()
     {

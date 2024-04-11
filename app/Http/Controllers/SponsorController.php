@@ -59,17 +59,27 @@ class SponsorController extends Controller
 
     public function updateOrder(Request $request)
     {
-        foreach ($request->order as $position => $id) {
-            Sponsor::where('id', $id)->update(['position' => $position]);
+        if ($request->has('updateCategories')) { 
+            foreach ($request->order as $item) {
+                $category = Sponsorcategories::findOrFail($item['id']);
+                $category->category_position = $item['position'];
+                $category->save();
+            }
+        } else {
+            foreach ($request->order as $position => $sponsorId) {
+                $sponsor = Sponsor::find($sponsorId);
+                if ($sponsor) {
+                    $sponsor->position = $position;
+                    $sponsor->save();
+                }
+            }
         }
+
         return response()->json(['status' => 'success'], 200);
     }
 
     public function updateCategory(Request $request)
     {
-       Log::debug('Update Category Request:', $request->all());
-
-
         $sponsor = Sponsor::findOrFail($request->sponsorId);
         $sponsor->category_id = $request->categoryId;
         $sponsor->save();
