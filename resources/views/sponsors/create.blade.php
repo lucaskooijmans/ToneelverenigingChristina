@@ -38,6 +38,15 @@
             <label for="logo" style="display: block; margin-bottom: 5px;">Foto van sponsor:</label>
             <input type="file" id="logo" name="logo" accept="image/*" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
         </div>
+        <div style="margin-bottom: 20px;">
+            <label for="category_id" style="display: block; margin-bottom: 5px;">Categorie:</label>
+            <select id="category_id" name="category_id" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="">Selecteer een categorie</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->sponsorcategories }}</option>
+                @endforeach
+            </select>
+        </div>
         <div>
             <button type="submit" style="padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
         </div>
