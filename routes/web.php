@@ -32,7 +32,10 @@ Route::get('/voorstellingen/create', [PerformanceController::class, 'create'])->
 Route::post('/voorstellingen', [PerformanceController::class, 'store'])->name('performances.store');
 Route::get('/voorstellingen/{performance}/edit', [PerformanceController::class, 'edit'])->name('performances.edit');
 Route::delete('/voorstellingen/delete/{id}', [PerformanceController::class, 'delete'])->name('performances.delete');
+Route::get('/voorstellingen/{id}', [PerformanceController::class, 'show'])->name('performances.show');
 
+// Calendar
+Route::get('/agenda', [PerformanceController::class, 'calendar'])->name('performances.calendar');
 
 // History page
 Route::get('/historie', [HistoryController::class, 'index']);

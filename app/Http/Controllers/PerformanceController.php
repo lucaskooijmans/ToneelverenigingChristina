@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Performance;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PerformanceController extends Controller
@@ -22,15 +23,15 @@ class PerformanceController extends Controller
     {
         if($request->edit){
             $performance = Performance::find($request->id);
-        
+
             $formFields = $request->all();
-        
+
             if($request->hasFile('image')){
-                $imageName = time().'.'.$request->image->extension();  
+                $imageName = time().'.'.$request->image->extension();
                 $request->image->move(public_path('images'), $imageName);
                 $formFields['image'] = $imageName;
             }
-        
+
             $performance->update($formFields);
             return $this->index();
         } else {
@@ -44,19 +45,19 @@ class PerformanceController extends Controller
                 'available_seats' => 'required|integer',
                 'price' => 'required|numeric',
             ]);
-        
+
             $formFields = $request->all();
-        
+
             if($request->hasFile('image')){
-                $imageName = time().'.'.$request->image->extension();  
+                $imageName = time().'.'.$request->image->extension();
                 $request->image->move(public_path('images'), $imageName);
                 $formFields['image'] = $imageName;
             }
-        
+
             $performance = Performance::create($formFields);
             $performance->tickets_remaining = $request->available_seats;
             $performance->save();
-        
+
             return redirect()->route('performances.index');
         }
     }
@@ -74,4 +75,31 @@ class PerformanceController extends Controller
         $performance->delete();
         return $this->index();
     }
+
+    public function calendar()
+    {
+        $performances = Performance::all();
+
+        $events = [];
+        foreach ($performances as $performance) {
+            $events[] = [
+                'id' => $performance->id,
+                'title' => $performance->name,
+                'description' => $performance->description,
+                'start' => $performance->starttime,
+                'end' => $performance->endtime,
+                'available_seats' => $performance->available_seats
+                // You can add more event properties if needed
+            ];
+        }
+
+        return view('performances.calendar', compact('events'));
+    }
+
+    public function show($id)
+    {
+        $performance = Performance::findOrFail($id);
+        return view('performances.show', compact('performance'));
+    }
+
 }
