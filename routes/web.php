@@ -57,6 +57,7 @@ Route::resource('sponsors', SponsorController::class);
 // TODO: Middleware voor admin alleen
 Route::get('/sponsors/create', [SponsorController::class, 'create'])->name('sponsors.create');
 Route::post('/sponsors/update-order', [SponsorController::class, 'updateOrder'])->name('sponsors.updateOrder');
+Route::post('/sponsors/update-category', [SponsorController::class, 'updateCategory'])->name('sponsors.updateCategory');
 Route::get('/sponsors/{id}/edit', [SponsorController::class, 'edit'])->name('sponsors.edit');
 Route::put('/sponsors/{id}', [SponsorController::class, 'update'])->name('sponsors.update');
 Route::delete('/sponsors/{sponsor}', [SponsorController::class, 'destroy'])->name('sponsors.destroy');

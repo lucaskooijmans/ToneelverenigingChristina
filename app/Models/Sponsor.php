@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Sponsorcategories;
 
 class Sponsor extends Model
 {
@@ -13,7 +14,7 @@ class Sponsor extends Model
 
     public function category()
     {
-        return $this->belongsTo('sponsorcategories', 'category_id');
+        return $this->belongsTo(Sponsorcategories::class, 'category_id');
     }
     
 }

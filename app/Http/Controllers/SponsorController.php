@@ -6,22 +6,24 @@ use App\Models\Sponsor;
 use App\Models\Sponsorcategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
 
 
 class SponsorController extends Controller
 {
-    
+    // TODO: Sort op updated_at 
     public function index()
     {
-        if(auth()->check() && auth()->user()->isAdmin()) {
-            $sponsors = Sponsor::orderBy('position', 'asc')->get();
-        } else {
-            $sponsors = Sponsor::where('isActive', 1) 
-                            ->orderBy('position', 'asc')
-                            ->get();
-        }
+        $categories = Sponsorcategories::with(['sponsors' => function($query) {
+            if(auth()->check() && auth()->user()->isAdmin()) {
+                $query->orderBy('position', 'asc')->orderBy('updated_at', 'desc');
+            } else {
+                $query->where('isActive', 1)->orderBy('position', 'asc');
+            }
+        }])->get();
 
-        return view('sponsors.index', compact('sponsors'));
+        return view('sponsors.index', compact('categories'));
     }
 
     public function create()
@@ -42,7 +44,6 @@ class SponsorController extends Controller
         $path = null;
         if($request->hasFile('logo') && $request->file('logo')->isValid()) {
             $path = $request->logo->store('images', 'public');
-        
         }
 
         Sponsor::create([
@@ -61,6 +62,17 @@ class SponsorController extends Controller
         foreach ($request->order as $position => $id) {
             Sponsor::where('id', $id)->update(['position' => $position]);
         }
+        return response()->json(['status' => 'success'], 200);
+    }
+
+    public function updateCategory(Request $request)
+    {
+       Log::debug('Update Category Request:', $request->all());
+
+
+        $sponsor = Sponsor::findOrFail($request->sponsorId);
+        $sponsor->category_id = $request->categoryId;
+        $sponsor->save();
 
         return response()->json(['status' => 'success'], 200);
     }

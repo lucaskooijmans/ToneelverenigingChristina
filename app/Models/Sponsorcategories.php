@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Sponsor;
 
 class Sponsorcategories extends Model
 {
@@ -13,6 +14,6 @@ class Sponsorcategories extends Model
 
     public function sponsors()
     {
-        return $this->hasMany('sponsor', 'category_id');
+        return $this->hasMany(Sponsor::class, 'category_id');
     }
 }
