@@ -19,7 +19,15 @@
     <div class="sponsors">
         <div class="container">
 
-            <h1>Alle Sponsors</h1>
+            <h1>Sponsoren</h1>
+            @auth
+                @if (auth()->user()->isAdmin())
+                    <div class="post-buttons">
+                        <a href="{{ route('sponsors.create') }}" class="button"><i class="fas fa-plus"></i> Sponsor toevoegen</a>
+                        <a href="{{ route('sponsorcategory.create') }}" class="button"><i class="fas fa-plus"></i> Categorie toevoegen</a>
+                    </div>
+                @endif
+            @endauth
             <div class="sponsors-list">
                 @foreach ($categories as $category)
                     <div class="category-group">
@@ -40,7 +48,8 @@
 
                                         @auth
                                             @if (auth()->user()->isAdmin())
-                                                <a href="{{ route('sponsors.edit', $sponsor->id) }}" class="button blue-button">Edit</a>
+                                                <a href="{{ route('sponsors.edit', $sponsor->id) }}"
+                                                    class="button blue-button"><i class="fas fa-pencil"></i> Bijwerken</a>
                                             @endif
                                         @endauth
                                     </div>
@@ -50,14 +59,6 @@
                     </div>
                 @endforeach
             </div>
-            @auth
-                @if (auth()->user()->isAdmin())
-                <div class="post-buttons">
-                    <a href="{{ route('sponsors.create') }}" class="button blue-button">Voeg een sponsor toe</a>
-                    <a href="{{ route('sponsorcategory.create') }}" class="button blue-button">Voeg een categorie toe</a>
-                </div>
-                @endif
-            @endauth
         </div>
     </div>
 

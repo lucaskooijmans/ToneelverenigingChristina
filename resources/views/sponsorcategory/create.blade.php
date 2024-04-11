@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creër Sponsor</title>
+    <title>Creër categorie</title>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
     <div class="sponsors">
         <div class="container">
 
-            <h1 style="font-family: 'Arial', sans-serif;">Creër SponsorCategorie</h1>
+            <h1 style="font-family: 'Arial', sans-serif;">Creër Categorie</h1>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -39,7 +39,7 @@
                         value="{{ old('sponsorcategories') }}" required class="form-control">
                 </div>
                 <div>
-                    <button type="submit" class="button green-button"><i class="fas fa-check"></i> Submit</button>
+                    <button type="submit" class="button green-button"><i class="fas fa-check"></i> Opslaan</button>
                 </div>
             </form>
         </div>
