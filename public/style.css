@@ -563,6 +563,8 @@ h1 {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease-in-out;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
 .button:hover {
@@ -880,6 +882,191 @@ textarea {
     color: #fff;
 }
 
+/* Performace pagina */
+
+.performances {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--primary-color);
+    color: var(--primary-foreground-color);
+}
+
+.performances .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 1200px;
+}
+
+.performance-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    min-width: 300px;
+}
+
+.performance-item h2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    margin-bottom: .5rem;
+}
+
+.performance-item p {
+    font-size: 1rem;
+    line-height: 1.1rem;
+}
+
+.performance-image {
+    height: 300px;
+    width: 500px;
+    border-radius: 5px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.performance-image img {
+    height: 100%;
+    border-radius: 5px;
+}
+
+.performance-item .pills {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.performance-datetime p, .performance-tickets p {
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-bottom: 1rem;
+    padding: .8rem 1rem;
+    border-radius: 5px;
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
+}
+
+.performance-datetime p i, .performance-tickets p i {
+    font-size: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: .4rem;
+    text-align: center;
+}
+
+.performance-items-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin-top: 1rem;
+}
+
+.performance-item-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    min-width: 300px;
+}
+
+.checkout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    min-width: 300px;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem 1rem;
+    background-color: #e03333;
+    color: #fff;
+    border-radius: 5px;
+    margin: 1rem 0;
+    border: 3px solid #ad0707;
+}
+
+.split {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin-top: 1rem;
+}
+
+.calendar .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.calendar h1 {
+    margin: 2rem 0 1rem;
+}
+
+#calendar {
+    min-width: 100%;
+}
+
+#calendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar th {
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-foreground-color);
+    border: 1px solid var(--primary-foreground-color);
+}
+
+#calendar td {
+    border: 1px solid var(--primary-foreground-color);
+}
+
+div.fc-event-main {
+    overflow-y: auto;
+}
+
 /* Media Queries */
 
 @media screen and (min-width: 1920px) {
@@ -1012,6 +1199,16 @@ textarea {
         flex-direction: column;
         gap: 2rem;
         align-items: center;
+    }
+
+    .performance-items-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .performance-image {
+        height: 200px;
+        width: 300px;
     }
 }
 
