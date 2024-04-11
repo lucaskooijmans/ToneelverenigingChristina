@@ -57,7 +57,7 @@
                 </div>
                 <input type="hidden" name="edit" value="{{ $edit ?? false }}">
                 <input type="hidden" name="id" value="{{ $performance->id ?? null }}">
-                <button type="submit" class="button green-button"><i class="fas fa-check"></i> Toevoegen</button>
+                <button type="submit" class="button green-button"><i class="fas fa-check"></i> Opslaan</button>
             </form>
         </div>
     </div>
