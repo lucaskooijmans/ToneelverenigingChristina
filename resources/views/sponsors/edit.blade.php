@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bewerk Sponsor</title>
+    </head>
+    <body>
+        <x-navbar />
+        <div class="sponsors">
+            <div class="container">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bewerk Sponsor</title>
-</head>
+                <h1>Bewerk Sponsor</h1>
 
-<body>
-    <x-navbar />
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
     <div class="sponsors">
         <div class="container">
@@ -64,7 +76,7 @@
                 </div>
                 <div class="post-buttons">
                     <button type="submit" class="button green-button"><i class="fas fa-save"></i> Bijwerken</button>
-                    
+                    <button type="button" onclick="window.history.back();" class="button gray-button"><i class="fas fa-times"></i> Annuleren</button>
                 </div>
             </form>
             <form action="{{ route('sponsors.destroy', $sponsor->id) }}" method="POST"
