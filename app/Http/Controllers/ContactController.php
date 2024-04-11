@@ -12,6 +12,7 @@ class ContactController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
+            'cf-turnstile-response' => 'required',
         ]);
 
         $data = array(

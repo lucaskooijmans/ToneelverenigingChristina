@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Contact</title>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
 <body>
@@ -45,7 +46,7 @@
                         <label for="message">Bericht:</label>
                         <textarea id="message" name="message" class="form-control"></textarea>
                     </div>
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAW38y6G28Abmhjw" data-callback="javascriptCallback"></div>
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAW38y6G28Abmhjw"></div>
                     <div class="form-group">
                         <button type="submit" class="button green-button">Verstuur</button>
                     </div>
@@ -82,7 +83,6 @@
             </div>
         </div>
     </div>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
 </body>
 
 </html>
