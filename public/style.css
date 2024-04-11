@@ -19,7 +19,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
 
 :root {
     /* Primaire achtergrondkleur */
-    --primary-color: #fff;
+    --primary-color: #ffffff;
     /* Primaire voorgrondkleur */
     --primary-foreground-color: #000;
     /* Secundaire achtergrondkleur (Sections, nieuwsberichten etc) */
@@ -46,6 +46,13 @@ body {
 .container {
     max-width: 1200px;
     padding: 0 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    margin-bottom: .5rem;
+
 }
 
 /* Navigatie */
@@ -1071,6 +1078,38 @@ textarea {
 
 div.fc-event-main {
     overflow-y: auto;
+}
+
+.sponsors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--primary-color);
+    color: var(--primary-foreground-color);
+}
+
+.sponsors .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 1200px;
+}
+
+.sponsors h1 {
+    margin: 2rem 0 1rem;
+}
+
+.category-group {
+    margin: 20px;
+    text-align: center;
+    padding: 1rem;
+}
+
+.category-group:not(:last-child) {
+    border-bottom: 2px solid #ccc;
 }
 
 /* Media Queries */
