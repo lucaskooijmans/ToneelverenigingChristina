@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Performance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Rules\PerformanceTimeOverlap;
 
 class PerformanceController extends Controller
 {
@@ -24,8 +25,8 @@ class PerformanceController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable',
-            'starttime' => 'required|date',
-            'endtime' => 'required|date|after:starttime',
+            'starttime' => ['required', 'date', new PerformanceTimeOverlap($request)],
+            'endtime' => ['required', 'date', 'after:starttime', new PerformanceTimeOverlap($request)],
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'location' => 'required|string',
             'available_seats' => 'required|integer',
