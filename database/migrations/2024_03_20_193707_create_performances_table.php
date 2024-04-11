@@ -18,10 +18,10 @@ return new class extends Migration
             $table->dateTime('starttime');
             $table->dateTime('endtime');
             $table->string('image')->nullable();
-            $table->string('location');
-            $table->integer('available_seats')->nullable();
-            $table->integer('tickets_remaining')->nullable();
-            $table->decimal('price', 8, 2)->nullable();
+            $table->string('location')->default('Dorpshuis de Rozenhoek');
+            $table->integer('available_seats');
+            $table->integer('tickets_remaining');
+            $table->decimal('price', 8, 2);
             $table->timestamps();
         });
     }

@@ -42,8 +42,9 @@
                 </div>
                 <div class="form-group">
                     <label for="location">Locatie:</label>
-                    <input type="text" id="location" name="location" required class="form-control"
-                    value="{{ old('location', $performance->location ?? '') }}">
+                    <input type="text" id="location" name="location" class="form-control"
+                        value="{{ old('location', $performance->location ?? '') }}"
+                        placeholder="Laat leeg voor 'Dorpshuis de Rozenhoek'">
                 </div>
                 <div class="form-group">
                     <label for="available_seats">Aantal plekken:</label>
@@ -57,7 +58,7 @@
                 </div>
                 <input type="hidden" name="edit" value="{{ $edit ?? false }}">
                 <input type="hidden" name="id" value="{{ $performance->id ?? null }}">
-                <button type="submit" class="button green-button"><i class="fas fa-check"></i> Toevoegen</button>
+                <button type="submit" class="button green-button"><i class="fas fa-check"></i> Opslaan</button>
             </form>
         </div>
     </div>

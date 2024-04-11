@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Performance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Rules\PerformanceTimeOverlap;
 
 class PerformanceController extends Controller
 {
@@ -21,8 +22,25 @@ class PerformanceController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable',
+            'starttime' => ['required', 'date', new PerformanceTimeOverlap($request)],
+            'endtime' => ['required', 'date', 'after:starttime', new PerformanceTimeOverlap($request)],
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'location' => 'nullable|string',
+            'available_seats' => 'required|integer',
+            'price' => 'required|numeric',
+        ]);
+
         if($request->edit){
             $performance = Performance::find($request->id);
+
+            // Calculate the difference in available seats
+            $seatDifference = $request->available_seats - $performance->available_seats;
+
+            // Apply the difference to tickets_remaining
+            $performance->tickets_remaining += $seatDifference;
 
             $formFields = $request->all();
 
@@ -35,18 +53,13 @@ class PerformanceController extends Controller
             $performance->update($formFields);
             return $this->index();
         } else {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'description' => 'required|string',
-                'starttime' => 'required|date',
-                'endtime' => 'required|date|after:starttime',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'location' => 'required|string',
-                'available_seats' => 'required|integer',
-                'price' => 'required|numeric',
-            ]);
-
             $formFields = $request->all();
+
+            if (is_null($formFields['location'])) {
+                unset($formFields['location']);
+            }
+
+            $formFields['tickets_remaining'] = $request->available_seats;
 
             if($request->hasFile('image')){
                 $imageName = time().'.'.$request->image->extension();
@@ -55,7 +68,6 @@ class PerformanceController extends Controller
             }
 
             $performance = Performance::create($formFields);
-            $performance->tickets_remaining = $request->available_seats;
             $performance->save();
 
             return redirect()->route('performances.index');
