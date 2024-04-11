@@ -1,47 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Board Member</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container mt-5">
-        <h2>Voeg een nieuwe bestuurslid toe</h2>
-        <form action="{{ route('bestuursleden.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf <!-- CSRF token is required for form submissions in Laravel -->
+    <x-navbar />
+    <div class="bestuursleden">
+        <div class="container">
 
-            <div class="form-group">
-                <label for="name">Naam:</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-            </div>
+            <h1>Voeg een nieuwe bestuurslid toe</h1>
+            <form action="{{ route('bestuursleden.store') }}" method="POST" enctype="multipart/form-data"
+                class="post-form">
+                @csrf <!-- CSRF token is required for form submissions in Laravel -->
 
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
+                <div class="form-group">
+                    <label for="name">Naam:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
 
-            <div class="form-group">
-                <label for="phone">Telefoonnummer:</label>
-                <input type="text" class="form-control" id="phone" name="phone" required>
-            </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
 
-            <div class="form-group">
-                <label for="description">Beschrijving:</label>
-                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="phone">Telefoonnummer:</label>
+                    <input type="text" class="form-control" id="phone" name="phone" required>
+                </div>
 
-            <div class="form-group">
-                <label for="image_url">URL naar foto:</label>
-                <input type="text" class="form-control" id="image_url" name="image_url" required>
-                @error('image_url')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+                <div class="form-group">
+                    <label for="description">Beschrijving:</label>
+                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                </div>
 
-            <button type="submit" class="btn btn-primary">Toevoegen</button>
-        </form>
+                <div class="form-group">
+                    <label for="image_url">URL naar foto:</label>
+                    <input type="text" class="form-control" id="image_url" name="image_url" required>
+                    @error('image_url')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <button type="submit" class="button green-button"><i class="fas fa-check"></i> Toevoegen</button>
+            </form>
+        </div>
     </div>
+
 </body>
+
 </html>

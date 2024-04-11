@@ -14,27 +14,30 @@
 
     <div class="historie">
 
-        <h1>Historie</h1>
-        @if (Gate::allows('isAdmin'))
-        <a href="{{ route('history.create') }}" class="add-item button"><i class="fas fa-plus"></i> Toevoegen</a>
-        @endif
         <div class="container">
-            <div class="section">
-                <h1>Onze bijdragen</h1>
-                @foreach ($historyItems as $history)
-                    @if ($history->contribution)
-                        <x-history_item :historyItem="$history" />
-                    @endif
-                @endforeach
-            </div>
+            <h1>Historie</h1>
+            @if (Gate::allows('isAdmin'))
+                <a href="{{ route('history.create') }}" class="add-item button"><i class="fas fa-plus"></i> Toevoegen</a>
+            @endif
+            <div class="split">
 
-            <div class="section">
-                <h1>Historie</h1>
-                @foreach ($historyItems as $history)
-                    @if (!$history->contribution)
-                        <x-history_item :historyItem="$history" />
-                    @endif
-                @endforeach
+                <div class="section">
+                    <h1>Onze bijdragen</h1>
+                    @foreach ($historyItems as $history)
+                        @if ($history->contribution)
+                            <x-history_item :historyItem="$history" />
+                        @endif
+                    @endforeach
+                </div>
+
+                <div class="section">
+                    <h1>Historie</h1>
+                    @foreach ($historyItems as $history)
+                        @if (!$history->contribution)
+                            <x-history_item :historyItem="$history" />
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
 
