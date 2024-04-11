@@ -13,12 +13,10 @@ class SponsorCategorySeeder extends Seeder
     public function run(): void
     {
         $sponsorCategories = [
-            ['id' => 1, 'category_position' => 1, 'sponsorcategories' => 'Technologiebedrijven'],
-            ['id' => 2, 'category_position' => 2, 'sponsorcategories' => 'Financiële Instellingen'],
-            ['id' => 3, 'category_position' => 3, 'sponsorcategories' => 'Gezondheidszorg Organisaties'],
-            ['id' => 4, 'category_position' => 4, 'sponsorcategories' => 'Educatieve Instellingen'],
-            ['id' => 5, 'category_position' => 5, 'sponsorcategories' => 'Voedsel en Drank Bedrijven'],
-            ['id' => 6, 'category_position' => 6, 'sponsorcategories' => 'Non-profit Organisaties'],
+            ['id' => 1, 'category_position' => 1, 'sponsorcategories' => 'Sponsoren verloting'],
+            ['id' => 2, 'category_position' => 2, 'sponsorcategories' => 'Bedankjes & catering spelers'],
+            ['id' => 3, 'category_position' => 3, 'sponsorcategories' => 'Spullen omtrent het toneel(decor)'],
+            ['id' => 4, 'category_position' => 4, 'sponsorcategories' => 'Overig'],
         ];
 
         foreach ($sponsorCategories as $category) {

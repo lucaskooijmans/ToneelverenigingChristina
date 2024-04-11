@@ -15,39 +15,48 @@ class SponsorSeeder extends Seeder
         $sponsors = [
             [
                 'id' => 1,
-                'name' => 'Rabobank',
-                'url' => 'www.rabobank.nl',
+                'name' => 'World of Chocolate',
+                'url' => 'https://www.worldofchocolate.nl/',
                 'position' => 1,
-                'logo' => 'rabobank.jpg',
+                'logo' => 'images/world_of_chocolate.jpg',
                 'isActive' => 1,
-                'category_id' => 2, // Financiële Instellingen
+                'category_id' => 2, // Bedankjes & catering spelers
             ],
             [
                 'id' => 2,
-                'name' => 'Philips',
-                'url' => 'www.philips.nl',
+                'name' => 'KVV de Poort',
+                'url' => 'https://kvvdepoort.nl/',
                 'position' => 2,
-                'logo' => 'philips.jpg',
+                'logo' => 'images/kvv_de_poort.jpg',
                 'isActive' => 1,
-                'category_id' => 1, // Technologiebedrijven
+                'category_id' => 1, // Sponsoren verloting
             ],
             [
                 'id' => 3,
-                'name' => 'Unilever',
-                'url' => 'www.unilever.nl',
+                'name' => 'Vers natuurlijk van Dieuwertje',
+                'url' => 'https://www.facebook.com/VersNatuurlijkVanDieuwertje/',
                 'position' => 3,
-                'logo' => 'unilever.jpg',
+                'logo' => 'images/vers_natuurlijk.jpg',
                 'isActive' => 1,
-                'category_id' => 5, // Voedsel en Drank Bedrijven
+                'category_id' => 2, // Bedankjes & catering spelers
             ],
             [
                 'id' => 4,
-                'name' => 'Erasmus MC',
-                'url' => 'www.erasmusmc.nl',
+                'name' => 'Tuincentrum de graaf',
+                'url' => 'https://www.tuincentrumdegraaf.nl/',
                 'position' => 4,
-                'logo' => 'erasmusmc.jpg',
+                'logo' => 'images/de_graaf_bloemen.jpg',
                 'isActive' => 1,
-                'category_id' => 3, // Gezondheidszorg Organisaties
+                'category_id' => 3, // Spullen omtrent het toneel(decor)
+            ],
+            [
+                'id' => 5,
+                'name' => 'Rozenhoek',
+                'url' => 'https://www.facebook.com/rozenhoekravenswaaij',
+                'position' => 5,
+                'logo' => 'images/rozenhoek.jpg',
+                'isActive' => 1,
+                'category_id' => 4, // Overig
             ],
         ];
 
