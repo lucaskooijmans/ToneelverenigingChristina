@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label for="url" style="display: block; margin-bottom: 5px;">URL naar de website:</label>
-                    <input type="url" id="url" name="url" value="{{ old('url', $sponsor->url) }}" required
+                    <input type="url" id="url" name="url" value="{{ old('url', $sponsor->url) }}"
                         class="form-control">
                 </div>
                 <div class="form-group">
@@ -61,13 +61,14 @@
                 </div>
                 <div class="post-buttons">
                     <button type="submit" class="button green-button"><i class="fas fa-save"></i> Bijwerken</button>
-                    <form action="{{ route('sponsors.destroy', $sponsor->id) }}" method="POST"
-                        onsubmit="return confirm('Are you sure you want to delete this sponsor? This action cannot be undone.');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="button red-button"><i class="fas fa-trash"></i> Verwijderen</button>
-                    </form>
+                    
                 </div>
+            </form>
+            <form action="{{ route('sponsors.destroy', $sponsor->id) }}" method="POST"
+                onsubmit="return confirm('Weet u zeker dat u deze sponsor wilt verwijderen? Deze actie kan niet ongedaan gemaakt worden.');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="button red-button"><i class="fas fa-trash"></i> Verwijderen</button>
             </form>
         </div>
     </div>

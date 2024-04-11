@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label for="url">URL naar de website:</label>
-                    <input type="url" id="url" name="url" value="{{ old('url') }}" required class="form-control">
+                    <input type="url" id="url" name="url" value="{{ old('url') }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="logo">Foto van sponsor:</label>
