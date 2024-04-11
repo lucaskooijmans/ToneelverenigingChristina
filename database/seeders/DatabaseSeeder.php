@@ -16,26 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-        $historyItemData = HistoryItem::factory()->make()->toArray();
-        HistoryItem::factory(10)->create();
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        Post::create(
-            [
-                'title' => 'Post 1',
-                'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing'
-            ]
-        );
-
-        Post::create(
-            [
-                'title' => 'Post 2',
-                'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing'
-            ]
-        );
+        $this->call([
+            PerformanceSeeder::class,
+            PostSeeder::class,
+            HistorySeeder::class,
+            SponsorCategorySeeder::class,
+            SponsorSeeder::class,
+        ]);
 
         User::create([
             'name' => 'Admin',
