@@ -21,11 +21,12 @@
 
                 <div class="checkout">
                     <h1>
-                        Bestel kaartjes
+                        <a href="{{ route('tickets.create', $performance->id) }}" class="buy-tickets-button">
+                            Bestel kaartjes
+                        </a>
                     </h1>
                 </div>
             </div>
-
 
         </div>
     </div>

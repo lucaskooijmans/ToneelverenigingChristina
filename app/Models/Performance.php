@@ -26,4 +26,10 @@ class Performance extends Model
         'price',
     ];
     protected $table = 'performances';
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+    
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BestuursledenController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SponsorCategoryController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,8 +66,6 @@ Route::get('/sponsors/{id}/edit', [SponsorController::class, 'edit'])->name('spo
 Route::put('/sponsors/{id}', [SponsorController::class, 'update'])->name('sponsors.update');
 Route::delete('/sponsors/{sponsor}', [SponsorController::class, 'destroy'])->name('sponsors.destroy');
 
-
-
 // Contact page
 Route::get('/contact', function () {
     return view('contact');
@@ -101,6 +100,9 @@ Route::post('/history/store', [HistoryController::class, 'store'])->name('histor
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
 
+// Tickets routes
+Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
 
 // Auth routes
