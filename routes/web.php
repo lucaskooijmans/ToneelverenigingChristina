@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BestuursledenController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SponsorCategoryController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +102,14 @@ Route::post('/history/store', [HistoryController::class, 'store'])->name('histor
 
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
+
+
+// TODO: FIX AUTH PERMS ETC
+// Payments route
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
+Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::post('/webhooks/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook');
 
 
 
