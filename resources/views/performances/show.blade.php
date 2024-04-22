@@ -81,8 +81,12 @@
                         <form action="{{ route('tickets.store', $performance->id) }}" method="POST" class="post-form">
                             @csrf
                             <div class="form-group">
-                                <label for="buyer_name">Naam</label>
-                                <input type="text" name="buyer_name" required class="form-control">
+                                <label for="buyer_first_name">Voornaam</label>
+                                <input type="text" name="buyer_first_name" required class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="buyer_last_name">Achternaam</label>
+                                <input type="text" name="buyer_last_name" required class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="buyer_email">E-mailadres</label>
