@@ -104,6 +104,10 @@ Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->n
 Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
+// Admin Actions
+Route::middleware('auth')->group(function () {
+    Route::put('/performances/{performance}/update-ticket-amount', [PerformanceController::class, 'updateTicketAmount'])->name('performances.updateTicketAmount');
+});
 
 // Auth routes
 require __DIR__ . '/auth.php';

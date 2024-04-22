@@ -34,9 +34,9 @@ class TicketController extends Controller
         $ticket->save();
 
         $performance->tickets_remaining -= $request->amount;
+        $performance->tickets_sold += $request->amount;
         $performance->save();
 
         return redirect()->route('performances.show', $performance->id);
     }
-
 }

@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('location')->default('Dorpshuis de Rozenhoek');
             $table->integer('available_seats');
             $table->integer('tickets_remaining');
+            $table->integer('tickets_sold')->default(0);
+            $table->integer('tickets_added')->default(0);
+            $table->integer('tickets_removed')->default(0);
             $table->decimal('price', 8, 2);
             $table->timestamps();
         });
