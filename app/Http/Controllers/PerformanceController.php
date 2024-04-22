@@ -81,25 +81,6 @@ class PerformanceController extends Controller
         return view('performances.create', compact('performance', 'edit'));
     }
 
-    public function updateTicketAmount(Request $request, $id)
-    {
-        $performance = Performance::findOrFail($id);
-        $ticketChange = $request->input('ticket_change');
-        if ($request->input('action') == 'add') {
-            $performance->tickets_remaining += $ticketChange;
-            $performance->tickets_added += $ticketChange;
-        } elseif ($request->input('action') == 'remove') {
-            if ($performance->tickets_remaining < $ticketChange) {
-                return back()->withErrors(['ticket_change' => 'Het aantal kaartjes kan niet onder de 0 liggen.']);
-            }
-            $performance->tickets_remaining -= $ticketChange;
-            $performance->tickets_removed += $ticketChange;
-        }
-        $performance->save();
-
-        return redirect()->route('performances.show', $performance->id);
-    }
-
     public function delete($id)
     {
         $performance = Performance::find($id);

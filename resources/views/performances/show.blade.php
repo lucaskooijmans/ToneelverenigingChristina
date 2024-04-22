@@ -31,7 +31,7 @@
             @if (auth()->user()->isAdmin())
                 <div class="admin-actions">
                     <h1 class="admin-heading">Eigenaar acties:</h1>
-                    <form action="{{ route('performances.updateTicketAmount', $performance->id) }}" method="POST" class="admin-form">
+                    <form action="{{ route('tickets.updateTicketAmount', $performance->id) }}" method="POST" class="admin-form">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
