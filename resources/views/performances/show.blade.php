@@ -11,6 +11,12 @@
     <x-navbar />
     
     <div class="performances">
+        <div id="confirmationMessage" style="display: none; background-color: #4CAF50; color: white; padding: 10px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 9999;">
+            Bestelling succesvol geplaatst!
+        </div>
+
+        <h1 style="font-family: 'Arial', sans-serif; text-align: center;">Bestel kaartjes</h1>
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

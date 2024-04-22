@@ -44,7 +44,7 @@ class TicketController extends Controller
         $performance->tickets_sold += $request->amount;
         $performance->save();
 
-        return redirect()->route('performances.show', $performance->id);
+        return redirect()->route('performances.show', $performance->id)->with('success', 'Succesvolle aankoop! U ontvangt een e-mail met de ticket(s).');
     }
         
 
