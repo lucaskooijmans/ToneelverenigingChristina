@@ -23,16 +23,7 @@ class Performance extends Model
         'location',
         'available_seats',
         'tickets_remaining',
-        'tickets_sold',
-        'tickets_added',
-        'tickets_removed',
         'price',
     ];
     protected $table = 'performances';
-
-    public function tickets()
-    {
-        return $this->hasMany(Ticket::class);
-    }
-    
 }

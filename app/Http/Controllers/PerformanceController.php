@@ -60,7 +60,6 @@ class PerformanceController extends Controller
             }
 
             $formFields['tickets_remaining'] = $request->available_seats;
-            $formFields['tickets_added'] = $request->available_seats;
 
             if($request->hasFile('image')){
                 $imageName = time().'.'.$request->image->extension();
@@ -115,20 +114,4 @@ class PerformanceController extends Controller
         return view('performances.show', compact('performance'));
     }
 
-    public function updateSeatAmount(Request $request, $id)
-    {
-        $performance = Performance::findOrFail($id);
-        $seatChange = $request->input('seats_change');
-        if ($request->input('action') == 'add') {
-            $performance->available_seats += $seatChange;
-        } elseif ($request->input('action') == 'remove') {
-            if ($performance->available_seats < $seatChange) {
-                return back()->withErrors(['seats_change' => 'Het aantal stoelen kan niet onder de 0 liggen.']);
-            }
-            $performance->available_seats -= $seatChange;
-        }
-        $performance->save();
-
-        return redirect()->route('performances.show', $performance->id);
-    }
 }
