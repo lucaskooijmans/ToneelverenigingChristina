@@ -22,7 +22,6 @@ class PerformanceSeeder extends Seeder
                 'location' => 'Dorpshuis de Rozenhoek',
                 'available_seats' => 100,
                 'tickets_remaining' => 100,
-                'tickets_added' => 100,
                 'price' => 10,
             ],
             [
@@ -34,7 +33,6 @@ class PerformanceSeeder extends Seeder
                 'location' => 'Dorpshuis de Rozenhoek',
                 'available_seats' => 100,
                 'tickets_remaining' => 100,
-                'tickets_added' => 100,
                 'price' => 10,
             ],
             [
@@ -46,7 +44,6 @@ class PerformanceSeeder extends Seeder
                 'location' => 'Dorpshuis de Rozenhoek',
                 'available_seats' => 100,
                 'tickets_remaining' => 100,
-                'tickets_added' => 100,
                 'price' => 10,
             ],
             [
@@ -58,7 +55,6 @@ class PerformanceSeeder extends Seeder
                 'location' => 'Dorpshuis de Rozenhoek',
                 'available_seats' => 100,
                 'tickets_remaining' => 100,
-                'tickets_added' => 100,
                 'price' => 10,
             ],
         ];
@@ -73,7 +69,6 @@ class PerformanceSeeder extends Seeder
                 'location' => $performance['location'],
                 'available_seats' => $performance['available_seats'],
                 'tickets_remaining' => $performance['tickets_remaining'],
-                'tickets_added' => $performance['tickets_added'],
                 'price' => $performance['price'],
             ]);
         }
