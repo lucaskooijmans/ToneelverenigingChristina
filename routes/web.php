@@ -36,6 +36,18 @@ Route::get('/voorstellingen/{performance}/edit', [PerformanceController::class, 
 Route::delete('/voorstellingen/delete/{id}', [PerformanceController::class, 'delete'])->name('performances.delete');
 Route::get('/voorstellingen/{id}', [PerformanceController::class, 'show'])->name('performances.show');
 
+Route::middleware('auth')->group(function () {
+    Route::put('/performances/{performance}/update-seat-amount', [PerformanceController::class, 'updateSeatAmount'])->name('performances.updateSeatAmount');
+});
+
+// Tickets routes
+Route::middleware('auth')->group(function () {
+    Route::put('/performances/{performance}/update-ticket-amount', [TicketController::class, 'updateTicketAmount'])->name('tickets.updateTicketAmount');
+});
+
+Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
+
 // Calendar
 Route::get('/agenda', [PerformanceController::class, 'calendar'])->name('performances.calendar');
 
@@ -99,15 +111,6 @@ Route::post('/history/store', [HistoryController::class, 'store'])->name('histor
 
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
-
-// Tickets routes
-Route::middleware('auth')->group(function () {
-    Route::put('/performances/{performance}/update-ticket-amount', [TicketController::class, 'updateTicketAmount'])->name('tickets.updateTicketAmount');
-});
-
-Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
-Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
-
 
 // Auth routes
 require __DIR__ . '/auth.php';
