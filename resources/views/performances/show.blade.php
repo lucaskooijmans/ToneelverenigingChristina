@@ -70,18 +70,36 @@
 
         <div class="container">
             <div class="split">
-
                 <div class="performance-item-showcase">
                     <h1>Voorstelling</h1>
                     <x-performance_item_expanded :performanceItem="$performance" />
                 </div>
 
                 <div class="checkout">
-                    <h1>
-                        <a href="{{ route('tickets.create', $performance->id) }}" class="buy-tickets-button">
-                            Bestel kaartjes
-                        </a>
-                    </h1>
+                    <h1>Bestel kaartjes</h1>
+                    @if ($performance->tickets_remaining > 0)
+                        <form action="{{ route('tickets.store', $performance->id) }}" method="POST" class="post-form">
+                            @csrf
+                            <div class="form-group">
+                                <label for="buyer_name">Naam</label>
+                                <input type="text" name="buyer_name" required class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="buyer_email">E-mailadres</label>
+                                <input type="email" name="buyer_email" required class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Aantal tickets</label>
+                                <input type="number" name="amount" required class="form-control">
+                            </div>
+                            
+                            <button type="submit" class="blue-button button">Afrekenen</button>
+                        </form>
+                    @else
+                        <div class="alert alert-warning">
+                            <p>Helaas, er zijn geen tickets meer beschikbaar voor deze voorstelling.</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
