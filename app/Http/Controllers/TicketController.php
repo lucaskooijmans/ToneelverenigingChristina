@@ -25,7 +25,7 @@ class TicketController extends Controller
         ]);
 
         if ($performance->tickets_remaining < $request->amount) {
-            return back()->withErrors(['amount' => 'There are not enough tickets available.']);
+            return back()->withErrors(['amount' => 'Er zijn niet genoeg kaartjes beschikbaar.']);
         }
 
         $ticket = new Ticket($validatedData);
