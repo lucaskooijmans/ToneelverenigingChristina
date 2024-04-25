@@ -9,7 +9,7 @@
 
 <body>
     <x-navbar />
-    
+
     <div class="performances">
         <div id="confirmationMessage" style="display: none; background-color: #4CAF50; color: white; padding: 10px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 9999;">
             Bestelling succesvol geplaatst!
@@ -35,6 +35,8 @@
 
         @auth
             @if (auth()->user()->isAdmin())
+                <a href="{{ route('tickets.exportTickets', $performance->id) }}" class="blue-button button">Exporteer verkochte tickets naar CSV</a>
+
                 <div class="admin-actions">
                     <h1 class="admin-heading">Eigenaar acties:</h1>
                     <form action="{{ route('tickets.updateTicketAmount', $performance->id) }}" method="POST" class="admin-form">
@@ -102,7 +104,7 @@
                                 <label for="amount">Aantal tickets</label>
                                 <input type="number" name="amount" required class="form-control">
                             </div>
-                            
+
                             <button type="submit" class="blue-button button">Afrekenen</button>
                         </form>
                     @else

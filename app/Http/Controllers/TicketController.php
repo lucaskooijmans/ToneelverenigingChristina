@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Performance;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class TicketController extends Controller
 {
@@ -46,7 +47,7 @@ class TicketController extends Controller
 
         return redirect()->route('performances.show', $performance->id)->with('success', 'Succesvolle aankoop! U ontvangt een e-mail met de ticket(s).');
     }
-        
+
 
     public function updateTicketAmount(Request $request, $id)
     {
@@ -65,5 +66,27 @@ class TicketController extends Controller
         $performance->save();
 
         return redirect()->route('performances.show', $performance->id);
+    }
+
+    public function exportTickets($performanceId)
+    {
+        $performance = Performance::findOrFail($performanceId);
+        $tickets = Ticket::where('performance_id', $performanceId)->get();
+        $csvFileName = $performance->name . '_tickets.csv';
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
+        ];
+
+        $handle = fopen('php://output', 'w');
+        fputcsv($handle, ['Naam', 'Aantal', 'Unieke code']); // Add more headers as needed
+
+        foreach ($tickets as $ticket) {
+            fputcsv($handle, [$ticket->buyer_name, $ticket->amount, $ticket->unique_number]); // Add more fields as needed
+        }
+
+        fclose($handle);
+
+        return Response::make('', 200, $headers);
     }
 }
