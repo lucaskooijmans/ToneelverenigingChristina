@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Performance;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class TicketController extends Controller
 {
@@ -36,8 +38,21 @@ class TicketController extends Controller
             'buyer_email' => $validatedData['buyer_email'],
             'amount' => $validatedData['amount']
         ]);
+
         $ticket->performance_id = $performance->id;
-        $ticket->unique_number = mt_rand(1000, 9999); // Generate a random 4-digit number
+
+        // Generate a random 6-digit number (1 million unique numbers, future proofing)
+        $min = 000000;
+        $max = 999999;
+        $uniqueNumber = mt_rand($min, $max);
+
+        while (Ticket::where('unique_number', $uniqueNumber)->exists()) {
+            // Regenerate until it is unique
+            $uniqueNumber = mt_rand($min, $max);
+        }
+
+        $ticket->unique_number = $uniqueNumber;
+
         $ticket->save();
 
         $performance->tickets_remaining -= $request->amount;
@@ -46,7 +61,7 @@ class TicketController extends Controller
 
         return redirect()->route('performances.show', $performance->id)->with('success', 'Succesvolle aankoop! U ontvangt een e-mail met de ticket(s).');
     }
-        
+
 
     public function updateTicketAmount(Request $request, $id)
     {
@@ -65,5 +80,29 @@ class TicketController extends Controller
         $performance->save();
 
         return redirect()->route('performances.show', $performance->id);
+    }
+
+    public function exportTickets($performanceId)
+    {
+        $performance = Performance::findOrFail($performanceId);
+        $date = Carbon::parse($performance->starttime)->format('d-m-Y');
+        $tickets = Ticket::where('performance_id', $performanceId)->orderBy('buyer_name')->get();
+        $csvFileName = $performance->name . '_' . $date . '_tickets.csv';
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
+        ];
+
+        $handle = fopen('php://output', 'w');
+        fputcsv($handle, ['Naam', 'Aantal', 'Email', 'Unieke code']);
+
+        foreach ($tickets as $ticket) {
+            fputcsv($handle, [$ticket->buyer_name, $ticket->amount, $ticket->buyer_email, $ticket->unique_number]);
+        }
+
+        fclose($handle);
+
+        $success_status = 200;
+        return Response::make('', $success_status, $headers);
     }
 }

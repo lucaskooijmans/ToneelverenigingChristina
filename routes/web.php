@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
 // Tickets routes
 Route::middleware('auth')->group(function () {
     Route::put('/performances/{performance}/update-ticket-amount', [TicketController::class, 'updateTicketAmount'])->name('tickets.updateTicketAmount');
+    Route::get('/performances/{performance}/export-tickets', [TicketController::class, 'exportTickets'])->name('tickets.exportTickets');
 });
 
 Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
