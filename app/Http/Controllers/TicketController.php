@@ -38,8 +38,21 @@ class TicketController extends Controller
             'buyer_email' => $validatedData['buyer_email'],
             'amount' => $validatedData['amount']
         ]);
+
         $ticket->performance_id = $performance->id;
-        $ticket->unique_number = mt_rand(000000, 999999); // Generate a random 6-digit number (1 million unique numbers, future proofing)
+
+        // Generate a random 6-digit number (1 million unique numbers, future proofing)
+        $min = 000000;
+        $max = 999999;
+        $uniqueNumber = mt_rand($min, $max);
+
+        while (Ticket::where('unique_number', $uniqueNumber)->exists()) {
+            // Regenerate until it is unique
+            $uniqueNumber = mt_rand($min, $max);
+        }
+
+        $ticket->unique_number = $uniqueNumber;
+
         $ticket->save();
 
         $performance->tickets_remaining -= $request->amount;
@@ -89,6 +102,7 @@ class TicketController extends Controller
 
         fclose($handle);
 
-        return Response::make('', 200, $headers);
+        $success_status = 200;
+        return Response::make('', $success_status, $headers);
     }
 }
