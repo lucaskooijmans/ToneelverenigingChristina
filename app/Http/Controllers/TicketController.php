@@ -81,10 +81,10 @@ class TicketController extends Controller
         ];
 
         $handle = fopen('php://output', 'w');
-        fputcsv($handle, ['Naam', 'Aantal', 'Unieke code']); // Add more headers as needed
+        fputcsv($handle, ['Naam', 'Aantal', 'Email', 'Unieke code']);
 
         foreach ($tickets as $ticket) {
-            fputcsv($handle, [$ticket->buyer_name, $ticket->amount, $ticket->unique_number]); // Add more fields as needed
+            fputcsv($handle, [$ticket->buyer_name, $ticket->amount, $ticket->buyer_email, $ticket->unique_number]);
         }
 
         fclose($handle);
