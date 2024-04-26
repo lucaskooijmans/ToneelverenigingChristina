@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Performance;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -38,7 +39,7 @@ class TicketController extends Controller
             'amount' => $validatedData['amount']
         ]);
         $ticket->performance_id = $performance->id;
-        $ticket->unique_number = mt_rand(1000, 9999); // Generate a random 4-digit number
+        $ticket->unique_number = mt_rand(000000, 999999); // Generate a random 6-digit number (1 million unique numbers, future proofing)
         $ticket->save();
 
         $performance->tickets_remaining -= $request->amount;
@@ -71,8 +72,9 @@ class TicketController extends Controller
     public function exportTickets($performanceId)
     {
         $performance = Performance::findOrFail($performanceId);
-        $tickets = Ticket::where('performance_id', $performanceId)->get();
-        $csvFileName = $performance->name . '_tickets.csv';
+        $date = Carbon::parse($performance->starttime)->format('d-m-Y');
+        $tickets = Ticket::where('performance_id', $performanceId)->orderBy('buyer_name')->get();
+        $csvFileName = $performance->name . '_' . $date . '_tickets.csv';
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
