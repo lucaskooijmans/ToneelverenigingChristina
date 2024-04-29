@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\HistoryItem;
 use Illuminate\Http\Request;
+use App\Mail\PaymentSuccessful;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class HistoryController extends Controller
@@ -11,6 +13,7 @@ class HistoryController extends Controller
     public function index()
     {
         $historyItems = HistoryItem::orderBy('date', 'desc')->get();
+        $name = 'Thomas Koerse';
         return view('history.index', compact('historyItems'));
     }
 
