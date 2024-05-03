@@ -1,7 +1,6 @@
 @component('mail::message')
 
-Dit is een test email.
-
-Bedankt voor uw betaling {{ $name }}; uw betaling is succesvol verwerkt.
+Bedankt voor uw bestelling {{ $name }}. Uw betaling is succesvol verwerkt.
+U vindt uw ticket(s) in de bijlage.
 
 @endcomponent
