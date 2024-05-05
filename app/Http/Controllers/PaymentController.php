@@ -77,7 +77,7 @@ class PaymentController extends Controller
                 return redirect()->route('performances.index')->with('error', 'Er is iets fout gegaan, probeer het opnieuw.');
         }
 
-        $request->session()->forget('paymentId');  // Clean up the session
+        $request->session()->forget('paymentId'); 
 
     }
 
