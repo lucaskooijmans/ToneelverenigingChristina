@@ -10,8 +10,6 @@
         <div class="sponsors">
             <div class="container">
 
-                <h1>Bewerk Sponsor</h1>
-
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -49,7 +47,7 @@
             <form id="myForm" action="{{ route('sponsors.update', $sponsor->id) }}" method="post" enctype="multipart/form-data"
                 class="post-form">
                 @csrf
-                @method('PUT') <!-- Important: Specify the method as PUT -->
+                @method('PUT') 
                 <div class="form-group">
                     <label for="name" style="display: block; margin-bottom: 5px;">Naam:</label>
                     <input type="text" id="name" name="name" value="{{ old('name', $sponsor->name) }}"
