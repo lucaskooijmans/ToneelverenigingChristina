@@ -10,6 +10,8 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <script src="{{ asset('js/sponsor-sortable.js') }}"></script>
+    @else
+        <script src="/minimizeCategories.js"></script>
     @endif
 </head>
 
@@ -37,13 +39,12 @@
             </div>
             <div class="sponsors-list">
                 @foreach ($categories as $category)
-                    <div class="category-group">
+                    <div class="category-group" data-open='true' onclick="javascript:toggleOpen(this)">
                         <h2>{{ $category->sponsorcategories }}</h2>
-                        <div class="category" data-category-id="{{ $category->id }}"
-                            style="margin-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: center; min-height: 120px;">
-                            <div id="{{ $category->id }}"  class="anchor"></div>
+                        <div class="category" data-category-id="{{ $category->id }}">
+                            <div id="{{ $category->id }}" class="anchor"></div>
                             @foreach ($category->sponsors as $sponsor)
-                                <div data-sponsor-id="{{ $sponsor->id }}"
+                                <div class="sponsor" data-sponsor-id="{{ $sponsor->id }}"
                                     style="margin: 10px; text-align: center; flex: 0 1 auto;">
                                     <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->name }}"
                                         style="width: 150px; height: 150px; border: 1px solid #ddd; border-radius: 4px; padding: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">

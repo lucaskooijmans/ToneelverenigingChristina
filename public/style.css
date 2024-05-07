@@ -1118,11 +1118,27 @@ div.fc-event-main {
     margin: 20px;
     text-align: center;
     padding: 1rem;
+    cursor: pointer;
+}
+
+.category {
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 120px;
 }
 
 .category-group:not(:last-child) {
     border-bottom: 2px solid #ccc;
 }
+
+.category-group[data-open = "false"] .category,
+.category-group[data-open = "false"] .sponsor {
+    display: none;
+}
+
+
 
 /* Media Queries */
 
