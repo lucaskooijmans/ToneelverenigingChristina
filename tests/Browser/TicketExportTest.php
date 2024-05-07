@@ -9,7 +9,6 @@
 
     class TicketExportTest extends DuskTestCase
     {
-        use DatabaseMigrations;
 
         public function testTicketExport()
         {

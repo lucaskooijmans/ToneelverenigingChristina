@@ -43,6 +43,13 @@ body {
     min-height: 100svh;
 }
 
+.anchor {
+    display: block;
+    position: relative;
+    top: -10rem;
+    visibility: hidden;
+}
+
 .container {
     max-width: 1200px;
     padding: 0 1rem;
@@ -464,6 +471,7 @@ h1 {
     gap: 1rem;
     margin: 1rem 0;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .posts {
@@ -739,6 +747,10 @@ textarea {
     color: #fff;
 }
 
+.alert-warning {
+    width: 25rem;;    
+}
+
 /* Bestuursleden pagina */
 
 .bestuursleden {
@@ -1006,7 +1018,7 @@ textarea {
 
 .checkout {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     gap: 1rem;
@@ -1106,11 +1118,27 @@ div.fc-event-main {
     margin: 20px;
     text-align: center;
     padding: 1rem;
+    cursor: pointer;
+}
+
+.category {
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 120px;
 }
 
 .category-group:not(:last-child) {
     border-bottom: 2px solid #ccc;
 }
+
+.category-group[data-open = "false"] .category,
+.category-group[data-open = "false"] .sponsor {
+    display: none;
+}
+
+
 
 /* Media Queries */
 
