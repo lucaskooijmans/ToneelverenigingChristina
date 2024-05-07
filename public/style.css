@@ -43,6 +43,13 @@ body {
     min-height: 100svh;
 }
 
+.anchor {
+    display: block;
+    position: relative;
+    top: -10rem;
+    visibility: hidden;
+}
+
 .container {
     max-width: 1200px;
     padding: 0 1rem;
@@ -464,6 +471,7 @@ h1 {
     gap: 1rem;
     margin: 1rem 0;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .posts {
