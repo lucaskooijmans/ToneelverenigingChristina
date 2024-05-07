@@ -13,7 +13,7 @@
         <div class="container">
 
             <h1>Voeg een nieuwe bestuurslid toe</h1>
-            <form action="{{ route('bestuursleden.store') }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('boardmembers.store') }}" method="POST" enctype="multipart/form-data"
                 class="post-form">
                 @csrf <!-- CSRF token is required for form submissions in Laravel -->
 
@@ -38,9 +38,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image_url">URL naar foto:</label>
-                    <input type="text" class="form-control" id="image_url" name="image_url" required>
-                    @error('image_url')
+                    <label for="image">Foto uploaden:</label>
+                    <input type="file" class="form-control" id="image" name="image" required>
+                    @error('image')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

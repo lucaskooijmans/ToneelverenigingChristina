@@ -16,12 +16,12 @@ class SponsorController extends Controller
     public function index()
     {
         $categories = Sponsorcategories::with(['sponsors' => function($query) {
-            if(auth()->check() && auth()->user()->isAdmin()) {
+            if (auth()->check() && auth()->user()->isAdmin()) {
                 $query->orderBy('position', 'asc')->orderBy('updated_at', 'desc');
             } else {
                 $query->where('isActive', 1)->orderBy('position', 'asc');
             }
-        }])->get();
+        }])->orderBy('category_position', 'asc')->get(); 
 
         return view('sponsors.index', compact('categories'));
     }

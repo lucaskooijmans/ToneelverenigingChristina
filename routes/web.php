@@ -8,8 +8,12 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BestuursledenController;
+use App\Http\Controllers\BoardmembersController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SponsorCategoryController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +39,19 @@ Route::get('/voorstellingen/{performance}/edit', [PerformanceController::class, 
 Route::delete('/voorstellingen/delete/{id}', [PerformanceController::class, 'delete'])->name('performances.delete');
 Route::get('/voorstellingen/{id}', [PerformanceController::class, 'show'])->name('performances.show');
 
+Route::middleware('auth')->group(function () {
+    Route::put('/performances/{performance}/update-seat-amount', [PerformanceController::class, 'updateSeatAmount'])->name('performances.updateSeatAmount');
+});
+
+// Tickets routes
+Route::middleware('auth')->group(function () {
+    Route::put('/performances/{performance}/update-ticket-amount', [TicketController::class, 'updateTicketAmount'])->name('tickets.updateTicketAmount');
+    Route::get('/performances/{performance}/export-tickets', [TicketController::class, 'exportTickets'])->name('tickets.exportTickets');
+});
+
+Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
+
 // Calendar
 Route::get('/agenda', [PerformanceController::class, 'calendar'])->name('performances.calendar');
 
@@ -52,7 +69,7 @@ Route::resource('posts', PostController::class);
 
 // Bestuursleden
 // Route::get('/bestuursleden', [BestuursledenController::class, 'index']);
-Route::resource('bestuursleden', BestuursledenController::class);
+Route::resource('boardmembers', BoardmembersController::class);
 // Route::put('/bestuursleden/{bestuurslid}', [BestuursledenController::class, 'update'])->name('bestuursleden.update');
 
 // Sponsors page
@@ -65,20 +82,16 @@ Route::get('/sponsors/{id}/edit', [SponsorController::class, 'edit'])->name('spo
 Route::put('/sponsors/{id}', [SponsorController::class, 'update'])->name('sponsors.update');
 Route::delete('/sponsors/{sponsor}', [SponsorController::class, 'destroy'])->name('sponsors.destroy');
 
-
-
 // Contact page
 Route::get('/contact', function () {
     return view('contact');
 });
-
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 // Home page
 Route::get('/', function () {
     return view('home');
 });
-
 
 // Dashboard page
 Route::get('/dashboard', function () {
@@ -103,6 +116,18 @@ Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->n
 
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');
 Route::get('/pdf/view', [App\Http\Controllers\PDFController::class, 'openView'])->name('pdf.openView');
+// Tickets routes
+Route::middleware('auth')->group(function () {
+    Route::put('/performances/{performance}/update-ticket-amount', [TicketController::class, 'updateTicketAmount'])->name('tickets.updateTicketAmount');
+});
+Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
+
+// TODO: FIX AUTH PERMS ETC
+// Payments route
+Route::post('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
+Route::get('/payment/status', [PaymentController::class, 'handlePaymentStatus'])->name('payment.handleStatus');
+Route::post('/webhooks/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook');
 
 // Auth routes
 require __DIR__ . '/auth.php';
