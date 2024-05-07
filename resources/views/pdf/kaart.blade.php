@@ -45,7 +45,7 @@
             {{ $code }}
         </p>
         <p>
-            Besteld voor
+            Besteld voor €
             {{-- Prijs van kaart --}}
             {{ $price }}
         </p>

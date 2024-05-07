@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Barryvdh\DomPDF\ServiceProvider;
+use Illuminate\Support\Facades\Storage;
 
 class PDFController extends Controller
 {
@@ -34,5 +35,19 @@ class PDFController extends Controller
             'date' => date('m/d/Y')
         ];
         return view('pdf.kaart', $data);
+    }
+
+    public static function createPDF($pdfFileName, $title, $name, $code, $price, $quantity, $date)
+    {
+        $data = [
+            'title' => $title,
+            'name' => $name,
+            'code' => $code,
+            'price' => $price,
+            'quantity' => $quantity,
+            'date' => $date
+        ];
+        $pdf = Pdf::loadView('pdf.kaart', $data);
+        Storage::put($pdfFileName, $pdf->download()->getOriginalContent());
     }
 }

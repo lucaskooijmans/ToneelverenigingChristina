@@ -9,21 +9,28 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentSuccessful extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $name;
+    public $id;
     /**
      * Create a new message instance.
      */
-    public function __construct($name)
+    public function __construct($name, $id)
     {
         $this->name = $name;
+        $this->id = $id;
         $this->attach(public_path('images/LogoSmall.jpg'), [
             'as' => 'logo.jpg',
             'mime' => 'image/jpeg',
+        ]);
+        $this->attach(Storage::path($id . '.pdf'), [
+            'as' => 'ticket.pdf',
+            'mime' => 'application/pdf',
         ]);
     }
 
