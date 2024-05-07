@@ -21,24 +21,34 @@ class PaymentController extends Controller
             'buyer_email' => 'required|email|max:255',
             'amount' => 'required|integer|min:1',
         ]);
-
+    
         $request->session()->put('purchase_data', $validatedData);
-
+    
         $performance = Performance::findOrFail($id);
         $totalPrice = $performance->price * $validatedData['amount'];
-
+    
         try {
             $payment = Mollie::api()->payments->create([
                 "amount" => [
                     "currency" => "EUR",
                     'value' => sprintf("%.2f", $totalPrice)
                 ],
-                "description" => "Tickets voor " . $performance->name,
-                "redirectUrl" => route('payment.success', ['performanceId' => $id]), 
+                "description" => "Tickets for " . $performance->name,
+                "redirectUrl" => route('payment.handleStatus'),
                 "webhookUrl" => route('payment.webhook'),
                 "method" => "ideal",
+                "metadata" => [
+                    "performanceId" => $id 
+                ],
             ]);
-
+    
+            if (!isset($payment) || !isset($payment->id)) {
+                Log::error('Payment creation failed, no payment ID.');
+                return back()->with('error', 'Failed to create payment. Please try again.');
+            }
+    
+            $request->session()->put('paymentId', $payment->id);
+    
             return redirect($payment->getCheckoutUrl());
         } catch (\Mollie\Api\Exceptions\ApiException $e) {
             Log::error("API call failed: " . $e->getMessage());
@@ -46,16 +56,42 @@ class PaymentController extends Controller
         }
     }
 
-    public function paymentSuccess(Request $request, $performanceId)
+    public function handlePaymentStatus(Request $request)
+    {
+        $paymentId = $request->session()->get('paymentId');
+
+        if (!$paymentId) {
+            return redirect('shop.index')->with('error', 'Payment information not found.');
+        }
+
+        $payment = Mollie::api()->payments->get($paymentId);
+
+        switch ($payment->status) {
+            case 'paid':
+                return $this->handlePaidStatus($request, $payment);
+            case 'failed':
+                return redirect()->route('performances.index')->with('error', 'De betaling is mislukt, probeer het opnieuw.');
+            case 'canceled':
+                return redirect()->route('performances.index')->with('error', 'De betaling is geannuleerd.');
+            case 'expired':
+                return redirect()->route('performances.index')->with('error', 'De betaling is verlopen.');
+            default:
+                return redirect()->route('performances.index')->with('error', 'Er is iets fout gegaan, probeer het opnieuw.');
+        }
+
+        $request->session()->forget('paymentId'); 
+
+    }
+
+    private function handlePaidStatus(Request $request, $payment)
     {
         $purchaseData = $request->session()->get('purchase_data', []);
-
         if (empty($purchaseData)) {
-            return redirect()->route('performances.index')->with('error', 'Payment was successful but purchase data is missing.');
+            return redirect()->route('performances.index')->with('error', 'No purchase data found.');
         }
-        
+
+        $performanceId = $payment->metadata->performanceId;
         $performance = Performance::findOrFail($performanceId);
-        
 
         if ($performance->tickets_remaining < $purchaseData['amount']) {
             return back()->withErrors(['amount' => 'Not enough tickets available.']);
@@ -73,27 +109,8 @@ class PaymentController extends Controller
         $email = $purchaseData['buyer_email'];
         $name = $purchaseData['buyer_first_name'];
         $performance->tickets_remaining -= $purchaseData['amount'];
-        $performance->tickets_sold += $purchaseData['amount'];
         $performance->save();
         Mail::to($email)->send(new PaymentSuccessful($name));
-        // TODO: Redirect naar view purchase gelukt
         return redirect()->route('performances.show', $performanceId)->with('success', 'Ticket purchase successful!');
-    }
-
-    public function handleWebhook()
-    {
-        $paymentid = request('id');
-        $payment = Mollie::api()->payments->get($paymentid);
-
-        if ($payment->isPaid()) {
-            echo 'Payment received';
-        }
-
-        return response('Webhook received', 200);
-    }
-
-    public function paymentFailed()
-    {
-        return redirect()->route('performances.index')->with('error', 'Payment failed. Please try again.');
     }
 }

@@ -9,6 +9,13 @@
 
 <body>
     <x-navbar />
+
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    
     <div class="performances">
 
         <div class="container">

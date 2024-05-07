@@ -111,10 +111,8 @@ Route::post('/performances/{performance}/tickets', [TicketController::class, 'st
 // Payments route
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::post('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
-// Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
-Route::get('/payment/success/{performanceId}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment/status', [PaymentController::class, 'handlePaymentStatus'])->name('payment.handleStatus');
 Route::post('/webhooks/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook');
-
 
 // Auth routes
 require __DIR__ . '/auth.php';
