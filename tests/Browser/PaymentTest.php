@@ -19,7 +19,7 @@ class PaymentTest extends DuskTestCase
                     ->type('amount', '1')
                     ->press('Afrekenen')
                     ->waitForText('Test profile', 10)
-                    ->select('select-locale', 'Nederlands') 
+                    ->select('locale', 'nl_NL') 
                     ->waitForText('Test profile', 10)
                     ->click('.grid-button-ideal-ABNANL2A')
                     ->radio('final_state', 'paid')
