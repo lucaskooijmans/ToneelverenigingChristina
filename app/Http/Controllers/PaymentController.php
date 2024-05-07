@@ -128,6 +128,9 @@ class PaymentController extends Controller
 
     public function redirect()
     {
+        if (!session('performance')) {
+            return redirect()->route('performances.index');
+        }
         $performance = session('performance');
         // Redirect to a view that shows the success message
         return view('performances.show', compact('performance'), ['success' => 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.']);
