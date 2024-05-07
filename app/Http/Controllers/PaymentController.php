@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Performance;
 use App\Models\Ticket;
+use App\Models\Performance;
+use Illuminate\Http\Request;
+use App\Mail\PaymentSuccessful;
 use Mollie\Laravel\Facades\Mollie;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 
 class PaymentController extends Controller
@@ -104,10 +106,11 @@ class PaymentController extends Controller
         ]);
 
         $ticket->save();
-
+        $email = $purchaseData['buyer_email'];
+        $name = $purchaseData['buyer_first_name'];
         $performance->tickets_remaining -= $purchaseData['amount'];
         $performance->save();
-
+        Mail::to($email)->send(new PaymentSuccessful($name));
         return redirect()->route('performances.show', $performanceId)->with('success', 'Ticket purchase successful!');
     }
 }
