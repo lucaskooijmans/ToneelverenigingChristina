@@ -18,7 +18,11 @@ class PaymentTest extends DuskTestCase
                     ->type('buyer_email', 'john@example.com')
                     ->type('amount', '1')
                     ->press('Afrekenen')
-                    ->assertRouteIs('payment.handleStatus')
+                    ->waitForText('Test profile', 10)
+                    ->click('.grid-button-ideal-ABNANL2A')
+                    ->radio('final_state', 'paid')
+                    ->press('Ga verder') 
+                    ->waitForText('Betaling succesvol afgerond.', 10) 
                     ->assertSee('Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
         });
     }
