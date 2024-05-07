@@ -747,6 +747,10 @@ textarea {
     color: #fff;
 }
 
+.alert-warning {
+    width: 25rem;;    
+}
+
 /* Bestuursleden pagina */
 
 .bestuursleden {
@@ -1014,7 +1018,7 @@ textarea {
 
 .checkout {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     gap: 1rem;
