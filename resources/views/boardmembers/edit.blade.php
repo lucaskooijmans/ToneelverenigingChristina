@@ -11,12 +11,21 @@
     <x-navbar />
     <div class="bestuursleden">
         <div class="container">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
 
             <h1>Pas een bestuurslid aan</h1>
-            <form action="{{ route('bestuursleden.update', $bestuurslid->id) }}" method="POST" class="post-form">
-                @csrf <!-- CSRF token is required for form submissions in Laravel -->
+            <form action="{{ route('boardmembers.update', $bestuurslid->id) }}" method="POST" class="post-form" enctype="multipart/form-data">
+                @csrf 
                 @method('PUT')
-
                 <div class="form-group">
                     <label for="name">Naam:</label>
                     <input type="text" class="form-control" id="name" name="name"
@@ -42,9 +51,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image_url">URL naar foto:</label>
-                    <input type="text" class="form-control" id="image_url" name="image_url"
-                        value="{{ $bestuurslid->image_url }}" required>
+                    <label for="image">Foto uploaden:</label>
+                    <input type="file" class="form-control" id="image" name="image">
                 </div>
 
                 <button type="submit" class="button green-button"><i class="fas fa-save"></i> Wijzigen</button>

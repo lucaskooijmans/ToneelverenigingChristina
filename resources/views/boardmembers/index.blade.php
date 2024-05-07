@@ -21,7 +21,7 @@
 
         @auth
             @if (auth()->user()->isAdmin())
-                <a href="{{ route('bestuursleden.create') }}"><button class="button"><i class="fas fa-plus"></i> Toevoegen</button></a>
+                <a href="{{ route('boardmembers.create') }}"><button class="button"><i class="fas fa-plus"></i> Toevoegen</button></a>
             @endif
         @endauth
 
@@ -32,7 +32,7 @@
                 @foreach ($bestuursleden as $bestuurslid)
                     <div class="member-card">
                         <div class="member-image">
-                            <img src="{{ $bestuurslid->image_url }}" width="200" height="200" alt="Board Member">
+                            <img src="{{ asset('storage/' . $bestuurslid->image_url) }}" width="200" height="200" alt="Board Member">
                         </div>
                         <h3>{{ $bestuurslid->name }}</h3>
                         <p>Email: {{ $bestuurslid->email }}</p>
@@ -41,8 +41,8 @@
                         <div class="post-buttons">
                             @auth
                                 @if (auth()->user()->isAdmin())
-                                    <a href="{{ route('bestuursleden.edit', $bestuurslid->id) }}"><button class="button blue-button"><i class="fas fa-pencil"></i> Edit</button></a>
-                                    <form action="{{ route('bestuursleden.destroy', $bestuurslid->id) }}" method="POST">
+                                    <a href="{{ route('boardmembers.edit', $bestuurslid->id) }}"><button class="button blue-button"><i class="fas fa-pencil"></i> Edit</button></a>
+                                    <form action="{{ route('boardmembers.destroy', $bestuurslid->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="button red-button"><i class="fas fa-trash"></i> Delete</button>
