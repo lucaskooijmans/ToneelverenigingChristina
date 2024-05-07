@@ -114,6 +114,10 @@ Route::post('/history/store', [HistoryController::class, 'store'])->name('histor
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
 
+//! PDF test routes
+Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');
+Route::get('/pdf/view', [App\Http\Controllers\PDFController::class, 'openView'])->name('pdf.openView');
+
 // Tickets routes
 Route::middleware('auth')->group(function () {
     Route::put('/performances/{performance}/update-ticket-amount', [TicketController::class, 'updateTicketAmount'])->name('tickets.updateTicketAmount');

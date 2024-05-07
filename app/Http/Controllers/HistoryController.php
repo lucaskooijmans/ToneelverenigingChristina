@@ -13,8 +13,6 @@ class HistoryController extends Controller
     public function index()
     {
         $historyItems = HistoryItem::orderBy('date', 'desc')->get();
-        $name = 'Thomas Koerse';
-        Mail::to('tkoerse@gmail.com')->send(new PaymentSuccessful($name));
         return view('history.index', compact('historyItems'));
     }
 

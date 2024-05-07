@@ -9,7 +9,7 @@ use App\Mail\PaymentSuccessful;
 use Mollie\Laravel\Facades\Mollie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use App\Http\Controllers\PDFController;
 
 class PaymentController extends Controller
 {
@@ -110,7 +110,16 @@ class PaymentController extends Controller
         $performance->tickets_remaining -= $purchaseData['amount'];
         $performance->save();
 
-        Mail::to($email)->send(new PaymentSuccessful($name));
+        PDFController::createPDF(
+            "$ticket->id.pdf",
+            $performance->name,
+            $ticket->buyer_name,
+            $ticket->unique_number,
+            ($performance->price * $ticket->amount),
+            $ticket->amount,
+            date('d/m/Y', strtotime($performance->starttime)));
+
+        Mail::to($email)->send(new PaymentSuccessful($name, $ticket->id));
      
 
         return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
