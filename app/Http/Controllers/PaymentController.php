@@ -43,8 +43,7 @@ class PaymentController extends Controller
             ]);
     
             if (!isset($payment) || !isset($payment->id)) {
-                Log::error('Payment creation failed, no payment ID.');
-                return back()->with('error', 'Failed to create payment. Please try again.');
+                return back()->with('error', 'Betaling aanmaken mislukt. Probeer het opnieuw');
             }
     
             $request->session()->put('paymentId', $payment->id);
@@ -52,7 +51,7 @@ class PaymentController extends Controller
             return redirect($payment->getCheckoutUrl());
         } catch (\Mollie\Api\Exceptions\ApiException $e) {
             Log::error("API call failed: " . $e->getMessage());
-            return back()->with('error', 'Failed to create payment. Please try again.');
+            return back()->with('error', 'Betaling aanmaken mislukt. Probeer het opnieuw.');
         }
     }
 
@@ -61,7 +60,7 @@ class PaymentController extends Controller
         $paymentId = $request->session()->get('paymentId');
 
         if (!$paymentId) {
-            return redirect('shop.index')->with('error', 'Payment information not found.');
+            return redirect('shop.index')->with('error', 'Betaal informatie niet gevonden, probeer het opnieuw');
         }
 
         $payment = Mollie::api()->payments->get($paymentId);
@@ -87,14 +86,14 @@ class PaymentController extends Controller
     {
         $purchaseData = $request->session()->get('purchase_data', []);
         if (empty($purchaseData)) {
-            return redirect()->route('performances.index')->with('error', 'No purchase data found.');
+            return redirect()->route('performances.index')->with('error', 'Betaling informatie niet gevonden, probeer het opnieuw.');
         }
 
         $performanceId = $payment->metadata->performanceId;
         $performance = Performance::findOrFail($performanceId);
 
         if ($performance->tickets_remaining < $purchaseData['amount']) {
-            return back()->withErrors(['amount' => 'Not enough tickets available.']);
+            return back()->withErrors(['amount' => 'Er zijn niet genoeg tickets beschikbaar. Probeer het opnieuw.']);
         }
 
         $ticket = new Ticket([
@@ -110,7 +109,11 @@ class PaymentController extends Controller
         $name = $purchaseData['buyer_first_name'];
         $performance->tickets_remaining -= $purchaseData['amount'];
         $performance->save();
+
         Mail::to($email)->send(new PaymentSuccessful($name));
-        return redirect()->route('performances.show', $performanceId)->with('success', 'Ticket purchase successful!');
+     
+
+        return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
+
     }
 }
