@@ -14,54 +14,7 @@ class TicketController extends Controller
     {
         $performance = Performance::findOrFail($performanceId);
         return view('tickets.create', compact('performance'));
-    }
-
-    public function store(Request $request, $performanceId)
-    {
-        $performance = Performance::findOrFail($performanceId);
-
-        $validatedData = $request->validate([
-            'buyer_first_name' => 'required|max:255|regex:/^[a-zA-ZÀ-ÿ\-\' ]+$/u',
-            'buyer_last_name' => 'required|max:255|regex:/^[a-zA-ZÀ-ÿ\-\' ]+$/u',
-            'buyer_email' => 'required|email|max:255',
-            'amount' => 'required|integer|min:1'
-        ]);
-
-        if ($performance->tickets_remaining < $request->amount) {
-            return back()->withErrors(['amount' => 'Er zijn niet genoeg kaartjes beschikbaar.']);
-        }
-
-        $fullName = $validatedData['buyer_first_name'] . ' ' . $validatedData['buyer_last_name'];
-
-        $ticket = new Ticket([
-            'buyer_name' => $fullName,
-            'buyer_email' => $validatedData['buyer_email'],
-            'amount' => $validatedData['amount']
-        ]);
-
-        $ticket->performance_id = $performance->id;
-
-        // Generate a random 6-digit number (1 million unique numbers, future proofing)
-        $min = 000000;
-        $max = 999999;
-        $uniqueNumber = mt_rand($min, $max);
-
-        while (Ticket::where('unique_number', $uniqueNumber)->exists()) {
-            // Regenerate until it is unique
-            $uniqueNumber = mt_rand($min, $max);
-        }
-
-        $ticket->unique_number = $uniqueNumber;
-
-        $ticket->save();
-
-        $performance->tickets_remaining -= $request->amount;
-        $performance->tickets_sold += $request->amount;
-        $performance->save();
-
-        return redirect()->route('performances.show', $performance->id)->with('success', 'Succesvolle aankoop! U ontvangt een e-mail met de ticket(s).');
-    }
-
+    }   
 
     public function updateTicketAmount(Request $request, $id)
     {

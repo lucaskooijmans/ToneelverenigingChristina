@@ -86,7 +86,7 @@
                 <div class="checkout">
                     <h1>Bestel kaartjes</h1>
                     @if ($performance->tickets_remaining > 0)
-                        <form action="{{ route('tickets.store', $performance->id) }}" method="POST" class="post-form">
+                        <form action="{{ route('payment.prepare', ['id' => $performance->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="buyer_first_name">Voornaam</label>

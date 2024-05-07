@@ -11,8 +11,8 @@ use App\Http\Controllers\BestuursledenController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SponsorCategoryController;
 use App\Http\Controllers\TicketController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,14 +85,12 @@ Route::delete('/sponsors/{sponsor}', [SponsorController::class, 'destroy'])->nam
 Route::get('/contact', function () {
     return view('contact');
 });
-
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 // Home page
 Route::get('/', function () {
     return view('home');
 });
-
 
 // Dashboard page
 Route::get('/dashboard', function () {
@@ -115,13 +113,18 @@ Route::post('/history/store', [HistoryController::class, 'store'])->name('histor
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
 
+// Tickets routes
+Route::middleware('auth')->group(function () {
+    Route::put('/performances/{performance}/update-ticket-amount', [TicketController::class, 'updateTicketAmount'])->name('tickets.updateTicketAmount');
+});
+Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
+
 // TODO: FIX AUTH PERMS ETC
 // Payments route
-Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
-Route::get('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
-Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::post('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
+Route::get('/payment/status', [PaymentController::class, 'handlePaymentStatus'])->name('payment.handleStatus');
 Route::post('/webhooks/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook');
-
 
 // Auth routes
 require __DIR__ . '/auth.php';
