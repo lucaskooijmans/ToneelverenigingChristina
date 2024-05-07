@@ -9,7 +9,6 @@
 
     class TicketExportTest extends DuskTestCase
     {
-
         public function testTicketExport()
         {
             $this->browse(function (Browser $browser) {
