@@ -124,6 +124,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
+Route::get("/performaces/redirect", [PaymentController::class, 'redirect'])->name('redirect');
 
 // TODO: FIX AUTH PERMS ETC
 // Payments route
