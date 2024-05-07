@@ -122,17 +122,7 @@ class PaymentController extends Controller
         Mail::to($email)->send(new PaymentSuccessful($name, $ticket->id));
      
 
-        return redirect()->route('redirect')->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.')->with('performance', $performance);
+        return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
 
-    }
-
-    public function redirect()
-    {
-        if (!session('performance')) {
-            return redirect()->route('performances.index');
-        }
-        $performance = session('performance');
-        // Redirect to a view that shows the success message
-        return view('performances.show', compact('performance'), ['success' => 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.']);
     }
 }
