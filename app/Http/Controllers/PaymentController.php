@@ -58,21 +58,23 @@ class PaymentController extends Controller
 
     public function handleWebhook(Request $request)
     {
+        // Log the incoming request
         Log::info('Webhook called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
 
+        // Immediately acknowledge the webhook to prevent retries
+        response()->json(['status' => 'success'], 200);
+
+        // Process the payment status
         $paymentId = $request->input('id');
         $payment = Mollie::api()->payments->get($paymentId);
-        
-        Log::info('Payment retrieved', ['paymentId' => $paymentId, 'status' => $payment->status]);
-
         $this->processPaymentStatus($payment);
+
+        // Ensure there's no other output that might corrupt the response
+        return response()->json(['status' => 'received']);
     }
 
-    public function confirmation()
-    {
-        return redirect()->route('performances.index')->with('success', 'Your payment process is complete. Please check your email for confirmation.');
-    }
 
+    
     private function processPaymentStatus($payment)
     {
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
@@ -163,4 +165,10 @@ class PaymentController extends Controller
             Log::info("Payment for {$payment->id} processed successfully. Ticket ID: {$ticket->id}, Email sent with PDF.");
         });
     }
+
+    public function confirmation()
+    {
+        return redirect()->route('performances.index')->with('success', 'Your payment process is complete. Please check your email for confirmation.');
+    }
+
 }
