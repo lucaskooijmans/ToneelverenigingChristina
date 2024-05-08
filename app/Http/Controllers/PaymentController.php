@@ -128,7 +128,7 @@ class PaymentController extends Controller
                 'buyer_email' => $purchaseData['buyer_email'],
                 'amount' => $purchaseData['amount'],
                 'performance_id' => $performanceId,
-                'payment_id' => $payment->id, // Ensure each payment is tracked uniquely
+                'payment_id' => $payment->id, 
                 'unique_number' => mt_rand(1000, 9999),
             ]);
 

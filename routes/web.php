@@ -128,8 +128,9 @@ Route::post('/performances/{performance}/tickets', [TicketController::class, 'st
 // TODO: FIX AUTH PERMS ETC
 // Payments route
 Route::post('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
-Route::get('/payment/status', [PaymentController::class, 'handlePaymentStatus'])->name('payment.handleStatus');
 Route::post('/webhooks/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook');
+// Route::get('/payment/status', [PaymentController::class, 'simpleConfirmation'])->name('payment.status');
+
 
 // Auth routes
 require __DIR__ . '/auth.php';
