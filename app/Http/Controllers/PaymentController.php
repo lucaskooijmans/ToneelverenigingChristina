@@ -70,7 +70,7 @@ class PaymentController extends Controller
 
     public function confirmation()
     {
-        return view('payment.confirmation', ['message' => 'Your payment process is complete. Please check your email for confirmation.']);
+        return redirect()->route('performances.index')->with('success', 'Your payment process is complete. Please check your email for confirmation.');
     }
 
     private function processPaymentStatus($payment)
