@@ -68,6 +68,11 @@ class PaymentController extends Controller
         $this->processPaymentStatus($payment);
     }
 
+    public function confirmation()
+    {
+        return view('payment.confirmation', ['message' => 'Your payment process is complete. Please check your email for confirmation.']);
+    }
+
     private function processPaymentStatus($payment)
     {
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
