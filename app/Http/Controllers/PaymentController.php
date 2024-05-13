@@ -16,6 +16,7 @@ class PaymentController extends Controller
 {
     public function preparePayment(Request $request, $id)
     {
+        Log::info('preparePayment called', ['performanceId' => $id]);
         $validatedData = $request->validate([
             'buyer_first_name' => 'required|max:255',
             'buyer_last_name' => 'required|max:255',
@@ -58,18 +59,13 @@ class PaymentController extends Controller
 
     public function handleWebhook(Request $request)
     {
-        // Log the incoming request
         Log::info('Webhook called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
-
-        // Immediately acknowledge the webhook to prevent retries
         response()->json(['status' => 'success'], 200);
 
-        // Process the payment status
         $paymentId = $request->input('id');
         $payment = Mollie::api()->payments->get($paymentId);
         $this->processPaymentStatus($payment);
 
-        // Ensure there's no other output that might corrupt the response
         return response()->json(['status' => 'received']);
     }
 
@@ -108,6 +104,7 @@ class PaymentController extends Controller
 
     private function hasBeenProcessed($paymentId)
     {
+        Log::info('Checking if payment has been processed', ['paymentId' => $paymentId]);
         $exists = Ticket::where('payment_id', $paymentId)->exists();
         Log::info('Payment processed check', ['paymentId' => $paymentId, 'processed' => $exists]);
         return $exists;
@@ -115,6 +112,8 @@ class PaymentController extends Controller
 
     private function handlePaidStatus($payment)
     {
+        Log::info('handlePaidStatus called');
+
         DB::transaction(function () use ($payment) {
             if (Ticket::where('payment_id', $payment->id)->exists()) {
                 Log::warning('Duplicate payment processing attempted', ['paymentId' => $payment->id]);
@@ -168,6 +167,7 @@ class PaymentController extends Controller
 
     public function confirmation()
     {
+        Log::info('confirmation called');
         return redirect()->route('performances.index')->with('success', 'Your payment process is complete. Please check your email for confirmation.');
     }
 
