@@ -38,6 +38,7 @@ Route::post('/voorstellingen', [PerformanceController::class, 'store'])->name('p
 Route::get('/voorstellingen/{performance}/edit', [PerformanceController::class, 'edit'])->name('performances.edit');
 Route::delete('/voorstellingen/delete/{id}', [PerformanceController::class, 'delete'])->name('performances.delete');
 Route::get('/voorstellingen/{id}', [PerformanceController::class, 'show'])->name('performances.show');
+Route::get('/countdown', [VoorstellingController::class, 'showCountdown'])->name('countdown');
 
 Route::middleware('auth')->group(function () {
     Route::put('/performances/{performance}/update-seat-amount', [PerformanceController::class, 'updateSeatAmount'])->name('performances.updateSeatAmount');
