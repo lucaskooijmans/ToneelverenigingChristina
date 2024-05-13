@@ -21,11 +21,11 @@ class ContactController extends Controller
             'subject' => $request->get('subject'),
             'user_message' => $request->get('message'),
         );
-        
     
         Mail::send('emails.contact', ['data' => $data], function($message) use ($data) {
             $message->to(config('mail.from.address'))->subject('Contact Form Submission');
-            $message->from($data['email']);
+            $message->from(config('mail.from.address'));
+            $message->replyTo($data['email']);
         });   
         
         session()->flash('success', 'Bedankt voor uw bericht! U ontvangt een bevestigingsmail.');
