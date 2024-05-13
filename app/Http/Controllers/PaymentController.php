@@ -59,15 +59,27 @@ class PaymentController extends Controller
 
     public function handleWebhook(Request $request)
     {
-        Log::info('Webhook called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
-        response()->json(['status' => 'success'], 200);
+        try {
+            Log::info('Webhook called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
 
-        $paymentId = $request->input('id');
-        $payment = Mollie::api()->payments->get($paymentId);
-        $this->processPaymentStatus($payment);
+            $paymentId = $request->input('id');
+            $payment = Mollie::api()->payments->get($paymentId);
 
-        return response()->json(['status' => 'received']);
+            // Log the payment object retrieved from Mollie
+            Log::info('Payment retrieved', ['payment' => $payment]);
+
+            $this->processPaymentStatus($payment);
+
+            return response()->json(['status' => 'received']);
+        } catch (\Exception $e) {
+            Log::error('Webhook handling failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json(['error' => 'Webhook handling failed', 'message' => $e->getMessage()], 500);
+        }
     }
+
 
 
     

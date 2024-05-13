@@ -128,7 +128,7 @@ Route::post('/performances/{performance}/tickets', [TicketController::class, 'st
 // TODO: FIX AUTH PERMS ETC
 // Payments route
 Route::post('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
-Route::post('/webhooks/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook');
+Route::post('/webhook/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook')->withoutMiddleware('csrf');
 Route::get('/payment/confirmation', [PaymentController::class, 'confirmation'])->name('payment.handleStatus');
 // Route::get('/payment/status', [PaymentController::class, 'simpleConfirmation'])->name('payment.status');
 
