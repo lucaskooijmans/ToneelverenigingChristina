@@ -2,7 +2,9 @@
 <script src="https://kit.fontawesome.com/2a5648d90a.js" crossorigin="anonymous" defer></script>
 <nav>
     <div class="brand">
-        <img src="/images/logo.jpg" alt="Logo van toneelvereniging Christina">
+        <a href="/" tabindex="1">
+            <img src="/images/logo.jpg" alt="Logo van toneelvereniging Christina">
+        </a>
 
         <h1>Toneelvereniging<br>Christina<br>Ravenswaaij</h1>
     </div>
