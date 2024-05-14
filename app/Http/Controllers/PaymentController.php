@@ -9,6 +9,8 @@ use App\Mail\PaymentSuccessful;
 use Mollie\Laravel\Facades\Mollie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Models\PaymentInfo;
+use Mollie\Api\Exceptions\ApiException;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PDFController;
 
@@ -23,8 +25,6 @@ class PaymentController extends Controller
             'buyer_email' => 'required|email|max:255',
             'amount' => 'required|integer|min:1',
         ]);
-
-        $request->session()->put('purchase_data', $validatedData);
 
         $performance = Performance::findOrFail($id);
         $totalPrice = $performance->price * $validatedData['amount'];
@@ -48,14 +48,19 @@ class PaymentController extends Controller
                 return back()->with('error', 'Failed to create payment. Please try again');
             }
 
-            $request->session()->put('paymentId', $payment->id);
+            PaymentInfo::create([
+                'payment_id' => $payment->id,
+                'performance_id' => $id,
+                'data' => json_encode($validatedData)
+            ]);
 
             return redirect($payment->getCheckoutUrl());
-        } catch (\Mollie\Api\Exceptions\ApiException $e) {
+        } catch (ApiException $e) {
             Log::error("API call failed: " . $e->getMessage());
             return back()->with('error', 'Failed to create payment. Please try again.');
         }
     }
+
 
     public function handleWebhook(Request $request)
     {
@@ -65,7 +70,6 @@ class PaymentController extends Controller
             $paymentId = $request->input('id');
             $payment = Mollie::api()->payments->get($paymentId);
 
-            // Log the payment object retrieved from Mollie
             Log::info('Payment retrieved', ['payment' => $payment]);
 
             $this->processPaymentStatus($payment);
@@ -124,24 +128,24 @@ class PaymentController extends Controller
     {
         Log::info('handlePaidStatus called');
 
-        // Fetching purchase data from session
-        $purchaseData = session()->get('purchase_data', []);
-        // Check if purchase data is available and contains necessary 'amount' key
-        if (empty($purchaseData) || !isset($purchaseData['amount'])) {
-            Log::error("Purchase data missing or amount not specified.");
+        // Fetching purchase data from PaymentInfo model
+        $paymentInfo = \App\Models\PaymentInfo::where('payment_id', $payment->id)->first();
+
+        if (!$paymentInfo || empty($paymentInfo->data)) {
+            Log::error("Purchase data missing or not specified.");
             return redirect()->route('performances.index')->with('error', 'Betaling informatie niet gevonden, probeer het opnieuw.');
         }
+
+        $purchaseData = json_decode($paymentInfo->data, true);
 
         $performanceId = $payment->metadata->performanceId;
         $performance = Performance::findOrFail($performanceId);
 
-        // Check if enough tickets are available
         if ($performance->tickets_remaining < $purchaseData['amount']) {
             Log::error("Not enough tickets available for performance {$performanceId}.");
             return back()->withErrors(['amount' => 'Er zijn niet genoeg tickets beschikbaar. Probeer het opnieuw.']);
         }
 
-        // Proceed to create ticket
         $ticket = new Ticket([
             'buyer_name' => $purchaseData['buyer_first_name'] . ' ' . $purchaseData['buyer_last_name'],
             'buyer_email' => $purchaseData['buyer_email'],
@@ -172,12 +176,9 @@ class PaymentController extends Controller
         return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
     }
 
-
-
     public function confirmation()
     {
         Log::info('confirmation called');
         return redirect()->route('performances.index')->with('success', 'Your payment process is complete. Please check your email for confirmation.');
     }
-
 }
