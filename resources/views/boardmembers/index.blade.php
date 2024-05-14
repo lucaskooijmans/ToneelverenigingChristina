@@ -32,7 +32,7 @@
                 @foreach ($bestuursleden as $bestuurslid)
                     <div class="member-card">
                         <div class="member-image">
-                            <img src="{{ asset('storage/' . $bestuurslid->image_url) }}" width="200" height="200" alt="Board Member">
+                            <img src="{{ asset('storage/' . $bestuurslid->image_url) }}" width="200" height="200" alt="Bestuurslid">
                         </div>
                         <h3>{{ $bestuurslid->name }}</h3>
                         <p>Email: {{ $bestuurslid->email }}</p>

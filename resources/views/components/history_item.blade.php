@@ -18,7 +18,7 @@
         <form action="{{ route('history.delete', ['id' => $historyItem->id]) }}" method="POST" style="display: inline-block;">
             @csrf
             @method('DELETE')
-            <button type="submit" class="button red-button" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Verwijderen</button>
+            <button type="submit" class="button red-button" onclick="return confirm('Weet je zeker dat je dit item wilt verwijderen?')"><i class="fa fa-trash"></i> Verwijderen</button>
         </form>
     </div>
     @endif
