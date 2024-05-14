@@ -23,12 +23,12 @@ class countdown extends Component
      */
     public function render(): View|Closure|string
     {
-                // Retrieve the upcoming performance
-                $upcomingPerformance = Performance::where('starttime', '>', Carbon::now())
-                ->orderBy('starttime', 'asc')
-                ->first();
+        // Retrieve the upcoming performance
+        $upcomingPerformance = Performance::where('starttime', '>', Carbon::now())
+        ->orderBy('starttime', 'asc')
+        ->first();
 
-                // Pass the upcoming performance to the countdown view
-                return view('components.countdown', compact('upcomingPerformance'));
+        // Pass the upcoming performance to the countdown view
+        return view('components.countdown', compact('upcomingPerformance'));
     }
 }
