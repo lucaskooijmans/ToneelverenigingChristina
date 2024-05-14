@@ -124,55 +124,54 @@ class PaymentController extends Controller
     {
         Log::info('handlePaidStatus called');
 
-        $uniqueNumber = mt_rand(1000, 9999);  // Generate the unique number for this transaction
-
-        if ($this->hasBeenProcessed($uniqueNumber)) {
-            Log::warning('Duplicate payment processing attempted', ['uniqueNumber' => $uniqueNumber]);
-            return;
+        // Fetching purchase data from session
+        $purchaseData = session()->get('purchase_data', []);
+        // Check if purchase data is available and contains necessary 'amount' key
+        if (empty($purchaseData) || !isset($purchaseData['amount'])) {
+            Log::error("Purchase data missing or amount not specified.");
+            return redirect()->route('performances.index')->with('error', 'Betaling informatie niet gevonden, probeer het opnieuw.');
         }
 
-        DB::transaction(function () use ($payment, $uniqueNumber) {
-            $performanceId = $payment->metadata->performanceId;
-            $performance = Performance::findOrFail($performanceId);
-            $purchaseData = session()->get('purchase_data', []);
+        $performanceId = $payment->metadata->performanceId;
+        $performance = Performance::findOrFail($performanceId);
 
-            if ($performance->tickets_remaining < $purchaseData['amount']) {
-                Log::error("Not enough tickets available for performance {$performanceId}.");
-                return;
-            }
+        // Check if enough tickets are available
+        if ($performance->tickets_remaining < $purchaseData['amount']) {
+            Log::error("Not enough tickets available for performance {$performanceId}.");
+            return back()->withErrors(['amount' => 'Er zijn niet genoeg tickets beschikbaar. Probeer het opnieuw.']);
+        }
 
-            $ticket = new Ticket([
-                'buyer_name' => $purchaseData['buyer_first_name'] . ' ' . $purchaseData['buyer_last_name'],
-                'buyer_email' => $purchaseData['buyer_email'],
-                'amount' => $purchaseData['amount'],
-                'performance_id' => $performanceId,
-                'unique_number' => $uniqueNumber,  // Use the generated unique number
-            ]);
+        // Proceed to create ticket
+        $ticket = new Ticket([
+            'buyer_name' => $purchaseData['buyer_first_name'] . ' ' . $purchaseData['buyer_last_name'],
+            'buyer_email' => $purchaseData['buyer_email'],
+            'amount' => $purchaseData['amount'],
+            'performance_id' => $performanceId,
+            'unique_number' => mt_rand(1000, 9999),
+        ]);
 
-            $ticket->save();
-            $performance->tickets_remaining -= $purchaseData['amount'];
-            $performance->save();
+        $ticket->save();
+        $performance->tickets_remaining -= $purchaseData['amount'];
+        $performance->save();
 
-            $pdfPath = PDFController::createPDF(
-                "$ticket->id.pdf",
-                $performance->name,
-                $ticket->buyer_name,
-                $ticket->unique_number,
-                ($performance->price * $ticket->amount),
-                $ticket->amount,
-                date('d/m/Y', strtotime($performance->starttime))
-            );
+        // Generate PDF and send email
+        $pdfPath = PDFController::createPDF(
+            "$ticket->id.pdf",
+            $performance->name,
+            $ticket->buyer_name,
+            $ticket->unique_number,
+            ($performance->price * $purchaseData['amount']),
+            $purchaseData['amount'],
+            date('d/m/Y', strtotime($performance->starttime))
+        );
 
-            $email = new PaymentSuccessful($ticket->buyer_name, $ticket->id);
-            $email->attach($pdfPath, [
-                'as' => 'Ticket-' . $ticket->id . '.pdf',
-                'mime' => 'application/pdf',
-            ]);
-            Mail::to($ticket->buyer_email)->send($email);
+        Mail::to($purchaseData['buyer_email'])->send(new PaymentSuccessful($purchaseData['buyer_first_name'], $ticket->id, $pdfPath));
 
-            Log::info("Payment for {$payment->id} processed successfully. Ticket ID: {$ticket->id}, Email sent with PDF.");
-        });
+        Log::info("Payment for {$payment->id} processed successfully. Ticket ID: {$ticket->id}, Email sent with PDF.");
+
+        return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
     }
+
 
 
     public function confirmation()
