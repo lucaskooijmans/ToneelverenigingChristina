@@ -131,4 +131,6 @@ class PerformanceController extends Controller
 
         return redirect()->route('performances.show', $performance->id);
     }
+
+    
 }
