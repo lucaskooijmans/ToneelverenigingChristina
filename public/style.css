@@ -748,7 +748,7 @@ textarea {
 }
 
 .alert-warning {
-    width: 25rem;;    
+    width: 25rem;;
 }
 
 /* Bestuursleden pagina */
@@ -803,7 +803,7 @@ textarea {
 }
 
 .member-card p {
-    max-width: 40ch;
+    max-width: 50ch;
     max-height: 8lh;
     overflow-y: auto;
 }
@@ -1138,7 +1138,9 @@ div.fc-event-main {
     display: none;
 }
 
-
+strong {
+    font-weight: bold;
+}
 
 /* Media Queries */
 
