@@ -80,9 +80,6 @@ class PaymentController extends Controller
         }
     }
 
-
-
-    
     private function processPaymentStatus($payment)
     {
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
@@ -114,24 +111,27 @@ class PaymentController extends Controller
         return redirect()->route('performances.index')->with('status', 'Payment status: ' . $payment->status);
     }
 
-    private function hasBeenProcessed($paymentId)
+    private function hasBeenProcessed($uniqueNumber)
     {
-        Log::info('Checking if payment has been processed', ['paymentId' => $paymentId]);
-        $exists = Ticket::where('payment_id', $paymentId)->exists();
-        Log::info('Payment processed check', ['paymentId' => $paymentId, 'processed' => $exists]);
+        Log::info('Checking if payment has been processed', ['uniqueNumber' => $uniqueNumber]);
+        $exists = Ticket::where('unique_number', $uniqueNumber)->exists();
+        Log::info('Payment processed check', ['uniqueNumber' => $uniqueNumber, 'processed' => $exists]);
         return $exists;
     }
+
 
     private function handlePaidStatus($payment)
     {
         Log::info('handlePaidStatus called');
 
-        DB::transaction(function () use ($payment) {
-            if (Ticket::where('payment_id', $payment->id)->exists()) {
-                Log::warning('Duplicate payment processing attempted', ['paymentId' => $payment->id]);
-                return;
-            }
+        $uniqueNumber = mt_rand(1000, 9999);  // Generate the unique number for this transaction
 
+        if ($this->hasBeenProcessed($uniqueNumber)) {
+            Log::warning('Duplicate payment processing attempted', ['uniqueNumber' => $uniqueNumber]);
+            return;
+        }
+
+        DB::transaction(function () use ($payment, $uniqueNumber) {
             $performanceId = $payment->metadata->performanceId;
             $performance = Performance::findOrFail($performanceId);
             $purchaseData = session()->get('purchase_data', []);
@@ -146,15 +146,13 @@ class PaymentController extends Controller
                 'buyer_email' => $purchaseData['buyer_email'],
                 'amount' => $purchaseData['amount'],
                 'performance_id' => $performanceId,
-                'payment_id' => $payment->id, 
-                'unique_number' => mt_rand(1000, 9999),
+                'unique_number' => $uniqueNumber,  // Use the generated unique number
             ]);
 
             $ticket->save();
             $performance->tickets_remaining -= $purchaseData['amount'];
             $performance->save();
 
-            // Generate PDF for the ticket
             $pdfPath = PDFController::createPDF(
                 "$ticket->id.pdf",
                 $performance->name,
@@ -165,7 +163,6 @@ class PaymentController extends Controller
                 date('d/m/Y', strtotime($performance->starttime))
             );
 
-            // Send email with the PDF ticket
             $email = new PaymentSuccessful($ticket->buyer_name, $ticket->id);
             $email->attach($pdfPath, [
                 'as' => 'Ticket-' . $ticket->id . '.pdf',
@@ -176,6 +173,7 @@ class PaymentController extends Controller
             Log::info("Payment for {$payment->id} processed successfully. Ticket ID: {$ticket->id}, Email sent with PDF.");
         });
     }
+
 
     public function confirmation()
     {
