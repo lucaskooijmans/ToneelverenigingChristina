@@ -9,24 +9,26 @@ use App\Mail\PaymentSuccessful;
 use Mollie\Laravel\Facades\Mollie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Models\PaymentInfo;
+use Mollie\Api\Exceptions\ApiException;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PDFController;
 
 class PaymentController extends Controller
 {
     public function preparePayment(Request $request, $id)
     {
+        Log::info('preparePayment called', ['performanceId' => $id]);
         $validatedData = $request->validate([
             'buyer_first_name' => 'required|max:255',
             'buyer_last_name' => 'required|max:255',
             'buyer_email' => 'required|email|max:255',
             'amount' => 'required|integer|min:1',
         ]);
-    
-        $request->session()->put('purchase_data', $validatedData);
-    
+
         $performance = Performance::findOrFail($id);
         $totalPrice = $performance->price * $validatedData['amount'];
-    
+
         try {
             $payment = Mollie::api()->payments->create([
                 "amount" => [
@@ -41,58 +43,106 @@ class PaymentController extends Controller
                     "performanceId" => $id 
                 ],
             ]);
-    
+
             if (!isset($payment) || !isset($payment->id)) {
-                return back()->with('error', 'Betaling aanmaken mislukt. Probeer het opnieuw');
+                return back()->with('error', 'Failed to create payment. Please try again');
             }
-    
-            $request->session()->put('paymentId', $payment->id);
-    
+
+            PaymentInfo::create([
+                'payment_id' => $payment->id,
+                'performance_id' => $id,
+                'data' => json_encode($validatedData)
+            ]);
+
             return redirect($payment->getCheckoutUrl());
-        } catch (\Mollie\Api\Exceptions\ApiException $e) {
+        } catch (ApiException $e) {
             Log::error("API call failed: " . $e->getMessage());
-            return back()->with('error', 'Betaling aanmaken mislukt. Probeer het opnieuw.');
+            return back()->with('error', 'Failed to create payment. Please try again.');
         }
     }
 
-    public function handlePaymentStatus(Request $request)
+
+    public function handleWebhook(Request $request)
     {
-        $paymentId = $request->session()->get('paymentId');
+        try {
+            Log::info('Webhook called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
 
-        if (!$paymentId) {
-            return redirect('shop.index')->with('error', 'Betaal informatie niet gevonden, probeer het opnieuw');
+            $paymentId = $request->input('id');
+            $payment = Mollie::api()->payments->get($paymentId);
+
+            Log::info('Payment retrieved', ['payment' => $payment]);
+
+            $this->processPaymentStatus($payment);
+
+            return response()->json(['status' => 'received']);
+        } catch (\Exception $e) {
+            Log::error('Webhook handling failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json(['error' => 'Webhook handling failed', 'message' => $e->getMessage()], 500);
         }
+    }
 
-        $payment = Mollie::api()->payments->get($paymentId);
+    private function processPaymentStatus($payment)
+    {
+        Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
 
         switch ($payment->status) {
             case 'paid':
-                return $this->handlePaidStatus($request, $payment);
-            case 'failed':
-                return redirect()->route('performances.index')->with('error', 'De betaling is mislukt, probeer het opnieuw.');
-            case 'canceled':
-                return redirect()->route('performances.index')->with('error', 'De betaling is geannuleerd.');
+                if (!$this->hasBeenProcessed($payment->id)) {
+                    $this->handlePaidStatus($payment);
+                }
+                break;
+            case 'open':
+            case 'pending':
+            case 'authorized':
             case 'expired':
-                return redirect()->route('performances.index')->with('error', 'De betaling is verlopen.');
+            case 'canceled':
+            case 'failed':
+                $this->handleOtherStatuses($payment);
+                break;
             default:
-                return redirect()->route('performances.index')->with('error', 'Er is iets fout gegaan, probeer het opnieuw.');
+                Log::warning('Received unhandled payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
+                $this->handleOtherStatuses($payment);
+                break;
         }
-
-        $request->session()->forget('paymentId'); 
-
     }
 
-    private function handlePaidStatus(Request $request, $payment)
+    private function handleOtherStatuses($payment)
     {
-        $purchaseData = $request->session()->get('purchase_data', []);
-        if (empty($purchaseData)) {
+        Log::info('Redirecting due to non-payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
+        return redirect()->route('performances.index')->with('status', 'Payment status: ' . $payment->status);
+    }
+
+    private function hasBeenProcessed($uniqueNumber)
+    {
+        Log::info('Checking if payment has been processed', ['uniqueNumber' => $uniqueNumber]);
+        $exists = Ticket::where('unique_number', $uniqueNumber)->exists();
+        Log::info('Payment processed check', ['uniqueNumber' => $uniqueNumber, 'processed' => $exists]);
+        return $exists;
+    }
+
+
+    private function handlePaidStatus($payment)
+    {
+        Log::info('handlePaidStatus called');
+
+        // Fetching purchase data from PaymentInfo model
+        $paymentInfo = \App\Models\PaymentInfo::where('payment_id', $payment->id)->first();
+
+        if (!$paymentInfo || empty($paymentInfo->data)) {
+            Log::error("Purchase data missing or not specified.");
             return redirect()->route('performances.index')->with('error', 'Betaling informatie niet gevonden, probeer het opnieuw.');
         }
+
+        $purchaseData = json_decode($paymentInfo->data, true);
 
         $performanceId = $payment->metadata->performanceId;
         $performance = Performance::findOrFail($performanceId);
 
         if ($performance->tickets_remaining < $purchaseData['amount']) {
+            Log::error("Not enough tickets available for performance {$performanceId}.");
             return back()->withErrors(['amount' => 'Er zijn niet genoeg tickets beschikbaar. Probeer het opnieuw.']);
         }
 
@@ -105,24 +155,30 @@ class PaymentController extends Controller
         ]);
 
         $ticket->save();
-        $email = $purchaseData['buyer_email'];
-        $name = $purchaseData['buyer_first_name'];
         $performance->tickets_remaining -= $purchaseData['amount'];
         $performance->save();
 
-        PDFController::createPDF(
+        // Generate PDF and send email
+        $pdfPath = PDFController::createPDF(
             "$ticket->id.pdf",
             $performance->name,
             $ticket->buyer_name,
             $ticket->unique_number,
-            ($performance->price * $ticket->amount),
-            $ticket->amount,
-            date('d/m/Y', strtotime($performance->starttime)));
+            ($performance->price * $purchaseData['amount']),
+            $purchaseData['amount'],
+            date('d/m/Y', strtotime($performance->starttime))
+        );
 
-        Mail::to($email)->send(new PaymentSuccessful($name, $ticket->id));
-     
+        Mail::to($purchaseData['buyer_email'])->send(new PaymentSuccessful($purchaseData['buyer_first_name'], $ticket->id, $pdfPath));
+
+        Log::info("Payment for {$payment->id} processed successfully. Ticket ID: {$ticket->id}, Email sent with PDF.");
 
         return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
+    }
 
+    public function confirmation()
+    {
+        Log::info('confirmation called');
+        return redirect()->route('performances.index')->with('success', 'Your payment process is complete. Please check your email for confirmation.');
     }
 }
