@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class performance_item_expanded extends Component
+class Performance_item_expanded extends Component
 {
     /**
      * Create a new component instance.
