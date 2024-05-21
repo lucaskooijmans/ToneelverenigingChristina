@@ -1114,6 +1114,15 @@ div.fc-event-main {
     margin: 2rem 0 1rem;
 }
 
+.sponsor.admin {
+    cursor: move;
+}
+
+.category-button {
+    color: var(--secondary-foreground-color);
+    text-decoration: none;
+}
+
 .category-group {
     margin: 20px;
     text-align: center;
