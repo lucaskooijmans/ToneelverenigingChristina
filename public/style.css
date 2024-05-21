@@ -1118,6 +1118,14 @@ div.fc-event-main {
     cursor: move;
 }
 
+.sponsor.inactive {
+    opacity: 0.5;
+}
+
+.sponsor.inactive strong::after {
+    content: " (Inactief)";
+}
+
 .category-button {
     color: var(--secondary-foreground-color);
     text-decoration: none;

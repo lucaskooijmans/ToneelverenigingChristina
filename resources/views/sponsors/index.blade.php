@@ -58,7 +58,7 @@
                         <div class="category" data-category-id="{{ $category->id }}">
                             <div id="{{ $category->id }}" class="anchor"></div>
                             @foreach ($category->sponsors as $sponsor)
-                                <div class="sponsor @auth @if (auth()->user()->isAdmin()) admin @endif @endauth"
+                                <div class="sponsor @auth @if (auth()->user()->isAdmin()) admin @endif @if(!$sponsor->isActive) inactive @endif @endauth"
                                     data-sponsor-id="{{ $sponsor->id }}"
                                     style="margin: 10px; text-align: center; flex: 0 1 auto;">
                                     <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->name }}"
