@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <label for="price">Prijs:</label>
                     <input type="number" step="0.01" id="price" name="price" required class="form-control"
-                        value="{{ old('price', $performance->price ?? '') }}">
+                        value="{{ old('price', $performance->price ?? '') }}" min="0">
                 </div>
                 <input type="hidden" name="edit" value="{{ $edit ?? false }}">
                 <input type="hidden" name="id" value="{{ $performance->id ?? null }}">
