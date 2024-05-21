@@ -41,7 +41,9 @@ class BoardmembersController extends Controller
             'email' => 'required|email|unique:boardmembers,email',
             'phone' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ], [
+            'image.image' => 'De afbeeldingen moeten een jpeg, png of jpg zijn',
         ]);
 
         $path = $request->file('image')->store('images', 'public');
@@ -86,8 +88,7 @@ class BoardmembersController extends Controller
                 'email' => 'required|email|unique:boardmembers,email,' . $id . ',id',
                 'phone' => 'required',
                 'description' => 'required',
-                'image' => 'required'
-            ]);
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
 
             $boardMember->name = $request->name;
             $boardMember->email = $request->email;

@@ -23,7 +23,15 @@ class PaymentController extends Controller
             'buyer_first_name' => 'required|max:255',
             'buyer_last_name' => 'required|max:255',
             'buyer_email' => 'required|email|max:255',
-            'amount' => 'required|integer|min:1',
+            'amount' => 'required|integer|gt:0',
+        ], [
+            'buyer_first_name.required' => 'Voornaam is verplicht',
+            'buyer_last_name.required' => 'Achternaam is verplicht',
+            'buyer_email.required' => 'E-mailadres is verplicht',
+            'buyer_email.email' => 'Ongeldig e-mailadres',
+            'amount.required' => 'Aantal tickets is verplicht',
+            'amount.integer' => 'Aantal tickets moet een getal zijn',
+            'amount.gt' => 'Aantal tickets moet groter zijn dan 0',
         ]);
 
         $performance = Performance::findOrFail($id);
@@ -86,6 +94,7 @@ class PaymentController extends Controller
 
     private function processPaymentStatus($payment)
     {
+        dd($payment);
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
 
         switch ($payment->status) {
@@ -128,8 +137,7 @@ class PaymentController extends Controller
     {
         Log::info('handlePaidStatus called');
 
-        // Fetching purchase data from PaymentInfo model
-        $paymentInfo = \App\Models\PaymentInfo::where('payment_id', $payment->id)->first();
+        $paymentInfo = PaymentInfo::where('payment_id', $payment->id)->first();
 
         if (!$paymentInfo || empty($paymentInfo->data)) {
             Log::error("Purchase data missing or not specified.");

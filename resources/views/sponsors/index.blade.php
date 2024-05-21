@@ -17,6 +17,11 @@
 
 <body>
     <x-navbar />
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <div class="sponsors">
         <div class="container">
@@ -35,6 +40,9 @@
             <div class="post-buttons">
                 @foreach ($categories as $category)
                     <a href="#{{ $category->id }}" class="button">{{ $category->sponsorcategories }}</a>
+                    @if(auth()->user()->isAdmin())
+                        <a href="{{ route('sponsorcategories.edit', $category->id) }}" class="btn btn-primary">Edit</a>
+                    @endif
                 @endforeach
             </div>
             <div class="sponsors-list">
