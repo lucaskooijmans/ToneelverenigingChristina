@@ -52,9 +52,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
-// Calendar
-Route::get('/agenda', [PerformanceController::class, 'calendar'])->name('performances.calendar');
-
 // History page
 Route::get('/historie', [HistoryController::class, 'index']);
 
