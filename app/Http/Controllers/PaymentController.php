@@ -44,7 +44,7 @@ class PaymentController extends Controller
                     'value' => sprintf("%.2f", $totalPrice)
                 ],
                 "description" => "Tickets for " . $performance->name,
-                "redirectUrl" => route('payment.handleStatus', ['status' => 'paid']),
+                "redirectUrl" => route('payment.handleStatus'),
                 "webhookUrl" => route('payment.webhook'),
                 "method" => "ideal",
                 "metadata" => [
@@ -104,17 +104,22 @@ class PaymentController extends Controller
                 if (!$this->hasBeenProcessed($payment->id)) {
                     $this->handlePaidStatus($payment);
                 }
-                return redirect()->route('payment.handleStatus', ['status' => 'paid']);
+                break;
             case 'open':
+            case 'pending':
+            case 'authorized':
             case 'expired':
             case 'canceled':
             case 'failed':
-                return redirect()->route('payment.handleStatus', ['status' => $payment->status]);
+                break;
             default:
                 Log::warning('Received unhandled payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-                return redirect()->route('payment.handleStatus', ['status' => $payment->status]);
+                break;
         }
-    }
+
+        return redirect()->route('payment.handleStatus', ['status' => $payment->status]);
+}
+
 
     private function handleOtherStatuses($payment)
     {
