@@ -44,7 +44,7 @@ class PaymentController extends Controller
                     'value' => sprintf("%.2f", $totalPrice)
                 ],
                 "description" => "Tickets for " . $performance->name,
-                "redirectUrl" => route('payment.handleStatus'),
+                "redirectUrl" => route('payment.handleStatus', ['status' => 'paid']), // Redirect with status 'paid'
                 "webhookUrl" => route('payment.webhook'),
                 "method" => "ideal",
                 "metadata" => [
@@ -53,6 +53,7 @@ class PaymentController extends Controller
             ]);
 
             if (!isset($payment) || !isset($payment->id)) {
+                Log::error('Payment creation failed', ['performanceId' => $id, 'validatedData' => $validatedData]);
                 return back()->with('error', 'Failed to create payment. Please try again');
             }
 
@@ -64,8 +65,11 @@ class PaymentController extends Controller
 
             return redirect($payment->getCheckoutUrl());
         } catch (ApiException $e) {
-            Log::error("API call failed: " . $e->getMessage());
+            Log::error("API call failed during payment creation", ['error' => $e->getMessage(), 'performanceId' => $id, 'validatedData' => $validatedData]);
             return back()->with('error', 'Failed to create payment. Please try again.');
+        } catch (\Exception $e) {
+            Log::error("Unexpected error during payment creation", ['error' => $e->getMessage(), 'performanceId' => $id, 'validatedData' => $validatedData]);
+            return back()->with('error', 'An unexpected error occurred. Please try again.');
         }
     }
 
@@ -94,24 +98,23 @@ class PaymentController extends Controller
     private function processPaymentStatus($payment)
     {
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
+
         switch ($payment->status) {
             case 'paid':
                 if (!$this->hasBeenProcessed($payment->id)) {
                     $this->handlePaidStatus($payment);
                 }
-                return $this->confirmation($payment->status);
+                return redirect()->route('payment.handleStatus', ['status' => 'paid']); // Redirect with status 'paid'
             case 'open':
             case 'pending':
             case 'authorized':
             case 'expired':
             case 'canceled':
             case 'failed':
-                $this->handleOtherStatuses($payment);
-                return $this->confirmation($payment->status);
+                return redirect()->route('payment.handleStatus', ['status' => $payment->status]); // Redirect with the respective status
             default:
                 Log::warning('Received unhandled payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-                $this->handleOtherStatuses($payment);
-                return $this->confirmation($payment->status);
+                return redirect()->route('payment.handleStatus', ['status' => $payment->status]); // Redirect with the respective status
         }
     }
 
