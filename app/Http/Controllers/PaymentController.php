@@ -94,7 +94,6 @@ class PaymentController extends Controller
 
     private function processPaymentStatus($payment)
     {
-        dd($payment);
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
 
         switch ($payment->status) {
