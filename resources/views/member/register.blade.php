@@ -53,6 +53,18 @@
             <input type="text" id="city" name="city" required>
             <br>
 
+            <hr/>
+
+            <label for="pay">Ik wil nu betalen:</label>
+            <input type="checkbox" id="pay" name="pay">
+            <br>
+
+            <hr/>
+
+            <input type="checkbox" id="accept" name="accept" required>
+            <label for="accept">Ik ga akkoord met de <a href="/algemene_voorwaarden">algemene voorwaarden</a>.</label>
+            <br>
+
             <button type="submit">Inschrijven</button>
         </form>
     </div>
