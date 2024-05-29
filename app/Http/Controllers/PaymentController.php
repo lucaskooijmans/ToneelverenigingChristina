@@ -95,7 +95,7 @@ class PaymentController extends Controller
     private function processPaymentStatus($payment)
     {
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-
+    
         switch ($payment->status) {
             case 'paid':
                 if (!$this->hasBeenProcessed($payment->id)) {
@@ -116,8 +116,7 @@ class PaymentController extends Controller
                 break;
         }
     }
-
-
+    
     private function handleOtherStatuses($payment)
     {
         Log::info('Redirecting due to non-payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
@@ -196,9 +195,5 @@ class PaymentController extends Controller
         return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
     }
 
-    public function confirmation()
-    {
-        Log::info('confirmation called');
-        return redirect()->route('performances.index')->with('success', 'Your payment process is complete. Please check your email for confirmation.');
-    }
+    
 }
