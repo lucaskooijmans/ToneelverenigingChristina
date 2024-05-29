@@ -120,7 +120,7 @@ class PaymentController extends Controller
     private function handleOtherStatuses($payment)
     {
         Log::info('Redirecting due to non-payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-        return redirect()->route('performances.index')->with('status', 'Payment status: ' . $payment->status);
+        return redirect()->route('performances.index')->with('succes', 'Payment status: ' . $payment->status);
     }
 
     private function hasBeenProcessed($uniqueNumber)
