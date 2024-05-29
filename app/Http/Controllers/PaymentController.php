@@ -117,33 +117,23 @@ class PaymentController extends Controller
         }
     }
 
+
     private function handleOtherStatuses($payment)
     {
-        $message = 'Payment status: ' . $payment->status;
-
-        switch ($payment->status) {
-            case 'open':
-                $message = 'Payment is still open.';
-                break;
-            case 'pending':
-                $message = 'Payment is pending.';
-                break;
-            case 'authorized':
-                $message = 'Payment is authorized.';
-                break;
-            case 'expired':
-                $message = 'Payment has expired.';
-                break;
-            case 'canceled':
-                $message = 'Payment has been canceled.';
-                break;
-            case 'failed':
-                $message = 'Payment has failed.';
-                break;
-        }
-
         Log::info('Redirecting due to non-payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-        return redirect()->route('performances.index')->with('success', $message);
+
+        $statusMessageMap = [
+            'open' => 'Betaling is nog in behandeling.',
+            'pending' => 'Betaling is nog in behandeling.',
+            'authorized' => 'Betaling is geautoriseerd, maar nog niet voltooid.',
+            'expired' => 'Betaling is verlopen.',
+            'canceled' => 'Betaling is geannuleerd.',
+            'failed' => 'Betaling is mislukt.'
+        ];
+
+        $message = $statusMessageMap[$payment->status] ?? 'Onbekende betalingsstatus.';
+        
+        return redirect()->route('performances.index')->with('error', $message);
     }
 
     private function hasBeenProcessed($uniqueNumber)
