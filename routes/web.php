@@ -116,8 +116,8 @@ Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'creat
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
 
 // Member register routes
-Route::get('/registerr', [MemberController::class, 'index'])->name('member.register');
-Route::post('/registerr', [MemberController::class, 'store'])->name('member.store');
+Route::get('/inschrijven', [MemberController::class, 'index'])->name('member.register');
+Route::post('/inschrijven', [MemberController::class, 'store'])->name('member.store');
 
 //! PDF test routes
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');

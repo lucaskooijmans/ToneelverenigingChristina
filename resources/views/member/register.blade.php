@@ -8,28 +8,33 @@
 </head>
 
 <body>
-    <h1>Inschrijven bij Toneelvereniging Christina</h1>
+    <x-navbar/>
 
-    @if(session('success'))
-        <p>{{ session('success') }}</p>
-    @endif
+    <div class="register-form">
+        <h1>Inschrijven bij Toneelvereniging Christina</h1>
 
-    <form method="POST" action="{{ route('member.store') }}">
-        @csrf
-        <label for="name">Naam:</label>
-        <input type="text" id="name" name="name" required>
-        <br>
+        @if(session('success'))
+            <p>{{ session('success') }}</p>
+        @endif
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br>
+        <form method="POST" action="{{ route('member.store') }}">
+            @csrf
+            <label for="name">Naam:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
 
-        <label for="password">Wachtwoord:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
 
-        <button type="submit">Inschrijven</button>
-    </form>
+            <label for="password">Wachtwoord:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+
+            <button type="submit">Inschrijven</button>
+        </form>
+    </div>
+
 </body>
 
 </html>
