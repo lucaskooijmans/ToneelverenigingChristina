@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\PerformanceController;
+    use App\Http\Controllers\MemberController;
+    use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -113,6 +114,10 @@ Route::post('/history/store', [HistoryController::class, 'store'])->name('histor
 
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
+
+// Member register routes
+Route::get('/registerr', [MemberController::class, 'index'])->name('member.register');
+Route::post('/registerr', [MemberController::class, 'store'])->name('member.store');
 
 //! PDF test routes
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');

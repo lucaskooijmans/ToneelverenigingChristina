@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
             {{ session('error') }}
         </div>
     @endif
-    
+
     <div class="performances">
 
         <div class="container">
