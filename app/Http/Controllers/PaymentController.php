@@ -44,7 +44,7 @@ class PaymentController extends Controller
                     'value' => sprintf("%.2f", $totalPrice)
                 ],
                 "description" => "Tickets for " . $performance->name,
-                "redirectUrl" => route('payment.handleStatus'),
+                "redirectUrl" => route('payment.handleStatus', ['status' => '{status}']),
                 "webhookUrl" => route('payment.webhook'),
                 "method" => "ideal",
                 "metadata" => [
@@ -76,7 +76,7 @@ class PaymentController extends Controller
     public function handleWebhook(Request $request)
     {
         try {
-            Log::info('Webhook called', ['id' => $request->input('id')]);
+            Log::info('Webhook called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
 
             $paymentId = $request->input('id');
             $payment = Mollie::api()->payments->get($paymentId);
@@ -95,10 +95,11 @@ class PaymentController extends Controller
         }
     }
 
+
     private function processPaymentStatus($payment)
     {
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-
+    
         switch ($payment->status) {
             case 'paid':
                 if (!$this->hasBeenProcessed($payment->id)) {
@@ -111,15 +112,14 @@ class PaymentController extends Controller
             case 'expired':
             case 'canceled':
             case 'failed':
+                $this->handleOtherStatuses($payment);
                 break;
             default:
                 Log::warning('Received unhandled payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
+                $this->handleOtherStatuses($payment);
                 break;
         }
-
-        return redirect()->route('payment.handleStatus', ['status' => $payment->status]);
-}
-
+    }    
 
     private function handleOtherStatuses($payment)
     {
