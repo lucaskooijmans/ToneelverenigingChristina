@@ -112,7 +112,11 @@ Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->nam
 Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
 
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
+Route::get('/sponsorcategories/{id}/edit', [SponsorCategoryController::class, 'edit'])->name('sponsorcategories.edit');
+Route::put('/sponsorcategories/{id}', [SponsorCategoryController::class, 'update'])->name('sponsorcategories.update');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
+Route::delete('/sponsorcategories/{id}', [SponsorCategoryController::class, 'destroy'])->name('sponsorcategories.destroy');
+
 
 //! PDF test routes
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');

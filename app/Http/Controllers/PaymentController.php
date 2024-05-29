@@ -69,7 +69,6 @@ class PaymentController extends Controller
         }
     }
 
-
     public function handleWebhook(Request $request)
     {
         try {
@@ -95,13 +94,12 @@ class PaymentController extends Controller
     private function processPaymentStatus($payment)
     {
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-
         switch ($payment->status) {
             case 'paid':
                 if (!$this->hasBeenProcessed($payment->id)) {
                     $this->handlePaidStatus($payment);
                 }
-                break;
+                return $this->confirmation($payment->status);
             case 'open':
             case 'pending':
             case 'authorized':
@@ -109,17 +107,17 @@ class PaymentController extends Controller
             case 'canceled':
             case 'failed':
                 $this->handleOtherStatuses($payment);
-                break;
+                return $this->confirmation($payment->status);
             default:
                 Log::warning('Received unhandled payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
                 $this->handleOtherStatuses($payment);
-                break;
+                return $this->confirmation($payment->status);
         }
     }
 
     private function handleOtherStatuses($payment)
     {
-        Log::info('Redirecting due to non-payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
+        Log::info('Non-payment status received', ['paymentId' => $payment->id, 'status' => $payment->status]);
         return redirect()->route('performances.index')->with('status', 'Payment status: ' . $payment->status);
     }
 
@@ -130,7 +128,6 @@ class PaymentController extends Controller
         Log::info('Payment processed check', ['uniqueNumber' => $uniqueNumber, 'processed' => $exists]);
         return $exists;
     }
-
 
     private function handlePaidStatus($payment)
     {
@@ -183,9 +180,29 @@ class PaymentController extends Controller
         return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
     }
 
-    public function confirmation()
+    public function confirmation($status)
     {
         Log::info('confirmation called');
-        return redirect()->route('performances.index')->with('success', 'Your payment process is complete. Please check your email for confirmation.');
+
+        switch ($status) {
+            case 'paid':
+                $message = 'Your payment process is complete. Please check your email for confirmation.';
+                break;
+            case 'open':
+            case 'pending':
+            case 'authorized':
+                $message = 'Your payment is still being processed. Please check your email for updates.';
+                break;
+            case 'expired':
+            case 'canceled':
+            case 'failed':
+                $message = 'Your payment failed. Please try again.';
+                break;
+            default:
+                $message = 'Unknown payment status. Please contact support.';
+                break;
+        }
+
+        return redirect()->route('performances.index')->with('success', $message);
     }
 }
