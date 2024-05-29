@@ -7,6 +7,7 @@
 <body>
     <h1>Er is een nieuw lid ingeschreven</h1>
     <p><strong>Naam:</strong> {{ $data['name'] }}</p>
+    <p><strong>Telefoonnummer:</strong> {{ $data['phoneNumber'] }}</p>
     <p><strong>E-mail:</strong> {{ $data['email'] }}</p>
 </body>
 </html>

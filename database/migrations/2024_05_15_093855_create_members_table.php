@@ -15,10 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('phoneNumber')->nullable();
+            $table->string('postalCode');
+            $table->string('houseNumber');
+            $table->string('street');
+            $table->string('city');
             $table->string('password');
-            $table->boolean('isActive');
-            $table->date('paidMembership');
+            $table->boolean('isActive')->default(true);;
+            $table->date('paidMembership')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

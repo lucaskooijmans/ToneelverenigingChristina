@@ -11,7 +11,7 @@
         use HasFactory, Notifiable;
 
         protected $fillable = [
-            'name', 'email', 'password',
+            'name', 'email', 'password', 'phoneNumber', 'postalCode', 'houseNumber', 'street', 'city'
         ];
 
         protected $hidden = [
