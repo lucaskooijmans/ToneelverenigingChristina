@@ -185,6 +185,7 @@ class PaymentController extends Controller
 
     public function confirmation($status)
     {
+        dd($status);
         Log::info('confirmation called');
 
         switch ($status) {
