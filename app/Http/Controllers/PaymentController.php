@@ -69,6 +69,27 @@ class PaymentController extends Controller
         }
     }
 
+    public function handleStatus(Request $request)
+    {
+        try {
+            Log::info('Payment status handling called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
+
+            $paymentId = $request->input('id');
+            $payment = Mollie::api()->payments->get($paymentId);
+
+            Log::info('Payment retrieved', ['payment' => $payment]);
+
+            $this->processPaymentStatus($payment);
+
+            return response()->json(['status' => 'received']);
+        } catch (\Exception $e) {
+            Log::error('Payment status handling failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json(['error' => 'Payment status handling failed', 'message' => $e->getMessage()], 500);
+        }
+    }   
 
     public function handleWebhook(Request $request)
     {
@@ -95,7 +116,7 @@ class PaymentController extends Controller
     private function processPaymentStatus($payment)
     {
         Log::info('Processing payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-    
+
         switch ($payment->status) {
             case 'paid':
                 if (!$this->hasBeenProcessed($payment->id)) {
@@ -135,6 +156,7 @@ class PaymentController extends Controller
         return redirect()->route('performances.index')->with('error', $message);
     }
 
+
     private function hasBeenProcessed($uniqueNumber)
     {
         Log::info('Checking if payment has been processed', ['uniqueNumber' => $uniqueNumber]);
@@ -142,7 +164,6 @@ class PaymentController extends Controller
         Log::info('Payment processed check', ['uniqueNumber' => $uniqueNumber, 'processed' => $exists]);
         return $exists;
     }
-
 
     private function handlePaidStatus($payment)
     {
@@ -194,6 +215,7 @@ class PaymentController extends Controller
 
         return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
     }
+
 
     
 }
