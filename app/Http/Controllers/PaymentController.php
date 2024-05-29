@@ -44,7 +44,7 @@ class PaymentController extends Controller
                     'value' => sprintf("%.2f", $totalPrice)
                 ],
                 "description" => "Tickets for " . $performance->name,
-                "redirectUrl" => route('payment.handleStatus'),
+                "redirectUrl" => route('payment.handleStatus', ['id' => $id]),
                 "webhookUrl" => route('payment.webhook'),
                 "method" => "ideal",
                 "metadata" => [
@@ -72,9 +72,13 @@ class PaymentController extends Controller
     public function handleStatus(Request $request)
     {
         try {
-            Log::info('Payment status handling called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
+            Log::info('Payment status handling called', ['id' => $request->input('id')]);
 
             $paymentId = $request->input('id');
+            if (!$paymentId) {
+                throw new \Exception('Invalid payment ID: ' . $paymentId);
+            }
+
             $payment = Mollie::api()->payments->get($paymentId);
 
             Log::info('Payment retrieved', ['payment' => $payment]);
@@ -89,14 +93,19 @@ class PaymentController extends Controller
             ]);
             return response()->json(['error' => 'Payment status handling failed', 'message' => $e->getMessage()], 500);
         }
-    }   
+    }
+   
 
     public function handleWebhook(Request $request)
     {
         try {
-            Log::info('Webhook called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
+            Log::info('Webhook called', ['id' => $request->input('id')]);
 
             $paymentId = $request->input('id');
+            if (!$paymentId) {
+                throw new \Exception('Invalid payment ID: ' . $paymentId);
+            }
+
             $payment = Mollie::api()->payments->get($paymentId);
 
             Log::info('Payment retrieved', ['payment' => $payment]);
@@ -112,6 +121,7 @@ class PaymentController extends Controller
             return response()->json(['error' => 'Webhook handling failed', 'message' => $e->getMessage()], 500);
         }
     }
+
 
     private function processPaymentStatus($payment)
     {
