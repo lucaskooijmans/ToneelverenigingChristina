@@ -44,7 +44,7 @@ class PaymentController extends Controller
                     'value' => sprintf("%.2f", $totalPrice)
                 ],
                 "description" => "Tickets for " . $performance->name,
-                "redirectUrl" => route('payment.handleStatus', ['status' => 'paid']), // Redirect with status 'paid'
+                "redirectUrl" => route('payment.handleStatus', ['status' => 'paid']),
                 "webhookUrl" => route('payment.webhook'),
                 "method" => "ideal",
                 "metadata" => [
@@ -76,7 +76,7 @@ class PaymentController extends Controller
     public function handleWebhook(Request $request)
     {
         try {
-            Log::info('Webhook called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
+            Log::info('Webhook called', ['id' => $request->input('id')]);
 
             $paymentId = $request->input('id');
             $payment = Mollie::api()->payments->get($paymentId);
@@ -104,24 +104,22 @@ class PaymentController extends Controller
                 if (!$this->hasBeenProcessed($payment->id)) {
                     $this->handlePaidStatus($payment);
                 }
-                return redirect()->route('payment.handleStatus', ['status' => 'paid']); // Redirect with status 'paid'
+                return redirect()->route('payment.handleStatus', ['status' => 'paid']);
             case 'open':
-            case 'pending':
-            case 'authorized':
             case 'expired':
             case 'canceled':
             case 'failed':
-                return redirect()->route('payment.handleStatus', ['status' => $payment->status]); // Redirect with the respective status
+                return redirect()->route('payment.handleStatus', ['status' => $payment->status]);
             default:
                 Log::warning('Received unhandled payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-                return redirect()->route('payment.handleStatus', ['status' => $payment->status]); // Redirect with the respective status
+                return redirect()->route('payment.handleStatus', ['status' => $payment->status]);
         }
     }
 
     private function handleOtherStatuses($payment)
     {
         Log::info('Non-payment status received', ['paymentId' => $payment->id, 'status' => $payment->status]);
-        return redirect()->route('performances.index')->with('status', 'Payment status: ' . $payment->status);
+        return redirect()->route('payment.handleStatus', ['status' => $payment->status]);
     }
 
     private function hasBeenProcessed($uniqueNumber)
@@ -185,16 +183,13 @@ class PaymentController extends Controller
 
     public function confirmation($status)
     {
-        dd($status);
-        Log::info('confirmation called');
+        Log::info('confirmation called', ['status' => $status]);
 
         switch ($status) {
             case 'paid':
                 $message = 'Your payment process is complete. Please check your email for confirmation.';
                 break;
             case 'open':
-            case 'pending':
-            case 'authorized':
                 $message = 'Your payment is still being processed. Please check your email for updates.';
                 break;
             case 'expired':
