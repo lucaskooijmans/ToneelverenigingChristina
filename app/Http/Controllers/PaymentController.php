@@ -44,7 +44,7 @@ class PaymentController extends Controller
                     'value' => sprintf("%.2f", $totalPrice)
                 ],
                 "description" => "Tickets for " . $performance->name,
-                "redirectUrl" => route('payment.handleStatus', ['id' => $id]),
+                "redirectUrl" => route('payment.handleStatus'),
                 "webhookUrl" => route('payment.webhook'),
                 "method" => "ideal",
                 "metadata" => [
@@ -69,43 +69,13 @@ class PaymentController extends Controller
         }
     }
 
-    public function handleStatus(Request $request)
-    {
-        try {
-            Log::info('Payment status handling called', ['id' => $request->input('id')]);
-
-            $paymentId = $request->input('id');
-            if (!$paymentId) {
-                throw new \Exception('Invalid payment ID: ' . $paymentId);
-            }
-
-            $payment = Mollie::api()->payments->get($paymentId);
-
-            Log::info('Payment retrieved', ['payment' => $payment]);
-
-            $this->processPaymentStatus($payment);
-
-            return response()->json(['status' => 'received']);
-        } catch (\Exception $e) {
-            Log::error('Payment status handling failed', [
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
-            ]);
-            return response()->json(['error' => 'Payment status handling failed', 'message' => $e->getMessage()], 500);
-        }
-    }
-   
 
     public function handleWebhook(Request $request)
     {
         try {
-            Log::info('Webhook called', ['id' => $request->input('id')]);
+            Log::info('Webhook called', ['id' => $request->input('id'), 'status' => $request->input('status')]);
 
             $paymentId = $request->input('id');
-            if (!$paymentId) {
-                throw new \Exception('Invalid payment ID: ' . $paymentId);
-            }
-
             $payment = Mollie::api()->payments->get($paymentId);
 
             Log::info('Payment retrieved', ['payment' => $payment]);
@@ -121,7 +91,6 @@ class PaymentController extends Controller
             return response()->json(['error' => 'Webhook handling failed', 'message' => $e->getMessage()], 500);
         }
     }
-
 
     private function processPaymentStatus($payment)
     {
@@ -147,25 +116,12 @@ class PaymentController extends Controller
                 break;
         }
     }
-    
+
     private function handleOtherStatuses($payment)
     {
         Log::info('Redirecting due to non-payment status', ['paymentId' => $payment->id, 'status' => $payment->status]);
-
-        $statusMessageMap = [
-            'open' => 'Betaling is nog in behandeling.',
-            'pending' => 'Betaling is nog in behandeling.',
-            'authorized' => 'Betaling is geautoriseerd, maar nog niet voltooid.',
-            'expired' => 'Betaling is verlopen.',
-            'canceled' => 'Betaling is geannuleerd.',
-            'failed' => 'Betaling is mislukt.'
-        ];
-
-        $message = $statusMessageMap[$payment->status] ?? 'Onbekende betalingsstatus.';
-        
-        return redirect()->route('performances.index')->with('error', $message);
+        return redirect()->route('performances.index')->with('status', 'Payment status: ' . $payment->status);
     }
-
 
     private function hasBeenProcessed($uniqueNumber)
     {
@@ -174,6 +130,7 @@ class PaymentController extends Controller
         Log::info('Payment processed check', ['uniqueNumber' => $uniqueNumber, 'processed' => $exists]);
         return $exists;
     }
+
 
     private function handlePaidStatus($payment)
     {
@@ -226,6 +183,9 @@ class PaymentController extends Controller
         return redirect()->route('performances.show', $performanceId)->with('success', 'Betaling succesvol afgerond. Uw tickets zijn verzonden naar uw e-mailadres.');
     }
 
-
-    
+    public function confirmation()
+    {
+        Log::info('confirmation called');
+        return redirect()->route('performances.index')->with('success', 'Your payment process is complete. Please check your email for confirmation.');
+    }
 }
