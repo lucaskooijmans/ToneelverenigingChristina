@@ -24,6 +24,8 @@
             <th>Naam</th>
             <th>Email</th>
             <th>Telefoonnummer</th>
+            <th>Lid sinds</th>
+            <th>Actief?</th>
             <th>Acties</th>
         </tr>
         </thead>
@@ -33,6 +35,14 @@
                 <td>{{ $member->name }}</td>
                 <td>{{ $member->email }}</td>
                 <td>{{ $member->phoneNumber }}</td>
+                <td>{{ $member->created_at->format('d-m-Y') }}</td>
+                <td>
+                    @if($member->isActive)
+                        Ja
+                    @else
+                        Nee
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('members.edit', $member->id) }}">Bewerken</a>
                     <form action="{{ route('members.destroy', $member->id) }}" method="POST" style="display:inline;">
