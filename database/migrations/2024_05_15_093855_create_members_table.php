@@ -20,11 +20,8 @@ return new class extends Migration
             $table->string('houseNumber');
             $table->string('street');
             $table->string('city');
-            $table->string('password');
-            $table->boolean('isActive')->default(true);;
+            $table->boolean('isActive')->default(false);
             $table->date('paidMembership')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }

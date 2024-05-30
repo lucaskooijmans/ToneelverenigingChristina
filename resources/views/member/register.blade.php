@@ -31,10 +31,6 @@
             <input type="text" id="phoneNumber" name="phoneNumber">
             <br>
 
-            <label for="password">Wachtwoord:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-
             <hr/>
 
             <label for="postalCode">Postcode:</label>

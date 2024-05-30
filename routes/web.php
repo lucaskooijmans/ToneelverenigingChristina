@@ -119,6 +119,19 @@ Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->n
 Route::get('/inschrijven', [MemberController::class, 'index'])->name('member.register');
 Route::post('/inschrijven', [MemberController::class, 'store'])->name('member.store');
 
+// Leden routes
+Route::middleware('auth')->group(function () {
+    Route::get('/leden', [MemberController::class, 'adminIndex'])->name('members.index');
+    Route::get('/leden/create', [MemberController::class, 'create'])->name('members.create');
+    Route::post('/leden', [MemberController::class, 'store'])->name('members.store');
+    Route::get('/leden/{member}/edit', [MemberController::class, 'edit'])->name('members.edit');
+    Route::put('/leden/{member}', [MemberController::class, 'update'])->name('members.update');
+    Route::delete('/leden/{member}', [MemberController::class, 'destroy'])->name('members.destroy');
+    Route::put('/leden/{member}/activate', [MemberController::class, 'setIsActive'])->name('members.setIsActive');
+    Route::put('/leden/{member}/deactivate', [MemberController::class, 'removeIsActive'])->name('members.removeIsActive');
+
+});
+
 //! PDF test routes
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');
 Route::get('/pdf/view', [App\Http\Controllers\PDFController::class, 'openView'])->name('pdf.openView');
