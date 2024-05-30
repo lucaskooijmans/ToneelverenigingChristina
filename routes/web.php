@@ -14,6 +14,7 @@ use App\Http\Controllers\SponsorCategoryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\DoneerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,12 @@ Route::get('/historie', [HistoryController::class, 'index']);
 
 // News page
 Route::get('/nieuws', [PostController::class, 'index']);
+
+// Goederen donatie page
+Route::get('/doneren', function () {
+    return view('doneren');
+});
+Route::post('/doneren', [DoneerController::class, 'submit'])->name('doneren.submit');
 
 // Photos resource
 Route::resource('gallery', GalleryController::class);

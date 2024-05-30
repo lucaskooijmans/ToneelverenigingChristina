@@ -18,6 +18,7 @@
         <a href="/gallery" tabindex="1">Gallerij</a>
         <a href="/boardmembers" tabindex="1">Bestuursleden</a>
         <a href="/sponsors" tabindex="1">Sponsoren</a>
+        <a href="/doneren" tabindex="1">Doneren</a>
         <a href="/contact" tabindex="1">Contact</a>
         {{-- <a href="/registreren" tabindex="1">Lid Worden</a> --}}
     </div>
