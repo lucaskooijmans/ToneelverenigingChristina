@@ -12,10 +12,9 @@
         <p>Tot wanneer mag het goed gebruikt worden: {{ $data['date'] }}</p>
     @endif
     <p>Staat van het goed: {{ $data['state'] }}</p>
-    <p>Foto van het goed is als bijlage toegevoegd</p>
-
     @if ($data['image'])
-        <img src="{{ $data['image'] }}" alt="Donated Item">
+    <p>Foto:</p>
+        <img src="{{ $message->embed(public_path('storage/' . $data['image'])) }}" alt="Donated Item">
     @endif
 </body>
 </html>

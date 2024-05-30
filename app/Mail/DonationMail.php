@@ -10,16 +10,20 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 
+
 class DonationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $data;
+    
     /**
      * Create a new message instance.
      */
-    public function __construct(private $data)
+    public function __construct(array $data)
     {
-        //
+
+        $this->data = $data;
     }
 
     /**
@@ -50,6 +54,7 @@ class DonationMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+        ];
     }
 }
