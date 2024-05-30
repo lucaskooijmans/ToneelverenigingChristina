@@ -8,28 +8,18 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class DonationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
-
     /**
      * Create a new message instance.
      */
-    public function __construct($data)
+    public function __construct(private $data)
     {
-        $this->data = $data;
-
-        // Assuming $data['image'] contains the path to the image
-        $imagePath = public_path($data['image']);
-
-        // Attach the image to the email
-        $this->attach($imagePath, [
-            'as' => 'foto.jpg',
-            'mime' => 'image/jpeg',
-        ]);
+        //
     }
 
     /**
@@ -38,7 +28,7 @@ class DonationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Goederendonatie',
+            subject: 'Donation Mail',
         );
     }
 
@@ -49,6 +39,7 @@ class DonationMail extends Mailable
     {
         return new Content(
             view: 'emails.donationmail',
+            with: ['data' => $this->data]
         );
     }
 

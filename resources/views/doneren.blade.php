@@ -28,7 +28,7 @@
 
             <div class="contact-split">
 
-                <form method="POST" action="{{ route('doneren.submit') }}" class="contact-form">
+                <form method="POST" action="{{ route('doneren.submit') }}" class="contact-form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Naam: <b>*</b></label>
