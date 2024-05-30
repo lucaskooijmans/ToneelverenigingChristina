@@ -11,6 +11,6 @@
         use HasFactory, Notifiable;
 
         protected $fillable = [
-            'name', 'email', 'phoneNumber', 'postalCode', 'houseNumber', 'street', 'city'
+            'name', 'email', 'phoneNumber', 'postalCode', 'houseNumber', 'street', 'city', 'isActive'
         ];
     }
