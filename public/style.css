@@ -236,7 +236,7 @@ h1 {
 }
 
 .curtain-left {
-    animation: slideL 3s ease-in-out forwards;
+    animation: slideL 5s ease-in-out forwards;
     position: absolute;
     left: 0;
     top: -200px;
@@ -251,7 +251,7 @@ h1 {
 }
 
 .curtain-right {
-    animation: slideR 3s ease-in-out forwards;
+    animation: slideR 5s ease-in-out forwards;
     position: absolute;
     right: 0;
     top: -200px;

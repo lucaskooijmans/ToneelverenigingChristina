@@ -13,6 +13,6 @@ if (!localStorage.getItem('visitedBefore')) {
 
     setTimeout(() => {
         curtain.remove();
-    }, 3000);
+    }, 5000);
     localStorage.setItem('visitedBefore', true);
 }
