@@ -17,36 +17,53 @@
             <p>{{ session('success') }}</p>
         @endif
 
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('member.store') }}">
             @csrf
+
             <label for="name">Naam:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" value="{{ old('name') }}" required>
             <br>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" value="{{ old('email') }}" required>
             <br>
 
             <label for="phoneNumber">Telefoonnummer:</label>
-            <input type="text" id="phoneNumber" name="phoneNumber">
+            <input type="text" id="phoneNumber" name="phoneNumber" value="{{ old('phoneNumber') }}">
             <br>
 
             <hr/>
 
             <label for="postalCode">Postcode:</label>
-            <input type="text" id="postalCode" name="postalCode" required>
+            <input type="text" id="postalCode" name="postalCode" value="{{ old('postalCode') }}" required>
             <br>
 
             <label for="houseNumber">Huisnummer:</label>
-            <input type="text" id="houseNumber" name="houseNumber" required>
+            <input type="text" id="houseNumber" name="houseNumber" value="{{ old('houseNumber') }}" required>
             <br>
 
             <label for="street">Straat:</label>
-            <input type="text" id="street" name="street" required>
+            <input type="text" id="street" name="street" value="{{ old('street') }}" required>
             <br>
 
             <label for="city">Plaats:</label>
-            <input type="text" id="city" name="city" required>
+            <input type="text" id="city" name="city" value="{{ old('city') }}" required>
             <br>
 
             <hr/>
@@ -64,7 +81,6 @@
             <button type="submit">Inschrijven</button>
         </form>
     </div>
-
 </body>
 
 </html>

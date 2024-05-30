@@ -118,6 +118,8 @@ Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->n
 // Member register routes
 Route::get('/inschrijven', [MemberController::class, 'index'])->name('member.register');
 Route::post('/inschrijven', [MemberController::class, 'store'])->name('member.store');
+Route::get('/betaling/success/{id}', [MemberController::class, 'paymentSuccess'])->name('member.paymentSuccess');
+Route::post('/webhooks/mollie', [MemberController::class, 'webhook'])->name('member.webhook');
 
 // Leden routes
 Route::middleware('auth')->group(function () {
