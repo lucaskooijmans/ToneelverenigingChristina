@@ -19,6 +19,7 @@
         <a href="/sponsors" tabindex="1">Sponsoren</a>
         <a href="/doneren" tabindex="1">Doneren</a>
         <a href="/contact" tabindex="1">Contact</a>
+        <a href="/inschrijven" tabindex="1">Inschrijven</a>
         {{-- <a href="/registreren" tabindex="1">Lid Worden</a> --}}
     </div>
     <div class="social-media">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,7 @@
             </div>
         @endif
 
+
         @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -37,7 +38,6 @@
             </div>
         @endif
 
-    
     
     <div class="performances">
 

@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\PerformanceController;
+    use App\Http\Controllers\MemberController;
+    use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -123,6 +124,25 @@ Route::put('/sponsorcategories/{id}', [SponsorCategoryController::class, 'update
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
 Route::delete('/sponsorcategories/{id}', [SponsorCategoryController::class, 'destroy'])->name('sponsorcategories.destroy');
 
+
+// Member register routes
+Route::get('/inschrijven', [MemberController::class, 'index'])->name('member.register');
+Route::post('/inschrijven', [MemberController::class, 'store'])->name('member.store');
+Route::get('/betaling/success/{id}', [MemberController::class, 'paymentSuccess'])->name('member.paymentSuccess');
+Route::post('/webhooks/mollie', [MemberController::class, 'webhook'])->name('member.webhook');
+
+// Leden routes
+Route::middleware('auth')->group(function () {
+    Route::get('/leden', [MemberController::class, 'adminIndex'])->name('members.index');
+    Route::get('/leden/create', [MemberController::class, 'create'])->name('members.create');
+    Route::post('/leden', [MemberController::class, 'store'])->name('members.store');
+    Route::get('/leden/{member}/edit', [MemberController::class, 'edit'])->name('members.edit');
+    Route::put('/leden/{member}', [MemberController::class, 'update'])->name('members.update');
+    Route::delete('/leden/{member}', [MemberController::class, 'destroy'])->name('members.destroy');
+    Route::put('/leden/{member}/activate', [MemberController::class, 'setIsActive'])->name('members.setIsActive');
+    Route::put('/leden/{member}/deactivate', [MemberController::class, 'removeIsActive'])->name('members.removeIsActive');
+
+});
 
 //! PDF test routes
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');
