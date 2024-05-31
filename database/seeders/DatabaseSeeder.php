@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             HistorySeeder::class,
             SponsorCategorySeeder::class,
             SponsorSeeder::class,
+            BoardMemberSeeder::class,
+            PhotoSeeder::class
         ]);
 
         User::create([

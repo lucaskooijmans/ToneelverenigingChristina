@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class performance_item_expanded extends Component
+class Aankondigingen extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class performance_item_expanded extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.performance_item_expanded');
+        return view('components.aankondigingen');
     }
 }

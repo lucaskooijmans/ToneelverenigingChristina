@@ -37,7 +37,7 @@
                         <h3>{{ $bestuurslid->name }}</h3>
                         <p>Email: {{ $bestuurslid->email }}</p>
                         <p>Telefoonnummer: {{ $bestuurslid->phone }}</p>
-                        <p>Beschrijving: {{ $bestuurslid->description }}</p>
+                        <p>{!! $bestuurslid->description !!}</p>
                         <div class="post-buttons">
                             @auth
                                 @if (auth()->user()->isAdmin())

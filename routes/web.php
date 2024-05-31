@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BestuursledenController;
 use App\Http\Controllers\BoardmembersController;
 use App\Http\Controllers\SponsorController;
@@ -15,6 +16,8 @@ use App\Http\Controllers\SponsorCategoryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\DoneerController;
+use App\Mail\DonationMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,14 +56,17 @@ Route::middleware('auth')->group(function () {
 Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
-// Calendar
-Route::get('/agenda', [PerformanceController::class, 'calendar'])->name('performances.calendar');
-
 // History page
 Route::get('/historie', [HistoryController::class, 'index']);
 
 // News page
 Route::get('/nieuws', [PostController::class, 'index']);
+
+// Goederen donatie page
+Route::get('/doneren', function () {
+    return view('doneren');
+});
+Route::post('/doneren', [DoneerController::class, 'submit'])->name('doneren.submit');
 
 // Photos resource
 Route::resource('gallery', GalleryController::class);
@@ -113,7 +119,11 @@ Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->nam
 Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
 
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
+Route::get('/sponsorcategories/{id}/edit', [SponsorCategoryController::class, 'edit'])->name('sponsorcategories.edit');
+Route::put('/sponsorcategories/{id}', [SponsorCategoryController::class, 'update'])->name('sponsorcategories.update');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
+Route::delete('/sponsorcategories/{id}', [SponsorCategoryController::class, 'destroy'])->name('sponsorcategories.destroy');
+
 
 // Member register routes
 Route::get('/inschrijven', [MemberController::class, 'index'])->name('member.register');
@@ -148,8 +158,9 @@ Route::post('/performances/{performance}/tickets', [TicketController::class, 'st
 // TODO: FIX AUTH PERMS ETC
 // Payments route
 Route::post('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
-Route::get('/payment/status', [PaymentController::class, 'handlePaymentStatus'])->name('payment.handleStatus');
-Route::post('/webhooks/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook');
+Route::post('/webhook/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook')->withoutMiddleware('csrf');
+Route::get('/payment/status/{id}', [PaymentController::class, 'confirmation'])->name('payment.status');
+// Route::get('/payment/status', [PaymentController::class, 'simpleConfirmation'])->name('payment.status');
 
 // Auth routes
 require __DIR__ . '/auth.php';

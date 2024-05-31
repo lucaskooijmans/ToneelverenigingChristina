@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class countdown extends Component
+class Countdown extends Component
 {
     /**
      * Create a new component instance.

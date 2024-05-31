@@ -12,12 +12,12 @@
     <div class="links">
         <a href="/" tabindex="1">Home</a>
         <a href="/voorstellingen" tabindex="1">Voorstellingen</a>
-        <a href="/agenda" tabindex="1">Agenda</a>
         <a href="/nieuws" tabindex="1">Nieuws</a>
         <a href="/historie" tabindex="1">Historie</a>
         <a href="/gallery" tabindex="1">Gallerij</a>
         <a href="/boardmembers" tabindex="1">Bestuursleden</a>
         <a href="/sponsors" tabindex="1">Sponsoren</a>
+        <a href="/doneren" tabindex="1">Doneren</a>
         <a href="/contact" tabindex="1">Contact</a>
         <a href="/inschrijven" tabindex="1">Inschrijven</a>
         {{-- <a href="/registreren" tabindex="1">Lid Worden</a> --}}
