@@ -8,18 +8,21 @@
 </head>
 
 <body>
-<x-navbar/>
+    <x-navbar />
 
-<div class="member-create-form">
-    <h1>Nieuw lid toevoegen</h1>
+    <div class="sponsors">
 
-    <form method="POST" action="{{ route('members.store') }}">
-        @csrf
-        <x-members-form/>
-        <button type="submit">Toevoegen</button>
-    </form>
-</div>
+        <div class="container">
+            <h1>Nieuw lid toevoegen</h1>
 
+            <form method="POST" action="{{ route('members.store') }}" class="post-form">
+                @csrf
+                <x-members-form />
+                <button type="submit">Toevoegen</button>
+            </form>
+        </div>
+
+    </div>
 </body>
 
 </html>
