@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BestuursledenController;
 use App\Http\Controllers\BoardmembersController;
 use App\Http\Controllers\SponsorController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\SponsorCategoryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\DoneerController;
+use App\Mail\DonationMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +60,12 @@ Route::get('/historie', [HistoryController::class, 'index']);
 
 // News page
 Route::get('/nieuws', [PostController::class, 'index']);
+
+// Goederen donatie page
+Route::get('/doneren', function () {
+    return view('doneren');
+});
+Route::post('/doneren', [DoneerController::class, 'submit'])->name('doneren.submit');
 
 // Photos resource
 Route::resource('gallery', GalleryController::class);
