@@ -52,9 +52,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
-// Calendar
-Route::get('/agenda', [PerformanceController::class, 'calendar'])->name('performances.calendar');
-
 // History page
 Route::get('/historie', [HistoryController::class, 'index']);
 
@@ -112,7 +109,11 @@ Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->nam
 Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
 
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
+Route::get('/sponsorcategories/{id}/edit', [SponsorCategoryController::class, 'edit'])->name('sponsorcategories.edit');
+Route::put('/sponsorcategories/{id}', [SponsorCategoryController::class, 'update'])->name('sponsorcategories.update');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
+Route::delete('/sponsorcategories/{id}', [SponsorCategoryController::class, 'destroy'])->name('sponsorcategories.destroy');
+
 
 //! PDF test routes
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');
@@ -129,7 +130,7 @@ Route::post('/performances/{performance}/tickets', [TicketController::class, 'st
 // Payments route
 Route::post('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
 Route::post('/webhook/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook')->withoutMiddleware('csrf');
-Route::get('/payment/confirmation', [PaymentController::class, 'confirmation'])->name('payment.handleStatus');
+Route::get('/payment/status/{id}', [PaymentController::class, 'confirmation'])->name('payment.status');
 // Route::get('/payment/status', [PaymentController::class, 'simpleConfirmation'])->name('payment.status');
 
 // Auth routes

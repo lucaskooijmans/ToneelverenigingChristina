@@ -68,7 +68,7 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="isActive" value="0">
-                    <label for="isActive">Is sponsor?</label>
+                    <label for="isActive">Actieve sponsor?</label>
                     <input type="checkbox" id="isActive" name="isActive" value="1"
                         {{ $sponsor->isActive ? 'checked' : '' }}>
                 </div>

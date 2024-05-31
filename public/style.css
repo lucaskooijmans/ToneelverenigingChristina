@@ -19,7 +19,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
 
 :root {
     /* Primaire achtergrondkleur */
-    --primary-color: #ffffff;
+    --primary-color: #8b0000;
     /* Primaire voorgrondkleur */
     --primary-foreground-color: #000;
     /* Secundaire achtergrondkleur (Sections, nieuwsberichten etc) */
@@ -338,6 +338,7 @@ h1 {
 
 .gallery h1 {
     margin: 2rem 0 1rem;
+    color: white;
 }
 
 .gallery .container {
@@ -518,6 +519,7 @@ h1 {
 
 .nieuws h1 {
     margin: 2rem 0 1rem;
+    color: white;
 }
 
 .nieuws .container {
@@ -748,6 +750,7 @@ textarea {
 
 .contact h1 {
     margin: 2rem 0 1rem;
+    color: white;
 }
 
 .contact-form {
@@ -830,6 +833,7 @@ textarea {
 
 .bestuursleden h1 {
     margin: 2rem 0 1rem;
+    color: white;
 }
 
 .bestuursleden .container {
@@ -887,6 +891,7 @@ textarea {
 
 .historie h1 {
     margin: 2rem 0 1rem;
+    color: white;
 }
 
 .historie .container {
@@ -979,6 +984,7 @@ textarea {
 
 .performances h1 {
     margin: 2rem 0 1rem;
+    color: white;
 }
 
 .performances .container {
@@ -1163,7 +1169,7 @@ div.fc-event-main {
     align-items: center;
     flex-direction: column;
     background-color: var(--primary-color);
-    color: var(--primary-foreground-color);
+    color: white;
 }
 
 .sponsors .container {
@@ -1177,6 +1183,24 @@ div.fc-event-main {
 
 .sponsors h1 {
     margin: 2rem 0 1rem;
+    color: white;
+}
+
+.sponsor.admin {
+    cursor: move;
+}
+
+.sponsor.inactive {
+    opacity: 0.5;
+}
+
+.sponsor.inactive strong::after {
+    content: " (Inactief)";
+}
+
+.category-button {
+    color: var(--secondary-foreground-color);
+    text-decoration: none;
 }
 
 .category-group {

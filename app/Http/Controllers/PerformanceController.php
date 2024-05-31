@@ -30,7 +30,7 @@ class PerformanceController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'location' => 'nullable|string',
             'available_seats' => 'required|integer',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
         ]);
 
         if($request->edit){

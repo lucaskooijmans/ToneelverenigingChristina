@@ -17,6 +17,11 @@
 
 <body>
     <x-navbar />
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <div class="sponsors">
         <div class="container">
@@ -34,7 +39,16 @@
             @endauth
             <div class="post-buttons">
                 @foreach ($categories as $category)
-                    <a href="#{{ $category->id }}" class="button">{{ $category->sponsorcategories }}</a>
+                    <div class="button">
+                        <a href="#{{ $category->id }}" class="category-button">{{ $category->sponsorcategories }}</a>
+                        @auth
+                            @if (auth()->user()->isAdmin())
+                                <a href="{{ route('sponsorcategories.edit', $category->id) }}" class="button blue-button">
+                                    <i class="fas fa-pencil"></i>
+                                </a>
+                            @endif
+                        @endauth
+                    </div>
                 @endforeach
             </div>
             <div class="sponsors-list">
@@ -44,7 +58,8 @@
                         <div class="category" data-category-id="{{ $category->id }}">
                             <div id="{{ $category->id }}" class="anchor"></div>
                             @foreach ($category->sponsors as $sponsor)
-                                <div class="sponsor" data-sponsor-id="{{ $sponsor->id }}"
+                                <div class="sponsor @auth @if (auth()->user()->isAdmin()) admin @endif @if(!$sponsor->isActive) inactive @endif @endauth"
+                                    data-sponsor-id="{{ $sponsor->id }}"
                                     style="margin: 10px; text-align: center; flex: 0 1 auto;">
                                     <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->name }}"
                                         style="width: 150px; height: 150px; border: 1px solid #ddd; border-radius: 4px; padding: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
