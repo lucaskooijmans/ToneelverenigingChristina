@@ -120,11 +120,11 @@
     <div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
         <h1 style="margin: 0;">Locatie</h1>
         <div style="width: 100%; height: 80%; display: flex; justify-content: center; align-items: center;">
-            <iframe 
-                src="https://storage.googleapis.com/maps-solutions-dmaxp2tpvp/locator-plus/ulxj/locator-plus.html"
-                style="border: 0; width: 100%; height: 100%;"
+        <iframe src="https://storage.googleapis.com/maps-solutions-dmaxp2tpvp/locator-plus/dv31/locator-plus.html"
+                width="100%" height="100%"
+                style="border:0;"
                 loading="lazy">
-            </iframe>
+        </iframe>
         </div>
     </div>
 
