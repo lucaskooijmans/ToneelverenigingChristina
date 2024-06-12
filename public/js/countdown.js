@@ -1,5 +1,3 @@
-console.log('test 2')
-
 // Get the datetime of the voorstelling from PHP
 let voorstellingDatetime = new Date(upcomingPerformance.starttime).getTime();
 

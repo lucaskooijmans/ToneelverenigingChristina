@@ -47,7 +47,7 @@
                         <input type="file" id="image" name="image" accept="image/*" required class="form-control" required>
                     </div>
                     <div class="form-group">
-                    <label for="type">Wil je het goed uitlenen of doneren</label>
+                    <label for="type">Wil je het goed uitlenen of doneren: <b>*</b></label>
                         <select id="type" name="type" required class="form-control">
                             <option value="doneren">Doneren</option>
                             <option value="uitlenen">Uitlenen</option>
@@ -58,8 +58,13 @@
                         <input type="date" id="date" name="date" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="state">In welke staat is uw goed:</label>
-                        <input id="state" name="state" class="form-control"></input>
+                        <label for="state">In welke staat is uw goed: <b>*</b></label>
+                        <select id="state" name="state" required class="form-control">
+                            <option value="nieuw">Nieuw</option>
+                            <option value="als-nieuw">Zo goed als nieuw</option>
+                            <option value="gebruikt">Gebruikt</option>
+                            <option value="beschadigd">Beschadigd</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="message">Bericht:</label>
