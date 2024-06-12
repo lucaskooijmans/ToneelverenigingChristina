@@ -21,6 +21,14 @@
         <a href="/contact" tabindex="1">Contact</a>
         <a href="/inschrijven" tabindex="1">Inschrijven</a>
         {{-- <a href="/registreren" tabindex="1">Lid Worden</a> --}}
+        @auth
+            @if (auth()->user()->isAdmin())
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="logout-button" tabindex="1">Log uit</button>
+                </form>
+            @endif
+        @endauth
     </div>
     <div class="social-media">
         <a href="https://www.facebook.com/toneelvereniging.christina.ravenswaaij/" target="_blank" title="Facebookpagina van Toneelvereniging Christina" tabindex="2">
