@@ -165,10 +165,22 @@ nav {
 .links[data-visible="true"] {
     transform: translateX(0);
     box-shadow: #1d1d1b 0px 0px 10px;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.5s cubic-bezier(0.13, 0.16, 0, 0.96);
+}
+
+.links[data-visible="true"] .link-category {
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.22, 0.02, 0, 1.02), opacity 0.3s cubic-bezier(0.22, 0.02, 0, 1.02);
+    transition-delay: .2s;
 }
 
 .links[data-visible="false"] {
+    transition: transform 0.5s cubic-bezier(0.13, 0.16, 0, 0.96);
+}
+
+.links[data-visible="false"] .link-category {
+    transform: translateY(200px);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -185,6 +197,12 @@ nav {
 .links:focus-within, .links:has(>.link-category:focus-within) {
     transform: translateX(0);
     transition: transform 0.3s ease-in-out;
+}
+
+.links:focus-within .link-category, .links:has(>.link-category:focus-within) .link-category {
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .links a {
@@ -205,6 +223,8 @@ nav {
     display: flex;
     flex-direction: column;
     min-width: 200px;
+    transform: translateY(200px);
+    opacity: 0;
 }
 
 .link-category h2 {
