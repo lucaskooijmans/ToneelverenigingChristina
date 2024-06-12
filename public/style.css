@@ -34,13 +34,39 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
     --accent-color: #8b001b;
 }
 
+*{
+    box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ccc;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', 'Arial', sans-serif;
     font-size: 16px;
     line-height: 1.6;
     color: var(--primary-foreground-color);
     background-color: var(--primary-color);
     min-height: 100svh;
+}
+
+.cursive {
+    font-family: 'Dancing Script', 'Arial', sans-serif;
 }
 
 .anchor {
@@ -63,7 +89,6 @@ h2 {
 }
 
 /* Navigatie */
-
 nav {
     display: flex;
     position: sticky;
@@ -71,11 +96,11 @@ nav {
     top: 0;
     justify-content: space-between;
     align-items: center;
-    padding: .5rem 1rem;
+    padding: .5rem;
     background-color: var(--secondary-color);
     color: var(--secondary-foreground-color);
-    font-size: 1.3rem;
     z-index: 5;
+    box-shadow: #1d1d1b 0px 0px 10px;
 }
 
 .brand {
@@ -85,19 +110,24 @@ nav {
     flex-direction: row;
 }
 
-.brand img {
-    height: 4.5rem;
+.brandtext {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1.4rem;
+    line-height: 1.5rem;
+    font-weight: bold;
 }
 
-.brand h1 {
-    font-size: 1.5rem;
-    line-height: 1.6rem;
-    font-weight: 600;
-    margin: 0;
+.brand img {
+    height: 4rem;
+}
+
+.brand a {
+    height: 4rem;
 }
 
 .menu-button {
-    display: none;
     font-size: 1.3rem;
     cursor: pointer;
     background-color: var(--secondary-color);
@@ -112,9 +142,49 @@ nav {
     background-color: var(--accent-color);
 }
 
+/* Verstop navigatielinks offscreen, wanneer data-visible = true, toon hem vanaf de linkerkant, onder de H1 in de navbar */
 .links {
+    position: absolute;
     display: flex;
-    gap: 1rem;
+    transform: translateX(-100%);
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    height: calc(100svh - 5rem);
+    gap: 4rem;
+    background-color: var(--secondary-color);
+    padding-top: 5rem;
+    overflow-y: auto;
+    z-index: 4;
+}
+
+.links[data-visible="true"] {
+    transform: translateX(0);
+    box-shadow: #1d1d1b 0px 0px 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.links[data-visible="false"] {
+    transition: transform 0.3s ease-in-out;
+}
+
+.links[data-visible="true"] ~ .social-media {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.links[data-visible="false"] ~ .social-media {
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.links:focus-within, .links:has(>.link-category:focus-within) {
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
 }
 
 .links a {
@@ -124,10 +194,25 @@ nav {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease-in-out;
+    text-align: center;
 }
 
 .links a:hover {
     background-color: var(--accent-color);
+}
+
+.link-category {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
+
+.link-category h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: .5rem;
+    color: gold;
+    text-align: center;
 }
 
 h1 {
@@ -142,12 +227,13 @@ h1 {
     gap: 1rem;
     position: fixed;
     left: 0;
-    top: 5.8rem;
     background-color: var(--secondary-color);
     color: var(--secondary-foreground-color);
-    padding: 1rem;
+    padding: .5rem 1rem;
+    top: 5rem;
     border-radius: 0 0 10px 0;
     z-index: 5;
+    box-shadow: #1d1d1b 0px 0px 10px;
 }
 
 .social-media a {
@@ -1242,50 +1328,6 @@ strong {
 @media screen and (max-width: 1665px) {
 
     /* Laptop */
-    /* Verstop navigatielinks offscreen, wanneer data-visible = true, toon hem vanaf de linkerkant, onder de H1 in de navbar */
-    .links {
-        position: fixed;
-        transform: translateX(-100%);
-        flex-direction: column;
-        top: 5.8rem;
-        left: 0;
-        min-width: 200px;
-        height: calc(100svh - 5.8rem);
-        gap: 0;
-        background-color: var(--secondary-color);
-        overflow-y: auto;
-        z-index: 4;
-    }
-
-    .links[data-visible="true"] {
-        transform: translateX(0);
-        box-shadow: #1d1d1b 0px 0px 10px;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .links[data-visible="false"] {
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .links[data-visible="true"] ~ .social-media {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .links[data-visible="false"] ~ .social-media {
-        transform: translateX(0);
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .links a:focus ~ .links {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .menu-button {
-        display: block;
-    }
-
     .hero {
         padding: 4rem 1rem 1rem;
     }
