@@ -9,6 +9,7 @@
 
 <body>
     <x-navbar />
+        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -40,9 +41,12 @@
 
     
     <div class="performances">
-
-        <div class="container">
+        <section class="intro">
             <h1>Voorstellingen</h1>
+            <p>Hier is een overzicht te zien van onze aankomende voorstellingen.</p>
+        </section>
+        <div class="container">
+            
 
             @auth
                 @if (auth()->user()->isAdmin())

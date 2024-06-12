@@ -24,9 +24,11 @@
     @endif
 
     <div class="sponsors">
-        <div class="container">
-
+        <section class="intro">
             <h1>Sponsoren</h1>
+            <p>Op deze pagina is een overzicht van al onze sponsoren te zien.</p>
+        </section>
+        <div class="container">
             @auth
                 @if (auth()->user()->isAdmin())
                     <div class="post-buttons">

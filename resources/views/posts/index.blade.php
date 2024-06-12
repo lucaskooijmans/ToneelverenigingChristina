@@ -13,10 +13,11 @@
     <x-navbar />
 
     <div class="nieuws">
-
-        <div class="container">
-
+        <section class="intro">
             <h1>Nieuws</h1>
+            <p>Hier worden de updates met betrekking tot de toneelvereniging bijgehouden.</p>
+        </section>
+        <div class="container">
 
             @auth
                 @if (auth()->user()->isAdmin())

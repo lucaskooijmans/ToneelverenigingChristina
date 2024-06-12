@@ -315,7 +315,7 @@ h1 {
     font-weight: 400;
 }
 
-/* Fotogallerij */
+/* Fotogalerij */
 
 .photo-form {
     padding: 20px;
@@ -982,7 +982,7 @@ textarea {
     color: var(--primary-foreground-color);
 }
 
-.performances h1 {
+.performances > h1 {
     margin: 2rem 0 1rem;
     color: white;
 }
@@ -1230,6 +1230,28 @@ div.fc-event-main {
 strong {
     font-weight: bold;
 }
+
+.intro {
+    text-align: center;
+    padding: 30px 0 30px 0;
+    width: 100%;
+    background-color: lightgrey;
+}
+
+.intro h1 {
+    font-weight: bold;
+    margin-top: 0;
+    color: black;
+}
+
+.intro p {
+    max-width: 30%;
+    margin-left: auto; 
+    margin-right: auto; 
+    word-wrap: break-word;
+    color: black;
+}
+
 
 /* Media Queries */
 

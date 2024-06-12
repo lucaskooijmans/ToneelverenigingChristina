@@ -14,10 +14,11 @@
 <x-navbar/>
 
 <div class="bestuursleden">
-
+    <section class="intro">
+        <h1>Bestuursleden</h1>
+        <p>Hier is een overzicht te zien van onze bestuursleden.</p>
+    </section>
     <div class="container">
-
-        <h1>Overzicht bestuursleden</h1>
 
         @auth
             @if (auth()->user()->isAdmin())

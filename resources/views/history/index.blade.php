@@ -13,9 +13,11 @@
     <x-navbar />
 
     <div class="historie">
-
-        <div class="container">
+        <section class="intro">
             <h1>Historie</h1>
+            <p>Hier staat achtergrondinformatie over de geschiedenis van onze toneelvereniging.</p>
+        </section>
+        <div class="container">
             @if (Gate::allows('isAdmin'))
                 <a href="{{ route('history.create') }}" class="add-item button"><i class="fas fa-plus"></i> Toevoegen</a>
             @endif

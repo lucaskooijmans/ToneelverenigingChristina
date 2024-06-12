@@ -10,9 +10,11 @@
 <body>
     <x-navbar />
     <div class="sponsors">
-
+        <section class="intro">
+            <h1>Inschrijven bij onze toneelvereniging</h1>
+            <p>Wil je een lid worden van de toneelvereniging? Dan ben je hier op het juiste adres!</p>
+        </section>
         <div class="container">
-            <h1>Inschrijven bij Toneelvereniging Christina</h1>
 
             @if (session('success'))
                 <p>{{ session('success') }}</p>

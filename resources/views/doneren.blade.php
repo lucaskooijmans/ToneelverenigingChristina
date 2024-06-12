@@ -13,12 +13,12 @@
     <x-navbar />
 
     <div class="contact">
+        <section class="intro">
+            <h1>Goederen doneren</h1>
+            <p>Voel je vrij om een bericht achter te laten als u vragen of opmerkingen heeft!</p>
+        </section>
 
         <div class="container">
-
-            <h1>
-                Goederen Doneren
-            </h1>
 
             @if (session('success'))
                 <div class="alert alert-success">

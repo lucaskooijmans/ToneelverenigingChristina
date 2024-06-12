@@ -14,7 +14,7 @@
         <a href="/voorstellingen" tabindex="1">Voorstellingen</a>
         <a href="/nieuws" tabindex="1">Nieuws</a>
         <a href="/historie" tabindex="1">Historie</a>
-        <a href="/gallery" tabindex="1">Gallerij</a>
+        <a href="/gallery" tabindex="1">Galerij</a>
         <a href="/boardmembers" tabindex="1">Bestuursleden</a>
         <a href="/sponsors" tabindex="1">Sponsoren</a>
         <a href="/doneren" tabindex="1">Doneren</a>
