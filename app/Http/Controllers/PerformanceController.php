@@ -30,9 +30,8 @@ class PerformanceController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'location' => 'nullable|string',
             'available_seats' => 'required|integer',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric'
         ]);
-
         if($request->edit){
             $performance = Performance::find($request->id);
 
@@ -67,6 +66,7 @@ class PerformanceController extends Controller
                 $request->image->move(public_path('images'), $imageName);
                 $formFields['image'] = $imageName;
             }
+
 
             $performance = Performance::create($formFields);
             $performance->save();
