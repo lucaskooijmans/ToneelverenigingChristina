@@ -22,7 +22,7 @@ $posts = Post::orderBy('created_at', 'desc')->take(2)->get();
     </div>
     @if ($posts->isNotEmpty())
         <div class="meerzien">
-            <a href="/nieuws" tabindex="0">
+            <a href="/nieuws" tabindex="0" title="Meer nieuwsberichten">
                 Meer
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2">

@@ -5,7 +5,8 @@
 </script>
 <script src="{{ asset('js/countdown.js') }}"></script>
 
-<section class="aankomend" style="@if($upcomingPerformance) background-image: url('/images/{{ $upcomingPerformance->image }} @endif')">
+<section class="aankomend"
+    style="@if ($upcomingPerformance) background-image: url('/images/{{ $upcomingPerformance->image }} @endif')">
     <div class="container">
         @if ($upcomingPerformance)
             <h1>{{ $upcomingPerformance->name }}</h1>
@@ -28,12 +29,11 @@
                 </div>
             </div>
             <div class="pulsing-button-container">
-                <a class="button pulsing-button" href="{{ route("performances.show", $upcomingPerformance->id) }}">Kaarten Kopen</a>
+                <a class="button pulsing-button" tabindex="0" title="Koop kaarten voor de voorstelling {{ $upcomingPerformance->name }}"
+                    href="{{ route('performances.show', $upcomingPerformance->id) }}">Kaarten Kopen</a>
             </div>
         @else
             <p>Er is geen aankomende Voorstelling gepland</p>
         @endif
     </div>
 </section>
-
-

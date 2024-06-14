@@ -9,7 +9,7 @@
     <script src="/curtains.js" defer></script>
 </head>
 
-<body>
+<body id="home">
     <x-navbar />
 
     <section class="hero">
