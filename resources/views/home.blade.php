@@ -25,7 +25,7 @@
                     modi, iusto laboriosam libero ipsum, eaque iste accusantium.
                 </p>
             </div>
-            <img src="/images/groepsfoto.jpg" alt="Hero image">
+            <img src="/images/groepsfoto.jpg" alt="Groepsfoto van de toneelvereniging.">
         </div>
     </section>
 
