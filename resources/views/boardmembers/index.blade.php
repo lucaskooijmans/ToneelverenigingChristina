@@ -17,7 +17,14 @@
 
     <div class="container">
 
-        <h1>Overzicht bestuursleden</h1>
+        <h1>Onze bestuursleden</h1>
+
+        <div class="bestuursleden-intro">
+            <img src="/images/bestuur.jpg" alt="Foto van de bestuursleden van Toneelvereniging Christina">
+            <p>
+                {{ __("bestuursleden-intro") }}
+            </p>
+        </div>
 
         @auth
             @if (auth()->user()->isAdmin())

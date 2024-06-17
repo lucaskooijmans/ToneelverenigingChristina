@@ -1019,6 +1019,26 @@ textarea {
     min-height: calc(100svh - 5.8rem);
 }
 
+.bestuursleden-intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    min-width: 300px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+}
+
+.bestuursleden-intro img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 5px;
+}
+
 .bestuursleden h1 {
     margin: 2rem 0 1rem;
     color: white;
