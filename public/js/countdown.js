@@ -19,29 +19,29 @@ let x = setInterval(function() {
 
     // Display the countdown in the corresponding spans
     let daysElement = document.querySelector("#days");
-    if (daysElement.innerHTML != days) {
-        daysElement.innerHTML = days;
+    if (daysElement.innerHTML != `${days}`) {
+        daysElement.innerHTML = `${days}`;
         daysElement.classList.add("changed");
         remove(daysElement)
     }
 
     let hoursElement = document.querySelector("#hours");
-    if (hoursElement.innerHTML != hours) {
-        hoursElement.innerHTML = hours;
+    if (hoursElement.innerHTML != `${hours}`) {
+        hoursElement.innerHTML = `${hours}`;
         hoursElement.classList.add("changed");
         remove(hoursElement)
     }
 
     let minutesElement = document.querySelector("#minutes");
-    if (minutesElement.innerHTML != minutes) {
-        minutesElement.innerHTML = minutes;
+    if (minutesElement.innerHTML != `${minutes}`) {
+        minutesElement.innerHTML = `${minutes}`;
         minutesElement.classList.add("changed");
         remove(minutesElement)
     }
 
     let secondsElement = document.querySelector("#seconds");
-    if (secondsElement.innerHTML != seconds) {
-        secondsElement.innerHTML = seconds;
+    if (secondsElement.innerHTML != `${seconds}`) {
+        secondsElement.innerHTML = `${seconds}`;
         secondsElement.classList.add("changed");
         remove(secondsElement)
     }

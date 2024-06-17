@@ -1,25 +1,28 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-<link
-    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-<link rel="stylesheet" href="/style.css">
-<script src="https://kit.fontawesome.com/2a5648d90a.js" crossorigin="anonymous" defer></script>
+<div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://kit.fontawesome.com/2a5648d90a.js" crossorigin="anonymous" defer></script>
+</div>
 
 <nav>
-    <div class="brand">
-        <a href="/" tabindex="0">
+    <a href="/" tabindex="0" class="brand-link" title="Homepagina van Toneelvereniging Christina">
+        <div class="brand">
             <img src="/images/logoBasic.png" alt="Logo van toneelvereniging Christina">
-        </a>
 
-        <div class="brandtext">
-            Toneelvereniging<br>Christina
+            <div class="brandtext">
+                Toneelvereniging<br>Christina
+            </div>
         </div>
-    </div>
-    <button class="menu-button" onclick="toggleNavbar()" tabindex="-1" aria-hidden="true">Menu</button>
+    </a>
+    <button class="menu-button" onclick="toggleNavbar()" tabindex="-1" aria-hidden="true"
+        title="Open het navigatiemenu">Menu</button>
     <div class="links">
         <div class="link-category">
             <h2 aria-hidden="true" class="cursive">Algemeen</h2>
