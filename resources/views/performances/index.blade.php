@@ -46,7 +46,7 @@
 
             @auth
                 @if (auth()->user()->isAdmin())
-                    <a href="{{ route('performances.create') }}" class="button" tabindex="3">
+                    <a href="{{ route('performances.create') }}" class="button" tabindex="0">
                         <i class="fas fa-plus"></i> Toevoegen
                     </a>
                 @endif
