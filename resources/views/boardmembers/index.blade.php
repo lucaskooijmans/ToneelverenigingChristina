@@ -38,14 +38,18 @@
             <div class="list-group boardmembers">
                 @foreach ($bestuursleden as $bestuurslid)
                     <div class="member-card">
-                        <div class="member-image">
-                            <img src="{{ asset('storage/' . $bestuurslid->image_url) }}" width="200" height="200" alt="Bestuurslid">
+                        <div class="member">
+                            <div class="member-image">
+                                <img src="{{ asset('storage/' . $bestuurslid->image_url) }}" width="200" height="200" alt="Bestuurslid">
+                            </div>
+                            <h3><strong>{{ $bestuurslid->name }}</strong></h3>
+                            <p><strong>Email:</strong> {{ $bestuurslid->email }}</p>
+                            <p><strong>Telefoonnummer:</strong> {{ $bestuurslid->phone }}</p>
                         </div>
-                        <h3>{{ $bestuurslid->name }}</h3>
-                        <p>Email: {{ $bestuurslid->email }}</p>
-                        <p>Telefoonnummer: {{ $bestuurslid->phone }}</p>
-                        <p>{!! $bestuurslid->description !!}</p>
-                        <div class="post-buttons">
+                        <div class="info">
+                            <p>{!! nl2br($bestuurslid->description) !!}</p>
+                            <div class="post-buttons">
+                        </div>
                             @auth
                                 @if (auth()->user()->isAdmin())
                                     <a href="{{ route('boardmembers.edit', $bestuurslid->id) }}"><button class="button blue-button"><i class="fas fa-pencil"></i> Edit</button></a>

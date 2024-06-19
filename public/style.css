@@ -1021,9 +1021,9 @@ textarea {
 
 .bestuursleden-intro {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    flex-direction: row;
     gap: 1rem;
     padding: 2rem;
     background-color: var(--secondary-color);
@@ -1031,6 +1031,7 @@ textarea {
     border-radius: 5px;
     min-width: 300px;
     box-shadow: #1d1d1b 0px 0px 10px;
+    width: 100%;
 }
 
 .bestuursleden-intro img {
@@ -1064,6 +1065,21 @@ textarea {
     margin-top: 1rem;
 }
 
+.member-card:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.member-card:nth-child(even) {
+    flex-direction: row;
+}
+
+.member {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .member-card {
     display: flex;
     justify-content: center;
@@ -1076,12 +1092,13 @@ textarea {
     border-radius: 5px;
     box-shadow: #1d1d1b 0px 0px 10px;
     min-width: 300px;
-
+    width: 100%;
+    position: relative;
 }
 
 .member-card p {
     max-width: 50ch;
-    max-height: 8lh;
+    max-height: 100%;
     overflow-y: auto;
 }
 
