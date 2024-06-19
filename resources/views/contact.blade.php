@@ -46,7 +46,7 @@
                         <label for="message">Bericht:</label>
                         <textarea id="message" name="message" class="form-control"></textarea>
                     </div>
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAW38y6G28Abmhjw"></div>
+                    <div class="cf-turnstile" data-sitekey="{{ env('CLOUDFLARE_PUBLIC', '') }}"></div>
                     <div class="form-group">
                         <button type="submit" class="button green-button">Verstuur</button>
                     </div>
