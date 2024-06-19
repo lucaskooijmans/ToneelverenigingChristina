@@ -17,6 +17,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\DoneerController;
+use App\Http\Controllers\TextEditController;
 use App\Mail\DonationMail;
 
 /*
@@ -161,6 +162,9 @@ Route::post('/payment/{id}', [PaymentController::class, 'preparePayment'])->name
 Route::post('/webhook/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook')->withoutMiddleware('csrf');
 Route::get('/payment/status/{id}', [PaymentController::class, 'confirmation'])->name('payment.status');
 // Route::get('/payment/status', [PaymentController::class, 'simpleConfirmation'])->name('payment.status');
+
+Route::get('/teksten', [TextEditController::class, 'index'])->name('text.index');
+Route::post('/teksten/{id}/edit', [TextEditController::class, 'edit'])->name('text.edit');
 
 // Auth routes
 require __DIR__ . '/auth.php';

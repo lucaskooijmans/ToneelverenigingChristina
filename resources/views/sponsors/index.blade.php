@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
@@ -56,7 +56,7 @@
             <div class="sponsors-list">
                 @foreach ($categories as $category)
                     <div class="category-group" data-open='true' onclick="javascript:toggleOpen(this)">
-                        <h2>{{ $category->sponsorcategories }}</h2>
+                        <h2 class="@auth admin @endauth">{{ $category->sponsorcategories }}</h2>
                         <div class="category" data-category-id="{{ $category->id }}">
                             <div id="{{ $category->id }}" class="anchor"></div>
                             @foreach ($category->sponsors as $sponsor)

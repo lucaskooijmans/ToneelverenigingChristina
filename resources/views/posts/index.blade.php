@@ -37,7 +37,7 @@
                             <div class="post-content">
                                 <h2>{{ $post->title }}</h2>
                                 <p class="date">Aangemaakt: {{ $post->created_at->format('j-n-Y H:i') }}</p>
-                                <p>{{ $post->body }}</p>
+                                <p>{!! nl2br($post->body) !!}</p>
                             </div>
                             @auth
                                 @if (auth()->user()->isAdmin())
