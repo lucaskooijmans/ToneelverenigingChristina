@@ -1415,6 +1415,10 @@ div.fc-event-main {
     cursor: move;
 }
 
+.category-group .admin {
+    cursor: move;
+}
+
 .sponsor.inactive {
     opacity: 0.5;
 }
@@ -1451,6 +1455,10 @@ div.fc-event-main {
 .category-group[data-open = "false"] .sponsor {
     display: none;
 }
+
+.category-group[data-open = "false"] h2::after {
+    content: "▼";
+},
 
 strong {
     font-weight: bold;

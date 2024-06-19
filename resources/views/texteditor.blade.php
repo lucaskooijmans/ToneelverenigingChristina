@@ -16,7 +16,7 @@
             <h1>Tekstbewerker</h1>
 
             @foreach ($keys as $key)
-                <form action="{{ route('text.edit', ['id' => $key]) }}" method="post">
+                <form action="{{ route('text.edit', ['id' => $key]) }}" method="post" class="post-form">
                     @csrf
                     <div class="form-group">
                         <label for="text">{{ $key }}</label>
