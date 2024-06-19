@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\PerformanceController;
+    use App\Http\Controllers\MemberController;
+    use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BestuursledenController;
 use App\Http\Controllers\BoardmembersController;
 use App\Http\Controllers\SponsorController;
@@ -14,6 +16,9 @@ use App\Http\Controllers\SponsorCategoryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\DoneerController;
+use App\Http\Controllers\TextEditController;
+use App\Mail\DonationMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,14 +57,17 @@ Route::middleware('auth')->group(function () {
 Route::get('/performances/{performance}/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/performances/{performance}/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
-// Calendar
-Route::get('/agenda', [PerformanceController::class, 'calendar'])->name('performances.calendar');
-
 // History page
 Route::get('/historie', [HistoryController::class, 'index']);
 
 // News page
 Route::get('/nieuws', [PostController::class, 'index']);
+
+// Goederen donatie page
+Route::get('/doneren', function () {
+    return view('doneren');
+});
+Route::post('/doneren', [DoneerController::class, 'submit'])->name('doneren.submit');
 
 // Photos resource
 Route::resource('gallery', GalleryController::class);
@@ -112,7 +120,30 @@ Route::delete('/history/delete/{id}', [HistoryController::class, 'delete'])->nam
 Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');
 
 Route::get('/sponsorscategory/create', [SponsorCategoryController::class, 'create'])->name('sponsorcategory.create');
+Route::get('/sponsorcategories/{id}/edit', [SponsorCategoryController::class, 'edit'])->name('sponsorcategories.edit');
+Route::put('/sponsorcategories/{id}', [SponsorCategoryController::class, 'update'])->name('sponsorcategories.update');
 Route::post('/sponsorscategory', [SponsorCategoryController::class, 'store'])->name('sponsorcategory.store');
+Route::delete('/sponsorcategories/{id}', [SponsorCategoryController::class, 'destroy'])->name('sponsorcategories.destroy');
+
+
+// Member register routes
+Route::get('/inschrijven', [MemberController::class, 'index'])->name('member.register');
+Route::post('/inschrijven', [MemberController::class, 'store'])->name('member.store');
+Route::get('/betaling/success/{id}', [MemberController::class, 'paymentSuccess'])->name('member.paymentSuccess');
+Route::post('/webhooks/mollie', [MemberController::class, 'webhook'])->name('member.webhook');
+
+// Leden routes
+Route::middleware('auth')->group(function () {
+    Route::get('/leden', [MemberController::class, 'adminIndex'])->name('members.index');
+    Route::get('/leden/create', [MemberController::class, 'create'])->name('members.create');
+    Route::post('/leden', [MemberController::class, 'store'])->name('members.store');
+    Route::get('/leden/{member}/edit', [MemberController::class, 'edit'])->name('members.edit');
+    Route::put('/leden/{member}', [MemberController::class, 'update'])->name('members.update');
+    Route::delete('/leden/{member}', [MemberController::class, 'destroy'])->name('members.destroy');
+    Route::put('/leden/{member}/activate', [MemberController::class, 'setIsActive'])->name('members.setIsActive');
+    Route::put('/leden/{member}/deactivate', [MemberController::class, 'removeIsActive'])->name('members.removeIsActive');
+
+});
 
 //! PDF test routes
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');
@@ -129,8 +160,11 @@ Route::post('/performances/{performance}/tickets', [TicketController::class, 'st
 // Payments route
 Route::post('/payment/{id}', [PaymentController::class, 'preparePayment'])->name('payment.prepare');
 Route::post('/webhook/mollie', [PaymentController::class, 'handleWebhook'])->name('payment.webhook')->withoutMiddleware('csrf');
-Route::get('/payment/confirmation', [PaymentController::class, 'confirmation'])->name('payment.handleStatus');
+Route::get('/payment/status/{id}', [PaymentController::class, 'confirmation'])->name('payment.status');
 // Route::get('/payment/status', [PaymentController::class, 'simpleConfirmation'])->name('payment.status');
+
+Route::get('/teksten', [TextEditController::class, 'index'])->name('text.index');
+Route::post('/teksten/{id}/edit', [TextEditController::class, 'edit'])->name('text.edit');
 
 // Auth routes
 require __DIR__ . '/auth.php';

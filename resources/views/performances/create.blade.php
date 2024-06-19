@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
@@ -74,7 +74,7 @@
                 <div class="form-group">
                     <label for="price">Prijs:</label>
                     <input type="number" step="0.01" id="price" name="price" required class="form-control"
-                        value="{{ old('price', $performance->price ?? '') }}">
+                        value="{{ old('price', $performance->price ?? '') }}" min="0">
                 </div>
                 <div class="form-group">
                     <label for="location_embed">Locatie:</label>

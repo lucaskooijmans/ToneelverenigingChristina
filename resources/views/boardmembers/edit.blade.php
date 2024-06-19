@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
@@ -52,7 +52,7 @@
 
                 <div class="form-group">
                     <label for="image">Foto uploaden:</label>
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg">
                 </div>
 
                 <button type="submit" class="button green-button"><i class="fas fa-save"></i> Wijzigen</button>

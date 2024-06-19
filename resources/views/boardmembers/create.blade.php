@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <label for="image">Foto uploaden:</label>
-                    <input type="file" class="form-control" id="image" name="image" required>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg, image/jpg" required>
                     @error('image')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror

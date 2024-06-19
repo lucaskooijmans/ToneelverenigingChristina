@@ -11,7 +11,8 @@ class PaymentInfo extends Model
     protected $fillable = [
         'payment_id', // Ensure this is listed to allow mass assignment
         'performance_id',
-        'data'
+        'data',
+        'status',
     ];
 
     /**
