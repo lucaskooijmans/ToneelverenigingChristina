@@ -1024,6 +1024,7 @@ textarea {
     justify-content: space-around;
     align-items: start;
     flex-direction: row;
+    flex-wrap: wrap ;
     gap: 1rem;
     padding: 2rem;
     background-color: var(--secondary-color);
@@ -1085,6 +1086,7 @@ textarea {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 1rem;
     padding: 2rem;
     background-color: var(--secondary-color);
