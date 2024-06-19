@@ -20,7 +20,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="text">{{ $key }}</label>
-                            <textarea name="text" class="form-control">{{ $messages[$key] }}</textarea>
+                            <textarea name="text" class="form-control editor">{{ $messages[$key] }}</textarea>
                         </div>
                         <button type="submit" class="button green-button"><i class="fas fa-save"></i> Opslaan</button>
                     </form>

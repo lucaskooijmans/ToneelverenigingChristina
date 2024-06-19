@@ -24,7 +24,7 @@
                     <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
                 @endauth
             </div>
-            <img src="/images/groepsfoto.jpg" alt="Groepsfoto van de toneelvereniging.">
+            <img src="{{ __("image") }}" alt="Groepsfoto van de toneelvereniging.">
         </div>
     </section>
 

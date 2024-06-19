@@ -915,6 +915,10 @@ textarea {
     min-height: 4lh;
 }
 
+.editor {
+    width: 100%;
+}
+
 /* Contact pagina */
 
 .contact {
@@ -1068,6 +1072,7 @@ textarea {
 
 .member-card:nth-child(odd) {
     flex-direction: row-reverse;
+    transform: translateX(6rem);
 }
 
 .member-card:nth-child(even) {
