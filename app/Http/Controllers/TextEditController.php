@@ -40,7 +40,7 @@ class TextEditController extends Controller
         // save the messages array to en.json
         file_put_contents(resource_path('lang/en.json'), json_encode($messages, JSON_PRETTY_PRINT));
 
-        return view('texteditor', [
+        return redirect()->route('text.index')->with([
             'messages' => $messages,
             'keys' => $keys
         ]);

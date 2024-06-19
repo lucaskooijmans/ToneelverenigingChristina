@@ -62,22 +62,16 @@
                     </div>
                     <div>
                         <label>Telefoonnummer<label></br>
-                        <label>06-36176711<label>
+                                <label>06-36176711<label>
                     </div>
 
-                    <div>
-                        <h1>FAQ</h1></br>
-                        <label>Vraag 1....</label></br>
-                        <label>Antwoord 1.....</label>
+                    <div class="FAQ">
+                        <h1>FAQ</h1>
+                        {!! nl2br(__('faq')) !!}
                     </div>
-                    <div>
-                        <label>Vraag 2....</label></br>
-                        <label>Antwoord 2.....</label>
-                    </div>
-                    <div>
-                        <label>Vraag 3....</label></br>
-                        <label>Antwoord 3.....</label>
-                    </div>
+                    @auth
+                        <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+                    @endauth
                 </div>
 
             </div>

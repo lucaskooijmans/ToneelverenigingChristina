@@ -1458,7 +1458,7 @@ div.fc-event-main {
 
 .category-group[data-open = "false"] h2::after {
     content: "▼";
-},
+}
 
 strong {
     font-weight: bold;
