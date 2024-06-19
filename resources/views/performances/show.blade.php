@@ -16,7 +16,19 @@
             Bestelling succesvol geplaatst!
         </div>
 
-        <h1 style="font-family: 'Arial', sans-serif; text-align: center;">Bestel kaartjes</h1>
+        <section class="intro">
+            <h1>{!! nl2br(__("voorstelling-titel")) !!}</h1>
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+            @endauth
+            <p>
+                    {!! nl2br(__("voorstelling-intro")) !!}
+            </p>
+
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            @endauth
+        </section>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -96,7 +108,6 @@
                 </div>
             @endif
         @endauth
-
         <div class="container">
             <div class="split">
                 <div class="performance-item-showcase">
@@ -105,7 +116,6 @@
                 </div>
 
                 <div class="checkout">
-                    <h1>Bestel kaartjes</h1>
                     @if ($performance->tickets_remaining > 0)
                         <form action="{{ route('payment.prepare', ['id' => $performance->id]) }}" method="POST"
                             class="post-form">

@@ -10,9 +10,20 @@
 <body>
     <x-navbar />
     <div class="sponsors">
+        <section class="intro">
+            <h1>{!! nl2br(__("inschrijven-titel")) !!}</h1>
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+            @endauth
+            <p>
+                    {!! nl2br(__("inschrijven-intro")) !!}
+            </p>
 
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            @endauth
+        </section>
         <div class="container">
-            <h1>Inschrijven bij Toneelvereniging Christina</h1>
 
             @if (session('success'))
                 <p>{{ session('success') }}</p>

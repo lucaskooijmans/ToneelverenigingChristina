@@ -13,10 +13,20 @@
     <x-navbar />
 
     <div class="nieuws">
+        <section class="intro">
+            <h1>{!! nl2br(__("nieuws-titel")) !!}</h1>
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+            @endauth
+            <p>
+                    {!! nl2br(__("nieuws-intro")) !!}
+            </p>
 
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            @endauth
+        </section>
         <div class="container">
-
-            <h1>Nieuws</h1>
 
             @auth
                 @if (auth()->user()->isAdmin())

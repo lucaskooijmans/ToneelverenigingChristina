@@ -24,9 +24,20 @@
     @endif
 
     <div class="sponsors">
-        <div class="container">
+        <section class="intro">
+            <h1>{!! nl2br(__("sponsoren-titel")) !!}</h1>
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+            @endauth
+            <p>
+                    {!! nl2br(__("sponsoren-intro")) !!}
+            </p>
 
-            <h1>Sponsoren</h1>
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            @endauth
+        </section>
+        <div class="container">
             @auth
                 @if (auth()->user()->isAdmin())
                     <div class="post-buttons">

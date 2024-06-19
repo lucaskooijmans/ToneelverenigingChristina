@@ -13,9 +13,20 @@
     <x-navbar />
 
     <div class="historie">
+        <section class="intro">
+            <h1>{!! nl2br(__("historie-titel")) !!}</h1>
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+            @endauth
+            <p>
+                    {!! nl2br(__("historie-intro")) !!}
+            </p>
 
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            @endauth
+        </section>
         <div class="container">
-            <h1>Historie</h1>
             @if (Gate::allows('isAdmin'))
                 <a href="{{ route('history.create') }}" class="add-item button"><i class="fas fa-plus"></i> Toevoegen</a>
             @endif

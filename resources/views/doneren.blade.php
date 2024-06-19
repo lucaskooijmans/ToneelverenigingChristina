@@ -13,12 +13,20 @@
     <x-navbar />
 
     <div class="contact">
+        <section class="intro">
+            <h1>{!! nl2br(__("doneren-titel")) !!}</h1>
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+            @endauth
+            <p>
+                    {!! nl2br(__("doneren-intro")) !!}
+            </p>
 
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            @endauth
+        </section>
         <div class="container">
-
-            <h1>
-                Goederen Doneren
-            </h1>
 
             @if (session('success'))
                 <div class="alert alert-success">

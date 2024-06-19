@@ -14,10 +14,20 @@
     <x-navbar />
 
     <div class="gallery">
+        <section class="intro">
+            <h1>{!! nl2br(__("galerij-titel")) !!}</h1>
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+            @endauth
+            <p>
+                    {!! nl2br(__("galerij-intro")) !!}
+            </p>
 
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            @endauth
+        </section>
         <div class="container">
-
-            <h1>Foto Gallerij</h1>
 
             @auth
                 @if (auth()->user()->isAdmin())

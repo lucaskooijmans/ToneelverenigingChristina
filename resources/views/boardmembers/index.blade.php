@@ -14,7 +14,19 @@
     <x-navbar />
 
     <div class="bestuursleden">
+        <section class="intro">
+            <h1>{!! nl2br(__("bestuursleden-titel")) !!}</h1>
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+            @endauth
+            <p>
+                    {!! nl2br(__("bestuursleden-intro")) !!}
+            </p>
 
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            @endauth
+        </section>
         <div class="container">
 
             <h1>Onze bestuursleden</h1>
