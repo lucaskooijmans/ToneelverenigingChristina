@@ -1,5 +1,4 @@
-if (localStorage.getItem('lastCurtainDateTime') === null
-    || new Date() - new Date(localStorage.getItem('lastCurtainDateTime')) > 120000) { // 2 minutes
+if (!localStorage.getItem('visitedBefore')) {
     const curtain = document.createElement('div');
     curtain.classList.add('curtain');
     document.body.appendChild(curtain);
@@ -12,9 +11,8 @@ if (localStorage.getItem('lastCurtainDateTime') === null
     curtainRight.classList.add('curtain-right');
     curtain.appendChild(curtainRight);
 
-    localStorage.setItem('lastCurtainDateTime', new Date());
-
     setTimeout(() => {
         curtain.remove();
     }, 5000);
+    localStorage.setItem('visitedBefore', true);
 }
