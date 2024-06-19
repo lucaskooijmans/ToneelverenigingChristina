@@ -1,40 +1,60 @@
 <link rel="stylesheet" href="/style.css">
 <script src="https://kit.fontawesome.com/2a5648d90a.js" crossorigin="anonymous" defer></script>
 <nav>
-    <div class="brand">
-        <a href="/" tabindex="1">
-            <img src="/images/logo.jpg" alt="Logo van toneelvereniging Christina">
-        </a>
+    <a href="/" tabindex="0" class="brand-link" title="Homepagina van Toneelvereniging Christina">
+        <div class="brand">
+            <img src="/images/logoBasic.png" alt="Logo van toneelvereniging Christina">
 
-        <h1>Toneelvereniging<br>Christina<br>Ravenswaaij</h1>
+            <div class="brandtext">
+                Toneelvereniging<br>Christina
+            </div>
+        </div>
+    </a>
+    <div class="post-buttons">
+    <button class="menu-button" onclick="toggleNavbar()" tabindex="-1" aria-hidden="true"
+        title="Open het navigatiemenu">Menu</button>
+
+    @auth
+        @if (auth()->user()->isAdmin())
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="logout-button" tabindex="1">Log uit</button>
+            </form>
+        @endif
+    @endauth
     </div>
-    <button class="menu-button" onclick="toggleNavbar()" tabindex="-1">Menu</button>
+    
     <div class="links">
-        <a href="/" tabindex="1">Home</a>
-        <a href="/voorstellingen" tabindex="1">Voorstellingen</a>
-        <a href="/nieuws" tabindex="1">Nieuws</a>
-        <a href="/historie" tabindex="1">Historie</a>
-        <a href="/gallery" tabindex="1">Galerij</a>
-        <a href="/boardmembers" tabindex="1">Bestuursleden</a>
-        <a href="/sponsors" tabindex="1">Sponsoren</a>
-        <a href="/doneren" tabindex="1">Doneren</a>
-        <a href="/contact" tabindex="1">Contact</a>
-        <a href="/inschrijven" tabindex="1">Inschrijven</a>
-        {{-- <a href="/registreren" tabindex="1">Lid Worden</a> --}}
-        @auth
-            @if (auth()->user()->isAdmin())
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="logout-button" tabindex="1">Log uit</button>
-                </form>
-            @endif
-        @endauth
+        <div class="link-category">
+            <h2 aria-hidden="true" class="cursive">Algemeen</h2>
+            <a href="/" tabindex="0">Home</a>
+            <a href="/voorstellingen" tabindex="0">Voorstellingen</a>
+            <a href="/nieuws" tabindex="0">Nieuws</a>
+        </div>
+        <div class="link-category">
+            <h2 aria-hidden="true" class="cursive">Over ons</h2>
+            <a href="/historie" tabindex="0">Historie</a>
+            <a href="/gallery" tabindex="0">Gallerij</a>
+            <a href="/boardmembers" tabindex="0">Bestuursleden</a>
+            <a href="/sponsors" tabindex="0">Onze Sponsoren</a>
+        </div>
+        <div class="link-category">
+            <h2 aria-hidden="true" class="cursive">Steun ons</h2>
+            <a href="/doneren" tabindex="0">Doneren</a>
+            <a href="/inschrijven" tabindex="0">Inschrijven</a>
+        </div>
+        <div class="link-category">
+            <h2 class="cursive">Overig</h2>
+            <a href="/contact" tabindex="0">Contact</a>
+        </div>
     </div>
     <div class="social-media">
-        <a href="https://www.facebook.com/toneelvereniging.christina.ravenswaaij/" target="_blank" title="Facebookpagina van Toneelvereniging Christina" tabindex="2">
+        <a href="https://www.facebook.com/toneelvereniging.christina.ravenswaaij/" target="_blank"
+            title="Facebookpagina van Toneelvereniging Christina" tabindex="0">
             <i class="fa-brands fa-facebook"></i>
         </a>
-        <a href="https://www.instagram.com/toneelravenswaaij" target="_blank" title="Instagrampagina van Toneelvereniging Christina" tabindex="2">
+        <a href="https://www.instagram.com/toneelravenswaaij" target="_blank"
+            title="Instagrampagina van Toneelvereniging Christina" tabindex="0">
             <i class="fa-brands fa-instagram"></i>
         </a>
     </div>
