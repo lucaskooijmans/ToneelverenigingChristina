@@ -915,6 +915,10 @@ textarea {
     min-height: 4lh;
 }
 
+.editor {
+    width: 100%;
+}
+
 /* Contact pagina */
 
 .contact {
@@ -1019,6 +1023,28 @@ textarea {
     min-height: calc(100svh - 5.8rem);
 }
 
+.bestuursleden-intro {
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-direction: row;
+    flex-wrap: wrap ;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground-color);
+    border-radius: 5px;
+    min-width: 300px;
+    box-shadow: #1d1d1b 0px 0px 10px;
+    width: 100%;
+}
+
+.bestuursleden-intro img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 5px;
+}
+
 .bestuursleden h1 {
     margin: 2rem 0 1rem;
     color: white;
@@ -1044,11 +1070,28 @@ textarea {
     margin-top: 1rem;
 }
 
+.member-card:nth-child(odd) {
+    flex-direction: row-reverse;
+    transform: translateX(6rem);
+}
+
+.member-card:nth-child(even) {
+    flex-direction: row;
+}
+
+.member {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .member-card {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 1rem;
     padding: 2rem;
     background-color: var(--secondary-color);
@@ -1056,12 +1099,13 @@ textarea {
     border-radius: 5px;
     box-shadow: #1d1d1b 0px 0px 10px;
     min-width: 300px;
-
+    width: 100%;
+    position: relative;
 }
 
 .member-card p {
     max-width: 50ch;
-    max-height: 8lh;
+    max-height: 100%;
     overflow-y: auto;
 }
 
@@ -1378,6 +1422,10 @@ div.fc-event-main {
     cursor: move;
 }
 
+.category-group .admin {
+    cursor: move;
+}
+
 .sponsor.inactive {
     opacity: 0.5;
 }
@@ -1413,6 +1461,10 @@ div.fc-event-main {
 .category-group[data-open = "false"] .category,
 .category-group[data-open = "false"] .sponsor {
     display: none;
+}
+
+.category-group[data-open = "false"] h2::after {
+    content: "▼";
 }
 
 strong {

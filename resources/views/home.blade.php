@@ -17,15 +17,14 @@
             <div class="text">
                 <h1>Welkom</h1>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus commodi repellat possimus
-                    quaerat tempora beatae eligendi placeat obcaecati inventore blanditiis sint, consequuntur dolores
-                    corporis sequi hic debitis est? Similique sapiente dolorem officia quos libero blanditiis
-                    praesentium optio quam nisi maiores, dolores, cum corrupti labore ut possimus natus temporibus illum
-                    perferendis recusandae vitae eveniet suscipit? Cum culpa sequi dolor at pariatur, animi perferendis
-                    modi, iusto laboriosam libero ipsum, eaque iste accusantium.
+                    {!! nl2br(__("homepagina-intro")) !!}
                 </p>
+
+                @auth
+                    <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+                @endauth
             </div>
-            <img src="/images/groepsfoto.jpg" alt="Groepsfoto van de toneelvereniging.">
+            <img src="{{ __("image") }}" alt="Groepsfoto van de toneelvereniging.">
         </div>
     </section>
 
