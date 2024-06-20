@@ -81,7 +81,8 @@ public function prepareDonation(Request $request)
             ]);
 
             // Update the redirect URL with the actual payment ID
-            $redirectUrl = str_replace('{paymentId}', $payment->id, route('donation.success', ['payment_id' => '{paymentId}']));
+            $payment->redirectUrl = route('donation.success', ['payment_id' => $payment->id]);
+            $payment->update();
 
             // Save the payment info to the database
             PaymentInfo::create([
@@ -102,8 +103,6 @@ public function prepareDonation(Request $request)
     public function donationSuccess(Request $request)
     {
         $paymentId = $request->query('payment_id');
-
-        dd($paymentId);
 
         if (!$paymentId) {
             return redirect()->route('donations.index')->with('error', 'Invalid payment ID.');
