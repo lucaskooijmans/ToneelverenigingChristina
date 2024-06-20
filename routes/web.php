@@ -1,7 +1,7 @@
 <?php
 
-    use App\Http\Controllers\MemberController;
-    use App\Http\Controllers\PerformanceController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -64,10 +64,7 @@ Route::get('/historie', [HistoryController::class, 'index']);
 // News page
 Route::get('/nieuws', [PostController::class, 'index']);
 
-// Goederen donatie page
-Route::get('/doneren', function () {
-    return view('doneren');
-});
+
 Route::post('/doneren', [DoneerController::class, 'submit'])->name('doneren.submit');
 
 // Photos resource
@@ -143,8 +140,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/leden/{member}', [MemberController::class, 'destroy'])->name('members.destroy');
     Route::put('/leden/{member}/activate', [MemberController::class, 'setIsActive'])->name('members.setIsActive');
     Route::put('/leden/{member}/deactivate', [MemberController::class, 'removeIsActive'])->name('members.removeIsActive');
-
 });
+
+// Goederen donatie page
+Route::get('doneren', [DoneerController::class, 'index'])->name('donations.index');
 
 // Gelddonatie route
 Route::get('donations', [DoneerController::class, 'index'])->name('donations.index');

@@ -18,51 +18,60 @@ use App\Http\Controllers\PDFController;
 
 class DoneerController extends Controller
 {
-    public function submit(Request $request)
-{
-    // Validate the incoming request data
-    $validatedData = $request->validate([
-        'name' => 'required',
-        'email' => 'required|email',
-        'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'subject' => 'nullable',
-        'message' => 'nullable',
-        'type' => 'nullable',
-        'date' => 'nullable|date',
-        'state' => 'nullable'
-    ]);
 
-    $path = null;
-    if($request->hasFile('image') && $request->file('image')->isValid()) {
-        $path = $request->image->store('images', 'public');
+
+    public function index()
+    {
+        return view('donations.index');
     }
 
-    // Prepare data for email
-    $data = array(
-        'name' => $request->get('name'),
-        'email' => $request->get('email'),
-        'subject' => $request->get('subject'),
-        'type' => $request->get('type'),
-        'date' => $request->get('date'),
-        'user_message' => $request->get('message'),
-        'state' => $request->get('state'),
-        'image' => $path ?? null,
-    );
+    public function submit(Request $request)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'subject' => 'nullable',
+            'message' => 'nullable',
+            'type' => 'nullable',
+            'date' => 'nullable|date',
+            'state' => 'nullable'
+        ]);
 
-    // Send the email with the uploaded image
-    Mail::to('')->send(new DonationMail($data));
+        $path = null;
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $path = $request->image->store('images', 'public');
+        }
 
-    // Redirect back with success message
-    return redirect()->back()->with('success', 'Your donation has been submitted successfully!');
-}
+        // Prepare data for email
+        $data = array(
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'subject' => $request->get('subject'),
+            'type' => $request->get('type'),
+            'date' => $request->get('date'),
+            'user_message' => $request->get('message'),
+            'state' => $request->get('state'),
+            'image' => $path ?? null,
+        );
 
-public function prepareDonation(Request $request)
+        // Send the email with the uploaded image
+        Mail::to('')->send(new DonationMail($data));
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Your donation has been submitted successfully!');
+    }
+
+    public function prepareDonation(Request $request)
     {
         // Validate the request data
         $validatedData = $request->validate([
             'donation_amount' => 'required|numeric|gt:0',
         ], [
-            'donation_amount.required' => 'Donation amount is required',
+            'donation_amount.required' => 'Het donatiebedrag is verplicht',
+            'donation_amount.numeric' => 'Het donatiebedrag moet numeriek zijn',
+            'donation_amount.gt' => 'Het donatiebedrag moet groter zijn dan 0',
         ]);
 
         $totalPrice = $validatedData['donation_amount'];
@@ -75,7 +84,7 @@ public function prepareDonation(Request $request)
                     'value' => sprintf('%.2f', $totalPrice),
                 ],
                 'description' => 'Geld donatie',
-                'redirectUrl' => route('donation.success', ['payment_id' => '{paymentId}']), 
+                'redirectUrl' => route('donation.success', ['payment_id' => '{paymentId}']),
                 'webhookUrl' => route('payment.webhook'),
                 'method' => 'ideal',
             ]);
@@ -146,7 +155,4 @@ public function prepareDonation(Request $request)
             return redirect()->route('donations.index')->with('error', 'An error occurred while retrieving the payment status.' . $e->getMessage());
         }
     }
-
-
-
 }
