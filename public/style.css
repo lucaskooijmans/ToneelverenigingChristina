@@ -1535,6 +1535,90 @@ strong {
     color: white; 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+.tab-list {
+    display: flex;
+    justify-content: center
+
+}
+
+.tabs{
+    height: 100px;
+    width: 100%;
+    background-color: var(--secondary-color);
+}
+
+.tab-list button {
+    width: 50%;
+    height: 100px;
+    background-color: var(--secondary-color);
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border: none;
+    font-size: 2rem;
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.tab-list__button.active {
+    background-color: var(--primary-color);
+}
+
+.tab {
+    display: none;
+}
+.tab.active {
+    display: block;
+}
+
+.contact2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: #aac3e8;;
+    padding: 30px;
+    color: var(--primary-foreground-color);
+    min-height: calc(100svh - 5.8rem);
+}
+
+.donation-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue; /* dark grey */
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 35px;
+    width: 600px;
+    margin: 0 auto; /* center the form */
+    padding: 20px;
+}
+
+
+
+
+
+
+
+
+
+
 /* Media Queries */
 
 @media screen and (min-width: 1920px) {

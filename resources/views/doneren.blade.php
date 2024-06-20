@@ -34,18 +34,7 @@
             </div>
         @endif
 
-
-
-        <div class="tabs">
-            <div class="tab-list">
-                <button class="tab-list__button active" data-target="donations">Goederen</button>
-                <button class="tab-list__button" data-target="gelddonatie">Geld</button>
-            </div>
-
-            <div class="tab-content">
-                <div id="donations" class="tab active">
-                <div class="contact">
-    @php
+        @php
         $images = config('introImages');
         $sectionImage = $images['doneren_intro'] ?? 'default_intro.jpg';
     @endphp
@@ -69,6 +58,17 @@
             <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
         @endauth
     </section>
+
+        <div class="tabs">
+            <div class="tab-list">
+                <button class="tab-list__button active" data-target="donations">Goederen</button>
+                <button class="tab-list__button" data-target="gelddonatie">Geld</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="donations" class="tab active">
+                <div class="contact">
+    
 
         <div class="container">
 
@@ -128,7 +128,6 @@
                 </div>
 
                 <div id="gelddonatie" class="tab">
-                    <!-- GeldDonatie content goes here -->
                         <div class="donationdiv">
                             <form action="{{ route('donations.prepare') }}" method="POST" class="donation-form">
                                 @csrf

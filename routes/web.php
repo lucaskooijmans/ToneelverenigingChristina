@@ -146,6 +146,11 @@ Route::middleware('auth')->group(function () {
 
 });
 
+// Gelddonatie route
+Route::get('donations', [DoneerController::class, 'index'])->name('donations.index');
+Route::post('donations/prepare', [DoneerController::class, 'prepareDonation'])->name('donations.prepare');
+Route::get('donations/success', [DoneerController::class, 'donationSuccess'])->name('donation.success');
+
 //! PDF test routes
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');
 Route::get('/pdf/view', [App\Http\Controllers\PDFController::class, 'openView'])->name('pdf.openView');
