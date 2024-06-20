@@ -58,4 +58,11 @@
         </a>
     </div>
 </nav>
+
+<div class="cookies">
+    <p>Deze website maakt gebruik van cookies om de gebruikerservaring te verbeteren. Door op accepteren te klikken ga
+        je akkoord met het gebruik van cookies.</p>
+    <button onclick="acceptCookies()" class="button green-button"><i class="fas fa-check"></i> Accepteren</button>
+</div>
+
 <script src="/navbar.js"></script>

@@ -107,6 +107,23 @@ nav {
     box-shadow: #1d1d1b 0px 0px 10px;
 }
 
+.cookies {
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #000;
+    color: #fff;
+    bottom: 1rem;
+    left: 1rem;
+    border-radius: 5px;
+    right: 1rem;
+    z-index: 100;
+}
+
 .brand {
     display: flex;
     align-items: center;
