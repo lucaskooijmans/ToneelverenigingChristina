@@ -155,6 +155,22 @@ nav {
     background-color: var(--accent-color);
 }
 
+.logout-button {
+    background-color: rgb(255, 89, 89); 
+    color: white; 
+    padding: 10px 15px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    font-size: 1em; 
+    transition: background-color 0.3s; 
+}
+
+.logout-button:hover {
+    background-color: darkred;
+}
+
 /* Verstop navigatielinks offscreen, wanneer data-visible = true, toon hem vanaf de linkerkant, onder de H1 in de navbar */
 .links {
     position: absolute;

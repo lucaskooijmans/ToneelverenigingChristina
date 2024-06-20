@@ -21,8 +21,19 @@
             </div>
         </div>
     </a>
-    <button class="menu-button" onclick="toggleNavbar()" tabindex="-1" aria-hidden="true"
-        title="Open het navigatiemenu">Menu</button>
+    <div class="post-buttons">
+        <button class="menu-button" onclick="toggleNavbar()" tabindex="-1" aria-hidden="true"
+            title="Open het navigatiemenu">Menu</button>
+        @auth
+            @if (auth()->user()->isAdmin())
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="logout-button" tabindex="1">Log uit</button>
+                </form>
+            @endif
+        @endauth
+    </div>
+    
     <div class="links">
         <div class="link-category">
             <h2 aria-hidden="true" class="cursive">Algemeen</h2>
