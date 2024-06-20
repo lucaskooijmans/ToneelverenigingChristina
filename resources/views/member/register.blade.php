@@ -10,19 +10,40 @@
 <body>
     <x-navbar />
     <div class="sponsors">
-        <section class="intro">
-            <h1>{!! nl2br(__("inschrijven-titel")) !!}</h1>
+        @php
+            $images = config('introImages');
+            $sectionImage = $images['inschrijven_intro'] ?? 'default_intro.jpg';
+        @endphp
+
+        <section class="intro" style="background-image: url('{{ asset('storage/introImages/' . $sectionImage) }}');">
+            <h1><strong>{!! nl2br(__("inschrijven-titel")) !!}</strong></h1>
+
             @auth
-                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+                <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding aanpassen</a>
+                <form id="imageUploadForm" class="no-blur" action="{{ route('uploadImage') }}" method="POST" enctype="multipart/form-data" style="display:none;">
+                    <input type="hidden" name="section" value="inschrijven_intro_intro">
+                    <input type="file" name="image" class="form-control">
+                    <button type="submit" class="button green-button">Upload</button>
+                </form>
             @endauth
-            <p>
-                    {!! nl2br(__("inschrijven-intro")) !!}
-            </p>
+
+            <p>{!! nl2br(__("inschrijven-intro")) !!}</p>
 
             @auth
                 <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
             @endauth
         </section>
+
+        <script>
+            function toggleUploadForm() {
+                var form = document.getElementById('imageUploadForm');
+                if (form.style.display === "none") {
+                    form.style.display = "block";
+                } else {
+                    form.style.display = "none";
+                }
+            }
+        </script>
         <div class="container">
 
             @if (session('success'))

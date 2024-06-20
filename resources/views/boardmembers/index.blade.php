@@ -20,11 +20,11 @@
         @endphp
 
         <section class="intro" style="background-image: url('{{ asset('storage/introImages/' . $sectionImage) }}');">
-            <h1><strong>{!! nl2br(__("bestuursleden-titel")) !!}<strong></h1>
+            <h1><strong>{!! nl2br(__("bestuursleden-titel")) !!}</strong></h1>
 
             @auth
                 <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding aanpassen</a>
-                <form id="imageUploadForm" action="{{ route('uploadImage') }}" method="POST" enctype="multipart/form-data" style="display:none;">
+                <form id="imageUploadForm" class="no-blur" action="{{ route('uploadImage') }}" method="POST" enctype="multipart/form-data" style="display:none;">
                     @csrf
                     <input type="hidden" name="section" value="bestuursleden_intro">
                     <input type="file" name="image" class="form-control">
@@ -35,7 +35,6 @@
             <p>{!! nl2br(__("bestuursleden-intro")) !!}</p>
 
             @auth
-                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
                 <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
             @endauth
         </section>

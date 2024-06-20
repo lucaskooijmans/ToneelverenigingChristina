@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
 
 class PageController extends Controller
 {
@@ -18,11 +19,12 @@ class PageController extends Controller
         $imageName = $section . '_' . time() . '.' . $request->image->extension();
         $request->image->storeAs('public/introImages', $imageName);
 
-        // Store the image path in a config file for simplicity
         $configPath = config_path('introImages.php');
         $images = include $configPath;
         $images[$section] = $imageName;
         file_put_contents($configPath, '<?php return ' . var_export($images, true) . ';');
+
+        Artisan::call('config:cache');
 
         return redirect()->back()->with('success', 'Image uploaded successfully.');
     }

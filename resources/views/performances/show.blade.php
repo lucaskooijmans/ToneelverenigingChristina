@@ -11,24 +11,46 @@
     <x-navbar />
 
     <div class="performances">
-        <div id="confirmationMessage"
-            style="display: none; background-color: #4CAF50; color: white; padding: 10px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 9999;">
-            Bestelling succesvol geplaatst!
-        </div>
+        @php
+            $images = config('introImages');
+            $sectionImage = $images['voorstelling_intro'] ?? 'default_intro.jpg';
+        @endphp
 
-        <section class="intro">
-            <h1>{!! nl2br(__("voorstelling-titel")) !!}</h1>
+        <section class="intro" style="background-image: url('{{ asset('storage/introImages/' . $sectionImage) }}');">
+            <h1><strong>{!! nl2br(__("voorstelling-titel")) !!}</strong></h1>
+
             @auth
-                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
+                <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding aanpassen</a>
+                <form id="imageUploadForm" class="no-blur" action="{{ route('uploadImage') }}" method="POST" enctype="multipart/form-data" style="display:none;">
+                    @csrf
+                    <input type="hidden" name="section" value="voorstelling_intro">
+                    <input type="file" name="image" class="form-control">
+                    <button type="submit" class="button green-button">Upload</button>
+                </form>
             @endauth
-            <p>
-                    {!! nl2br(__("voorstelling-intro")) !!}
-            </p>
+
+            <p>{!! nl2br(__("voorstelling-intro")) !!}</p>
 
             @auth
                 <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
             @endauth
         </section>
+
+        <script>
+            function toggleUploadForm() {
+                var form = document.getElementById('imageUploadForm');
+                if (form.style.display === "none") {
+                    form.style.display = "block";
+                } else {
+                    form.style.display = "none";
+                }
+            }
+        </script>
+
+        <div id="confirmationMessage"
+            style="display: none; background-color: #4CAF50; color: white; padding: 10px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 9999;">
+            Bestelling succesvol geplaatst!
+        </div>
 
         @if ($errors->any())
             <div class="alert alert-danger">
