@@ -15,9 +15,10 @@
 
     <div class="bestuursleden">
         @php
-            $images = config('images');
+            $images = config('introImages');
             $sectionImage = $images['bestuursleden_intro'] ?? 'default_intro.jpg';
         @endphp
+
         <section class="intro" style="background-image: url('{{ asset('storage/introImages/' . $sectionImage) }}');">
             <h1>{!! nl2br(__("bestuursleden-titel")) !!}</h1>
 
@@ -38,6 +39,7 @@
                 <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
             @endauth
         </section>
+
         <script>
             function toggleUploadForm() {
                 var form = document.getElementById('imageUploadForm');
