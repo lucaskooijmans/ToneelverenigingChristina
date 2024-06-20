@@ -970,7 +970,7 @@ textarea {
     padding: 2rem;
     background-color: var(--secondary-color);
     color: var(--secondary-foreground-color);
-    border-radius: 35px;
+    border-radius: 5px;
     box-shadow: #1d1d1b 0px 0px 10px;
     min-width: 500px;
 }

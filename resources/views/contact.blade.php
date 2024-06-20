@@ -76,7 +76,7 @@
                         <label for="message">Bericht:</label>
                         <textarea id="message" name="message" class="form-control"></textarea>
                     </div>
-                    <div class="cf-turnstile" data-sitekey="{{ env('CLOUDFLARE_PUBLIC', '') }}"></div>
+                    <div class="cf-turnstile" data-sitekey="{{ env('CLOUDFLARE_PUBLIC', '0x4AAAAAAAW38y6G28Abmhjw') }}"></div>
                     <div class="form-group">
                         <button type="submit" class="button green-button">Verstuur</button>
                     </div>
@@ -86,13 +86,8 @@
                 <div class="contact-info">
 
                     <div>
-                        <h1>Contactgegevens</h1></br>
-                        <label>Email</label></br>
-                        <label>toneelverenigingchristina@gmail.com</label>
-                    </div>
-                    <div>
-                        <label>Telefoonnummer<label></br>
-                                <label>06-36176711<label>
+                        <h1>Contactgegevens</h1>
+                        {!! nl2br(__('contactgegevens')) !!}
                     </div>
 
                     <div class="FAQ">

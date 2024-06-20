@@ -47,7 +47,7 @@
         <div class="container">
 
             @if (session('success'))
-                <p>{{ session('success') }}</p>
+                <p class="alert alert-success">{{ session('success') }}</p>
             @endif
 
             @if (session('error'))
@@ -87,8 +87,6 @@
                         class="form-control">
                 </div>
 
-                <hr>
-
                 <div class="form-group">
                     <label for="postalCode">Postcode:</label>
                     <input type="text" id="postalCode" name="postalCode" value="{{ old('postalCode') }}" required
@@ -113,22 +111,18 @@
                         class="form-control">
                 </div>
 
-                <hr />
-
                 <div class="form-group">
                     <label for="pay">Ik wil nu betalen:</label>
                     <input type="checkbox" id="pay" name="pay" class="form-control">
                 </div>
 
-                <hr />
-
                 <div class="form-group">
                     <label for="accept">Ik ga akkoord met de <a href="/algemene_voorwaarden">algemene
                             voorwaarden</a>.</label>
-                    <input type="checkbox" id="accept" name="accept" required>
+                    <input type="checkbox" id="accept" name="accept" required class="form-control">
                 </div>
 
-                <button type="submit">Inschrijven</button>
+                <button type="submit" class="button green-button">Inschrijven</button>
             </form>
         </div>
     </div>
