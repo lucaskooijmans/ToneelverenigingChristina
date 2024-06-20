@@ -63,6 +63,7 @@ class DoneerController extends Controller
         return redirect()->back()->with('success', 'Your donation has been submitted successfully!');
     }
 
+
     public function prepareDonation(Request $request)
     {
         // Validate the request data
@@ -88,6 +89,26 @@ class DoneerController extends Controller
                 'webhookUrl' => route('payment.webhook'),
                 'method' => 'ideal',
             ]);
+
+    // Prepare data for email
+    $data = array(
+        'name' => $request->get('name'),
+        'email' => $request->get('email'),
+        'subject' => $request->get('subject'),
+        'type' => $request->get('type'),
+        'date' => $request->get('date'),
+        'user_message' => $request->get('message'),
+        'state' => $request->get('state'),
+        'image' => $path ?? null,
+    );
+
+    // Send the email with the uploaded image
+    Mail::to(env('MAILTO', 'test@thover.eu'))->send(new DonationMail($data));
+
+    // Redirect back with success message
+    return redirect()->back()->with('success', 'Your donation has been submitted successfully!');
+}
+
 
             // Update the redirect URL with the actual payment ID
             $payment->redirectUrl = route('donation.success', ['payment_id' => $payment->id]);

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('tickets_added');
             $table->integer('tickets_removed')->default(0);
             $table->decimal('price', 8, 2);
+            $table->string('location_embed', 500)->nullable();
             $table->timestamps();
         });
     }
