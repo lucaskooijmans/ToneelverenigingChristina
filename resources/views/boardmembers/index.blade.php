@@ -14,7 +14,7 @@
     <x-navbar />
 
     <div class="bestuursleden">
-        <section class="intro">
+        <section class="intro" style="background-image: url('{{ $bestuursledenIntroImage }}');">
             <h1>{!! nl2br(__("bestuursleden-titel")) !!}</h1>
             @auth
                 <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
@@ -26,10 +26,11 @@
             @auth
                 <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
             @endauth
+            @auth
+                <a href="{{ route('introImage.index') }}" class="button green-button">Achtergrondafbeelding aanpassen</a>
+            @endauth
         </section>
         <div class="container">
-
-            <h1>Onze bestuursleden</h1>
 
             <div class="bestuursleden-intro">
                 <img src="/images/bestuur.jpg" alt="Foto van de bestuursleden van Toneelvereniging Christina">
