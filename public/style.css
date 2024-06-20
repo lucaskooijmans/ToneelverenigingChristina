@@ -307,7 +307,7 @@ h1 {
     padding: 2rem;
     padding-top: 4rem;
     /* background-color: var(--primary-color); */
-    background: linear-gradient(rgba(29, 29, 29, 0.97), rgba(0, 0, 0, 0.5)), url("/images/groepsfoto.jpg");
+    background: linear-gradient(rgba(29, 29, 29, 0.85), rgba(0, 0, 0, 0.5)), url("/images/groepsfoto.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: scroll;
