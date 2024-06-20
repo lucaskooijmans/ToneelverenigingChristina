@@ -1512,6 +1512,12 @@ strong {
     cursor: pointer;
 }
 
+.no-blur {
+    position: relative;
+    z-index: 3; 
+    backdrop-filter: none; 
+    color: white; 
+}
 
 /* Media Queries */
 

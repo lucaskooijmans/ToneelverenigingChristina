@@ -13,19 +13,41 @@
     <x-navbar />
 
     <div class="contact">
-        <section class="intro">
-            <h1>{!! nl2br(__("doneren-titel")) !!}</h1>
-            @auth
-                <a href="{{ route('text.index') }}" class="button green-button">Titel bewerken</a>
-            @endauth
-            <p>
-                    {!! nl2br(__("doneren-intro")) !!}
-            </p>
+    @php
+        $images = config('introImages');
+        $sectionImage = $images['doneren_intro'] ?? 'default_intro.jpg';
+    @endphp
 
-            @auth
-                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
-            @endauth
-        </section>
+    <section class="intro" style="background-image: url('{{ asset('storage/introImages/' . $sectionImage) }}');">
+        <h1><strong>{!! nl2br(__("doneren-titel")) !!}</strong></h1>
+
+        @auth
+            <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding aanpassen</a>
+            <form id="imageUploadForm" class="no-blur" action="{{ route('uploadImage') }}" method="POST" enctype="multipart/form-data" style="display:none;">
+                @csrf
+                <input type="hidden" name="section" value="doneren_intro">
+                <input type="file" name="image" class="form-control no-blur">
+                <button type="submit" class="button green-button no-blur">Upload</button>
+            </form>
+        @endauth
+
+        <p>{!! nl2br(__("doneren-intro")) !!}</p>
+
+        @auth
+            <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+        @endauth
+    </section>
+
+    <script>
+        function toggleUploadForm() {
+            var form = document.getElementById('imageUploadForm');
+            if (form.style.display === "none") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+    </script>
         <div class="container">
 
             @if (session('success'))
