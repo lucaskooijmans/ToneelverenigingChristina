@@ -105,7 +105,7 @@ class DoneerController extends Controller
         } catch (\Exception $e) {
             // Log the error for debugging
             Log::error('Mollie payment error: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while processing the donation. Please try again. ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while processing the donation. Please try again. ');
         }
     }
 
@@ -152,7 +152,7 @@ class DoneerController extends Controller
             return view('donations.success', ['statusMessage' => $statusMessage]);
         } catch (\Exception $e) {
             Log::error('Error retrieving payment: ' . $e->getMessage());
-            return redirect()->route('donations.index')->with('error', 'An error occurred while retrieving the payment status.' . $e->getMessage());
+            return redirect()->route('donations.index')->with('error', 'An error occurred while retrieving the payment status.');
         }
     }
 }
