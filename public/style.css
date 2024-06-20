@@ -172,6 +172,14 @@ nav {
     background-color: var(--accent-color);
 }
 
+.location iframe {
+    border: none;
+    border-radius: 5px;
+    width: 1000px;
+    max-width: 1200px;
+  height: 800px;
+}
+
 .logout-button {
     background-color: rgb(255, 89, 89); 
     color: white; 
@@ -1619,6 +1627,10 @@ strong {
         flex-direction: column;
 
     }
+
+    .location iframe {
+        width: 600px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -1662,6 +1674,10 @@ strong {
 
     .section {
         width: 80%;
+    }
+
+    .location iframe {
+        width: 400px;
     }
 }
 
