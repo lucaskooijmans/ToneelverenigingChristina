@@ -487,7 +487,7 @@ h1 {
     }
 }
 
-/* Fotogallerij */
+/* Fotogalerij */
 
 .photo-form {
     padding: 20px;
@@ -1187,6 +1187,8 @@ textarea {
 
 }
 
+
+
 .historie-item {
     display: flex;
     justify-content: center;
@@ -1485,6 +1487,52 @@ div.fc-event-main {
 
 strong {
     font-weight: bold;
+}
+
+.intro {
+    text-align: center;
+    padding: 20px 0 50px 0;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative; 
+    color: white; 
+}
+
+.intro::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); 
+    backdrop-filter: blur(3px); 
+    z-index: 1; 
+}
+
+.intro h1, .intro p, .intro .button {
+    position: relative;
+    z-index: 2; 
+}
+
+.intro .button {
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.no-blur {
+    position: relative;
+    z-index: 3; 
+    backdrop-filter: none; 
+    color: white; 
 }
 
 /* Media Queries */

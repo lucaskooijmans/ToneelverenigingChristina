@@ -44,7 +44,7 @@
         <div class="link-category">
             <h2 aria-hidden="true" class="cursive">Over ons</h2>
             <a href="/historie" tabindex="0">Historie</a>
-            <a href="/gallery" tabindex="0">Gallerij</a>
+            <a href="/gallery" tabindex="0">Galerij</a>
             <a href="/boardmembers" tabindex="0">Bestuursleden</a>
             <a href="/sponsors" tabindex="0">Onze Sponsoren</a>
         </div>

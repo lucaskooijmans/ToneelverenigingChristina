@@ -17,7 +17,7 @@ class GalleryTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
                     ->visit('/gallery')
-                    ->assertSee('Foto Gallerij')
+                    ->assertSee('Foto Galerij')
                     ->assertSee('Foto toevoegen')
                     ->clickLink('Foto toevoegen')
                     ->assertSee('Foto toevoegen')

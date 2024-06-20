@@ -14,10 +14,42 @@
     <x-navbar />
 
     <div class="bestuursleden">
+        @php
+            $images = config('introImages');
+            $sectionImage = $images['bestuursleden_intro'] ?? 'default_intro.jpg';
+        @endphp
 
+        <section class="intro" style="background-image: url('{{ asset('storage/introImages/' . $sectionImage) }}');">
+            <h1><strong>{!! nl2br(__("bestuursleden-titel")) !!}</strong></h1>
+
+            @auth
+                <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding aanpassen</a>
+                <form id="imageUploadForm" class="no-blur" action="{{ route('uploadImage') }}" method="POST" enctype="multipart/form-data" style="display:none;">
+                    @csrf
+                    <input type="hidden" name="section" value="bestuursleden_intro">
+                    <input type="file" name="image" class="form-control">
+                    <button type="submit" class="button green-button">Upload</button>
+                </form>
+            @endauth
+
+            <p>{!! nl2br(__("bestuursleden-intro")) !!}</p>
+
+            @auth
+                <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            @endauth
+        </section>
+
+        <script>
+            function toggleUploadForm() {
+                var form = document.getElementById('imageUploadForm');
+                if (form.style.display === "none") {
+                    form.style.display = "block";
+                } else {
+                    form.style.display = "none";
+                }
+            }
+        </script>
         <div class="container">
-
-            <h1>Onze bestuursleden</h1>
 
             <div class="bestuursleden-intro">
                 <img src="/images/bestuur.jpg" alt="Foto van de bestuursleden van Toneelvereniging Christina">
