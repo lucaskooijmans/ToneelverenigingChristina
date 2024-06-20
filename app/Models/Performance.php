@@ -27,7 +27,6 @@ class Performance extends Model
         'tickets_added',
         'tickets_removed',
         'price',
-        'location_embed'
     ];
     protected $table = 'performances';
 

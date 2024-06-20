@@ -62,6 +62,7 @@
                 <p>Er is op dit moment geen nieuws...</p>
             @else
                 <div class="list-group posts">
+                    <div class="tree"></div>
                     @foreach ($posts as $post)
                         <div class="list-group-item post">
                             <div class="post-content">

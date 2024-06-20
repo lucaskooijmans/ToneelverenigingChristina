@@ -32,6 +32,7 @@ class PerformanceController extends Controller
             'available_seats' => 'required|integer',
             'price' => 'required|numeric|min:0',
         ]);
+
         if($request->edit){
             $performance = Performance::find($request->id);
 
@@ -57,6 +58,7 @@ class PerformanceController extends Controller
             if (is_null($formFields['location'])) {
                 unset($formFields['location']);
             }
+
             $formFields['tickets_remaining'] = $request->available_seats;
             $formFields['tickets_added'] = $request->available_seats;
 
