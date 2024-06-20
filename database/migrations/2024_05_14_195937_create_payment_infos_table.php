@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payment_infos', function (Blueprint $table) {
             $table->id();
             $table->string('payment_id')->unique();
-            $table->unsignedBigInteger('performance_id');
+            $table->unsignedBigInteger('performance_id')->nullable();
             $table->text('data'); // Serialized purchase data
             $table->timestamps();
         });        

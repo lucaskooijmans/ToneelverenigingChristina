@@ -138,9 +138,9 @@
                             <button type="button" class="donation-button" onclick="setDonationAmount(20)">€20</button>
                             <button type="button" class="donation-button" onclick="setDonationAmount(0)">Kies eigen bedrag</button>
                         </div>
-                        <div class="form-group donation-input">
+                        <div class="form-group">
                             <label for="donation_amount">Donatiebedrag</label>
-                            <input type="number" id="donation_amount" name="donation_amount" required class="form-control">
+                            <input type="number" id="donation_amount" name="donation_amount" required class="form-control" max="5000">
                         </div>
                         <button type="submit">Doneer</button>
                     </form>
@@ -178,6 +178,7 @@
             var dateGroup = document.getElementById('date-group');
             var donationAmountInput = document.getElementById('donation_amount');
             var donationButtons = document.querySelectorAll('.donation-button');
+            var donationAmountLabel = document.querySelector('label[for="donation_amount"]');
 
             typeSelect.addEventListener('change', function() {
                 if (typeSelect.value === 'uitlenen') {
@@ -189,8 +190,21 @@
 
             donationButtons.forEach(button => {
                 button.addEventListener('click', function() {
+                    // Remove highlight from all buttons
                     donationButtons.forEach(btn => btn.classList.remove('highlight'));
+
+                    // Add highlight to the clicked button
                     this.classList.add('highlight');
+
+                    // Hide the input bar
+                    donationAmountInput.style.display = 'none';
+                    donationAmountLabel.style.display = 'none';
+
+                    // If "Kies eigen bedrag" button is clicked, show the input bar
+                    if (this.textContent === 'Kies eigen bedrag') {
+                        donationAmountInput.style.display = 'block';
+                        donationAmountLabel.style.display = 'block';
+                    }
                 });
             });
         });
