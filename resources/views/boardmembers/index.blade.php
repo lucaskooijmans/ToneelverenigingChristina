@@ -20,7 +20,7 @@
         @endphp
 
         <section class="intro" style="background-image: url('{{ asset('storage/introImages/' . $sectionImage) }}');">
-            <h1>{!! nl2br(__("bestuursleden-titel")) !!}</h1>
+            <h1><strong>{!! nl2br(__("bestuursleden-titel")) !!}<strong></h1>
 
             @auth
                 <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding aanpassen</a>

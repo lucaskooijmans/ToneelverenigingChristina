@@ -1475,29 +1475,43 @@ strong {
 
 .intro {
     text-align: center;
-    padding: 30px 0;
+    padding: 20px 0 50px 0;
     width: 100%;
-    background-color: lightgrey;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: lightgrey;
-    color: black;
+    position: relative; 
+    color: white; 
 }
 
-.intro h1 {
-    font-weight: bold;
-    margin-top: 0;
-    color: inherit;
+.intro::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); 
+    backdrop-filter: blur(3px); 
+    z-index: 1; 
 }
 
-.intro p {
-    max-width: 30%;
-    margin-left: auto;
-    margin-right: auto;
-    word-wrap: break-word;
-    color: inherit;
+.intro h1, .intro p, .intro .button {
+    position: relative;
+    z-index: 2; 
 }
+
+.intro .button {
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
 
 /* Media Queries */
 
