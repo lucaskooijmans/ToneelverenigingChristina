@@ -139,15 +139,12 @@
         </div>
     </div>
     <div class="sponsors">
-        <div class="container"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
-
-    <div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
-        <h1 style="margin: 0;">Locatie</h1>
-        <div style="width: 100%; height: 80%; display: flex; justify-content: center; align-items: center;">
-            {!! $performance->location_embed !!}
+        <div class="container location">
+            <h1 style="margin: 0;">Locatie</h1>
+            <div style="width: 100%; height: 80%; display: flex; justify-content: center; align-items: center;">
+                {!! $performance->location_embed !!}
+            </div>
         </div>
-    </div>
 
 </body>
 
