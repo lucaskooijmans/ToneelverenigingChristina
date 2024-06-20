@@ -16,9 +16,9 @@
             <h1>Tekstbewerker</h1>
             <div class="post-form">
                 @foreach ($keys as $key)
-                    <form action="{{ route('text.edit', ['id' => $key]) }}" method="post">
+                    <form action="{{ route('text.edit', ['id' => $key]) }}" method="post" class="editor">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group editor">
                             <label for="text">{{ $key }}</label>
                             <textarea name="text" class="form-control editor">{{ $messages[$key] }}</textarea>
                         </div>
