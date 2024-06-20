@@ -546,6 +546,11 @@ h1 {
 
 .photo-item img {
     width: 100%;
+    transition: transform 0.15s ease-in-out;
+}
+
+.photo-item:hover img {
+    transform: scale(1.1);
 }
 
 .photo-item h2 {
@@ -1474,8 +1479,12 @@ div.fc-event-main {
     display: none;
 }
 
-.category-group[data-open = "false"] h2::after {
+.category-group[data-open = "true"] h2::after {
     content: "▼";
+}
+
+.category-group[data-open = "false"] h2::after {
+    content: "▲";
 }
 
 strong {
