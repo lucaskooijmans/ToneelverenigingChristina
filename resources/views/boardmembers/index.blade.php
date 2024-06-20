@@ -54,7 +54,7 @@
             <div class="bestuursleden-intro">
                 <img src="/images/bestuur.jpg" alt="Foto van de bestuursleden van Toneelvereniging Christina">
                 <p>
-                    {!! nl2br(__('bestuursleden-intro')) !!}
+                    {!! nl2br(__('bestuursleden-blok-intro')) !!}
                     @auth
                         <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
                     @endauth
