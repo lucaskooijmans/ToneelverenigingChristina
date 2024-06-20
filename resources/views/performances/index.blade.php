@@ -42,7 +42,7 @@
     <div class="performances">
     @php
             $images = config('introImages');
-            $sectionImage = $images['voorstellingen_intro'] ?? 'default_intro.jpg';
+            $sectionImage = $images['voorstellingen_overzicht_intro'] ?? 'default_intro.jpg';
         @endphp
 
         <section class="intro" style="background-image: url('{{ asset('storage/introImages/' . $sectionImage) }}');">
@@ -52,7 +52,7 @@
                 <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding aanpassen</a>
                 <form id="imageUploadForm" class="no-blur" action="{{ route('uploadImage') }}" method="POST" enctype="multipart/form-data" style="display:none;">
                     @csrf
-                    <input type="hidden" name="section" value="voorstellingen_intro">
+                    <input type="hidden" name="section" value="voorstellingen_overzicht_intro">
                     <input type="file" name="image" class="form-control">
                     <button type="submit" class="button green-button">Upload</button>
                 </form>
