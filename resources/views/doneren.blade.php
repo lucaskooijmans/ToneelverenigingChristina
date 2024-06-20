@@ -12,7 +12,39 @@
 <body>
     <x-navbar />
 
-    <div class="contact">
+    @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+
+
+        <div class="tabs">
+            <div class="tab-list">
+                <button class="tab-list__button active" data-target="donations">Goederen</button>
+                <button class="tab-list__button" data-target="gelddonatie">Geld</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="donations" class="tab active">
+                <div class="contact">
     @php
         $images = config('introImages');
         $sectionImage = $images['doneren_intro'] ?? 'default_intro.jpg';
@@ -38,16 +70,6 @@
         @endauth
     </section>
 
-    <script>
-        function toggleUploadForm() {
-            var form = document.getElementById('imageUploadForm');
-            if (form.style.display === "none") {
-                form.style.display = "block";
-            } else {
-                form.style.display = "none";
-            }
-        }
-    </script>
         <div class="container">
 
             @if (session('success'))
@@ -103,6 +125,74 @@
             </div>
         </div>
     </div>
+                </div>
+
+                <div id="gelddonatie" class="tab">
+                    <!-- GeldDonatie content goes here -->
+                        <div class="donationdiv">
+                            <form action="{{ route('donations.prepare') }}" method="POST" class="donation-form">
+                                @csrf
+                                <h1>Doneren</h1>
+                                <div class="donation-buttons">
+                                    <button type="button" class="donation-button" onclick="setDonationAmount(5)">€5</button>
+                                    <button type="button" class="donation-button" onclick="setDonationAmount(10)">€10</button>
+                                    <button type="button" class="donation-button" onclick="setDonationAmount(20)">€20</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="donation_amount">Donatiebedrag</label>
+                                    <input type="number" id="donation_amount" name="donation_amount" required class="form-control">
+                                </div>
+                                <button type="submit">Doneer</button>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -117,6 +207,42 @@
                 }
             });
         });
+
+        function toggleUploadForm() {
+            var form = document.getElementById('imageUploadForm');
+            if (form.style.display === "none") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+
+        function setDonationAmount(amount) {
+        document.getElementById('donation_amount').value = amount;
+    }
+    document.querySelectorAll('.tab-list__button').forEach(button => {
+    button.addEventListener('click', () => {
+        const target = button.dataset.target;
+        document.querySelectorAll('.tab-list__button').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        button.classList.add('active');
+        document.querySelector('#' + target).classList.add('active');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+            var typeSelect = document.getElementById('type');
+            var dateGroup = document.getElementById('date-group');
+
+            typeSelect.addEventListener('change', function() {
+                if (typeSelect.value === 'uitlenen') {
+                    dateGroup.style.display = 'block';
+                } else {
+                    dateGroup.style.display = 'none';
+                }
+            });
+        });
+
     </script>
 </body>
 
