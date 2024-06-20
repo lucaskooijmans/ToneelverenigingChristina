@@ -18,6 +18,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\DoneerController;
 use App\Http\Controllers\TextEditController;
+use App\Http\Controllers\PageController;
 use App\Mail\DonationMail;
 
 /*
@@ -165,6 +166,8 @@ Route::get('/payment/status/{id}', [PaymentController::class, 'confirmation'])->
 
 Route::get('/teksten', [TextEditController::class, 'index'])->name('text.index');
 Route::post('/teksten/{id}/edit', [TextEditController::class, 'edit'])->name('text.edit');
+
+Route::post('/uploadImage', [PageController::class, 'uploadImage'])->name('uploadImage');
 
 // Auth routes
 require __DIR__ . '/auth.php';
