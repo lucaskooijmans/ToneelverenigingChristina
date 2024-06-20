@@ -26,7 +26,7 @@
             <p><i class="fas fa-euro-sign"></i> {{ $performanceItem->price }}</p>
         </div>
     </div>
-    <a href="/voorstellingen/{{ $performanceItem->id }}" class="button blue-button">Kaarten kopen</a>
+    <a href="/voorstellingen/{{ $performanceItem->id }}" class="button blue-button">Meer informatie</a>
     @if (Gate::allows('isAdmin'))
         <div class="post-buttons">
             <button class="button blue-button" tabindex="4"

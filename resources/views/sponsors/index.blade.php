@@ -99,8 +99,9 @@
                                     <div style="margin-top: 10px;">
                                         <strong
                                             style="display: block; margin-bottom: 5px;">{{ $sponsor->name }}</strong>
-                                        <a href="{{ $sponsor->url }}" class="button blue-button"
-                                            target="_blank">Bezoek website</a>
+                                        <a href="{{ $sponsor->url }}"
+                                            style="color: #007bff; text-decoration: none; font-size: 14px;"
+                                            target="_blank">Website</a>
 
                                         @auth
                                             @if (auth()->user()->isAdmin())
