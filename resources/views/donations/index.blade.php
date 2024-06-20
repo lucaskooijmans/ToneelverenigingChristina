@@ -136,11 +136,11 @@
                             <button type="button" class="donation-button" onclick="setDonationAmount(5)">€5</button>
                             <button type="button" class="donation-button" onclick="setDonationAmount(10)">€10</button>
                             <button type="button" class="donation-button" onclick="setDonationAmount(20)">€20</button>
-                            <button type="button" class="donation-button" onclick="setDonationAmount(0)">Kies eigen bedrag</button>
+                            <button type="button" class="donation-button" onclick="setDonationAmount()">Kies eigen bedrag</button>
                         </div>
                         <div class="form-group">
                             <label for="donation_amount">Donatiebedrag</label>
-                            <input type="number" id="donation_amount" name="donation_amount" required class="form-control" max="5000">
+                            <input type="number" id="donation_amount" name="donation_amount" required class="form-control" max="5000" placeholder="Vul hier het gewenste bedrag in">
                         </div>
                         <button type="submit">Doneer</button>
                     </form>
