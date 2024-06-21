@@ -171,15 +171,11 @@
         </div>
     </div>
     <div class="sponsors">
-        <div class="container"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+        <div class="container location">
 
             <h1 style="margin: 0;">Locatie</h1>
             <div style="width: 80vw; height: 80%; display: flex; justify-content: center; align-items: center;">
-                <iframe
-                    src="https://storage.googleapis.com/maps-solutions-dmaxp2tpvp/locator-plus/dv31/locator-plus.html"
-                    width="100%" height="100%" style="border:0;" loading="lazy">
-                </iframe>
+                {!! $performance->location_embed !!}
             </div>
         </div>
     </div>
