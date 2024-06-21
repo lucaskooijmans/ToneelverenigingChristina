@@ -159,7 +159,7 @@
                 <div class="donationdiv">
                     <form action="{{ route('donations.prepare') }}" method="POST" class="donation-form">
                         @csrf
-                        <h1>Geld donatie</h1>
+                        <h1>Gelddonatie</h1>
                         <div class="donation-buttons">
                             <button type="button" class="donation-button" onclick="setDonationAmount(5)">€5</button>
                             <button type="button" class="donation-button" onclick="setDonationAmount(10)">€10</button>

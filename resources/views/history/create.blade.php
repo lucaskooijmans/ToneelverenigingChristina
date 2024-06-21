@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="optional_footer">Footer:</label>
+                    <label for="optional_footer">Voettekst:</label>
                     <textarea name="optional_footer" class="form-control" id="optional_footer">{{ old('optional_footer', $historyItem->optional_footer ?? '') }}</textarea>
                 </div>
 
