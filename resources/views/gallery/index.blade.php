@@ -14,8 +14,8 @@
     <x-navbar />
 
     <div class="gallery">
-    @php
-            $images = config('introImages');
+        @php
+            $images = json_decode(file_get_contents(resource_path('intro.json')), true);
             $sectionImage = $images['galerij_intro'] ?? 'default_intro.jpg';
         @endphp
 

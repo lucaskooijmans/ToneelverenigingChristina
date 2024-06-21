@@ -11,7 +11,7 @@
     <x-navbar />
     <div class="sponsors">
         @php
-            $images = config('introImages');
+            $images = json_decode(file_get_contents(resource_path('intro.json')), true);
             $sectionImage = $images['inschrijven_intro'] ?? 'default_intro.jpg';
         @endphp
 
