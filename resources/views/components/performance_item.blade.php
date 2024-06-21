@@ -18,7 +18,7 @@
     <p>{{ $performanceItem->description }}</p>
     <div class="pills">
         <div class="performance-datetime">
-            <p><i class="far fa-calendar-alt"></i> {{ $performanceItem->starttimeDT->format("Y-m-d") }}</p>
+            <p><i class="far fa-calendar-alt"></i> {{ $performanceItem->starttimeDT->format("d-m-Y") }}</p>
             <p><i class="far fa-clock"></i> {{ $performanceItem->starttimeDT->format("H:i") }}-{{ $performanceItem->endtimeDT->format("H:i") }}</p>
         </div>
         <div class="performance-tickets">
