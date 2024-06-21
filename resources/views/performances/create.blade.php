@@ -83,11 +83,6 @@
                     <input type="number" step="0.01" id="price" name="price" required class="form-control"
                         value="{{ old('price', $performance->price ?? '') }}" min="0">
                 </div>
-                <div class="form-group">
-                    <label for="location_embed">Locatie:</label>
-                    <input type="text" id="location_embed" name="location_embed" class="form-control"
-                        value="{{ old('location_embed', $performance->location_embed ?? '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217.3498098737098!2d5.327337745359679!3d51.95160077772477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6592dd4cbe6a1%3A0xa592b7f9668a192b!2sDe%20Rozenhoek!5e0!3m2!1snl!2snl!4v1718289897215!5m2!1snl!2snl" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>') }}">
-                </div>
                 <input type="hidden" name="edit" value="{{ $edit ?? false }}">
                 <input type="hidden" name="id" value="{{ $performance->id ?? null }}">
                 <button type="submit" class="button green-button"><i class="fas fa-check"></i> Opslaan</button>
