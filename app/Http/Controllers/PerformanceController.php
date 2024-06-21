@@ -11,7 +11,7 @@ class PerformanceController extends Controller
 {
     public function index()
     {
-        $performances = Performance::all();
+        $performances = Performance::orderBy('starttime')->get();
         return view('performances.index', ['performances' => $performances]);
     }
 
