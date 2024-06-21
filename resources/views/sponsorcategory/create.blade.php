@@ -34,10 +34,11 @@
                 class="post-form">
                 @csrf
                 <div class="form-group">
-                    <label for="sponsorcategories">Naam:</label>
+                    <label for="sponsorcategories">Naam: <b>*</b></label>
                     <input type="text" id="sponsorcategories" name="sponsorcategories"
                         value="{{ old('sponsorcategories') }}" required class="form-control">
                 </div>
+                <label><b>*</b> Verplicht veld</label>
                 <div>
                     <button type="submit" class="button green-button"><i class="fas fa-check"></i> Opslaan</button>
                 </div>

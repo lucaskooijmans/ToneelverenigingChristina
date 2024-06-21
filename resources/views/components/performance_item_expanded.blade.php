@@ -9,7 +9,7 @@
     <p>Starttijd: {{ $performanceItem->starttime }}</p>
     <p>Eindtijd: {{ $performanceItem->endtime }}</p>
     <p>Locatie: {{ $performanceItem->location }}</p>
-    <p>Beschikbare stoelen: {{ $performanceItem->available_seats }}</p>
+    <p>Aantal stoelen: {{ $performanceItem->available_seats }}</p>
     <p>Beschikbare tickets: {{ $performanceItem->tickets_remaining }}</p>
     <p>Prijs: {{ $performanceItem->price }}</p>
     @if (Gate::allows('isAdmin'))

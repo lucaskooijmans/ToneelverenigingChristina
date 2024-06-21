@@ -39,7 +39,7 @@ class BoardmembersController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:boardmembers,email',
-            'phone' => 'required',
+            'phone' => 'nullable',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ], [
@@ -86,7 +86,7 @@ class BoardmembersController extends Controller
             $request->validate([
                 'name' => 'required',
                 'email' => 'required|email|unique:boardmembers,email,' . $id . ',id',
-                'phone' => 'required',
+                'phone' => 'nullable',
                 'description' => 'required',
                 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
 
