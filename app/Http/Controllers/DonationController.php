@@ -16,7 +16,7 @@ use Mollie\Api\Exceptions\ApiException;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PDFController;
 
-class DoneerController extends Controller
+class DonationController extends Controller
 {
 
 
@@ -60,7 +60,7 @@ class DoneerController extends Controller
         Mail::to(env('MAILTO', 'test@thover.eu'))->send(new DonationMail($data));
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Your donation has been submitted successfully!');
+        return redirect()->back()->with('success', 'Uw donatie is goed binnengekomen. Ontzettend bedankt voor uw donatie!');
     }
 
     public function prepareDonation(Request $request)
@@ -105,7 +105,7 @@ class DoneerController extends Controller
         } catch (\Exception $e) {
             // Log the error for debugging
             Log::error('Mollie payment error: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while processing the donation. Please try again. ');
+            return redirect()->back()->with('error', 'Er is een fout opgetreden tijdens het verwerken van de donatie. Probeer het opnieuw.');
         }
     }
 
@@ -130,7 +130,7 @@ class DoneerController extends Controller
 
             switch ($payment->status) {
                 case 'paid':
-                    $statusMessage = 'Bedankt voor je donatie! Uw donatie is succesvol verwerkt.';
+                    $statusMessage = 'Bedankt voor uw donatie! Uw donatie is succesvol verwerkt.';
                     break;
                 case 'open':
                     $statusMessage = 'Uw betaling is nog niet afgerond. Volg de instructies om de betaling te voltooien.';
@@ -152,7 +152,7 @@ class DoneerController extends Controller
             return view('donations.success', ['statusMessage' => $statusMessage]);
         } catch (\Exception $e) {
             Log::error('Error retrieving payment: ' . $e->getMessage());
-            return redirect()->route('donations.index')->with('error', 'An error occurred while retrieving the payment status.');
+            return redirect()->route('donations.index')->with('error', 'Er is een error opgetreden met het ophalen van de betalingsstatus.');
         }
     }
 }
