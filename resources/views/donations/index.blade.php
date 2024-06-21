@@ -72,11 +72,34 @@
 
                     <div class="container">
 
-                        @if (session('success'))
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    
+                    @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
-                        @endif
+                    @endif
+
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
                         <div class="contact-split">
 
@@ -110,8 +133,13 @@
                                     <input type="date" id="date" name="date" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="state">In welke staat is uw goed:</label>
-                                    <input id="state" name="state" class="form-control"></input>
+                                    <label for="state">In welke staat is uw goed: <b>*</b></label>
+                                    <select id="state" name="state" required class="form-control">
+                                        <option value="Nieuw">Nieuw</option>
+                                        <option value="Zo goed als nieuw">Zo goed als nieuw</option>
+                                        <option value="Gebruikt">Gebruikt</option>
+                                        <option value="Beschadigd">Beschadigd</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="message">Bericht:</label>

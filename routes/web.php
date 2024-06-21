@@ -16,7 +16,7 @@ use App\Http\Controllers\SponsorCategoryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\DoneerController;
+use App\Http\Controllers\DonationController;
 use App\Http\Controllers\TextEditController;
 use App\Http\Controllers\PageController;
 use App\Mail\DonationMail;
@@ -65,7 +65,7 @@ Route::get('/historie', [HistoryController::class, 'index']);
 Route::get('/nieuws', [PostController::class, 'index']);
 
 
-Route::post('/doneren', [DoneerController::class, 'submit'])->name('doneren.submit');
+Route::post('/doneren', [DonationController::class, 'submit'])->name('doneren.submit');
 
 // Photos resource
 Route::resource('gallery', GalleryController::class);
@@ -143,12 +143,12 @@ Route::middleware('auth')->group(function () {
 });
 
 // Goederen donatie page
-Route::get('doneren', [DoneerController::class, 'index'])->name('donations.index');
+Route::get('doneren', [DonationController::class, 'index'])->name('donations.index');
 
 // Gelddonatie route
-Route::get('donations', [DoneerController::class, 'index'])->name('donations.index');
-Route::post('donations/prepare', [DoneerController::class, 'prepareDonation'])->name('donations.prepare');
-Route::get('donations/success', [DoneerController::class, 'donationSuccess'])->name('donation.success');
+Route::get('donations', [DonationController::class, 'index'])->name('donations.index');
+Route::post('donations/prepare', [DonationController::class, 'prepareDonation'])->name('donations.prepare');
+Route::get('donations/success', [DonationController::class, 'donationSuccess'])->name('donation.success');
 
 //! PDF test routes
 Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf.generatePDF');
