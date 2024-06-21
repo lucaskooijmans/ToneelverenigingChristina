@@ -14,7 +14,7 @@
 
     <div class="contact">
         @php
-            $images = config('introImages');
+            $images = json_decode(file_get_contents(resource_path('intro.json')), true);
             $sectionImage = $images['contact_intro'] ?? 'default_intro.jpg';
         @endphp
 

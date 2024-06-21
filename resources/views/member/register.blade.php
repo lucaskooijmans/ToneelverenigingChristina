@@ -11,7 +11,7 @@
     <x-navbar />
     <div class="sponsors">
         @php
-            $images = config('introImages');
+            $images = json_decode(file_get_contents(resource_path('intro.json')), true);
             $sectionImage = $images['inschrijven_intro'] ?? 'default_intro.jpg';
         @endphp
 
@@ -21,7 +21,8 @@
             @auth
                 <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding aanpassen</a>
                 <form id="imageUploadForm" class="no-blur" action="{{ route('uploadImage') }}" method="POST" enctype="multipart/form-data" style="display:none;">
-                    <input type="hidden" name="section" value="inschrijven_intro_intro">
+                    @csrf
+                    <input type="hidden" name="section" value="inschrijven_intro">
                     <input type="file" name="image" class="form-control">
                     <button type="submit" class="button green-button">Upload</button>
                 </form>

@@ -13,49 +13,51 @@
     <x-navbar />
 
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
     @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
     @endif
 
     @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
     @endif
 
     @php
-    $images = config('introImages');
-    $sectionImage = $images['doneren_intro'] ?? 'default_intro.jpg';
+        $images = json_decode(file_get_contents(resource_path('intro.json')), true);
+        $sectionImage = $images['doneren_intro'] ?? 'default_intro.jpg';
     @endphp
 
     <section class="intro" style="background-image: url('{{ asset('storage/introImages/' . $sectionImage) }}');">
-        <h1><strong>{!! nl2br(__("doneren-titel")) !!}</strong></h1>
+        <h1><strong>{!! nl2br(__('doneren-titel')) !!}</strong></h1>
 
         @auth
-        <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding aanpassen</a>
-        <form id="imageUploadForm" class="no-blur" action="{{ route('uploadImage') }}" method="POST" enctype="multipart/form-data" style="display:none;">
-            @csrf
-            <input type="hidden" name="section" value="doneren_intro">
-            <input type="file" name="image" class="form-control no-blur">
-            <button type="submit" class="button green-button no-blur">Upload</button>
-        </form>
+            <a href="javascript:void(0)" onclick="toggleUploadForm()" class="button green-button">Achtergrondafbeelding
+                aanpassen</a>
+            <form id="imageUploadForm" class="no-blur" action="{{ route('uploadImage') }}" method="POST"
+                enctype="multipart/form-data" style="display:none;">
+                @csrf
+                <input type="hidden" name="section" value="doneren_intro">
+                <input type="file" name="image" class="form-control no-blur">
+                <button type="submit" class="button green-button no-blur">Upload</button>
+            </form>
         @endauth
 
-        <p>{!! nl2br(__("doneren-intro")) !!}</p>
+        <p>{!! nl2br(__('doneren-intro')) !!}</p>
 
         @auth
-        <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
+            <a href="{{ route('text.index') }}" class="button green-button">Tekst bewerken</a>
         @endauth
     </section>
 
@@ -72,38 +74,39 @@
 
                     <div class="container">
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
 
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                    
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
 
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
                         <div class="contact-split">
 
-                            <form method="POST" action="{{ route('doneren.submit') }}" class="contact-form" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('doneren.submit') }}" class="contact-form"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Naam: <b>*</b></label>
@@ -119,7 +122,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Foto van het goed: <b>*</b></label>
-                                    <input type="file" id="image" name="image" accept="image/*" required class="form-control" required>
+                                    <input type="file" id="image" name="image" accept="image/*" required
+                                        class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="type">Wil je het goed uitlenen of doneren</label>
@@ -162,13 +166,17 @@
                         <h1>Gelddonatie</h1>
                         <div class="donation-buttons">
                             <button type="button" class="donation-button" onclick="setDonationAmount(5)">€5</button>
-                            <button type="button" class="donation-button" onclick="setDonationAmount(10)">€10</button>
-                            <button type="button" class="donation-button" onclick="setDonationAmount(20)">€20</button>
-                            <button type="button" class="donation-button" onclick="setDonationAmount()">Kies eigen bedrag</button>
+                            <button type="button" class="donation-button"
+                                onclick="setDonationAmount(10)">€10</button>
+                            <button type="button" class="donation-button"
+                                onclick="setDonationAmount(20)">€20</button>
+                            <button type="button" class="donation-button" onclick="setDonationAmount()">Kies eigen
+                                bedrag</button>
                         </div>
                         <div class="form-group">
                             <label for="donation_amount">Donatiebedrag</label>
-                            <input type="number" id="donation_amount" name="donation_amount" required class="form-control" max="5000" placeholder="Vul hier het gewenste bedrag in">
+                            <input type="number" id="donation_amount" name="donation_amount" required
+                                class="form-control" max="5000" placeholder="Vul hier het gewenste bedrag in">
                         </div>
                         <button type="submit">Doneer</button>
                     </form>
@@ -194,7 +202,8 @@
         document.querySelectorAll('.tab-list__button').forEach(button => {
             button.addEventListener('click', () => {
                 const target = button.dataset.target;
-                document.querySelectorAll('.tab-list__button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-list__button').forEach(btn => btn.classList.remove(
+                    'active'));
                 document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
                 button.classList.add('active');
                 document.querySelector('#' + target).classList.add('active');

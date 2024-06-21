@@ -19,12 +19,10 @@ class PageController extends Controller
         $imageName = $section . '_' . time() . '.' . $request->image->extension();
         $request->image->storeAs('public/introImages', $imageName);
 
-        $configPath = config_path('introImages.php');
-        $images = include $configPath;
+        $jsonPath = resource_path('intro.json');
+        $images = json_decode(file_get_contents($jsonPath), true);
         $images[$section] = $imageName;
-        file_put_contents($configPath, '<?php return ' . var_export($images, true) . ';');
-
-        Artisan::call('config:cache');
+        file_put_contents($jsonPath, json_encode($images, JSON_PRETTY_PRINT));
 
         return redirect()->back()->with('success', 'Image uploaded successfully.');
     }

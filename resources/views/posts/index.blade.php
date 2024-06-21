@@ -14,7 +14,7 @@
 
     <div class="nieuws">
         @php
-            $images = config('introImages');
+            $images = json_decode(file_get_contents(resource_path('intro.json')), true);
             $sectionImage = $images['nieuws_intro'] ?? 'default_intro.jpg';
         @endphp
 
