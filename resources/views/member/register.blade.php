@@ -70,13 +70,13 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="name">Naam:</label>
+                    <label for="name">Naam: <b>*</b></label>
                     <input type="text" id="name" name="name" value="{{ old('name') }}" required
                         class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label for="email">Email: <b>*</b></label>
                     <input type="email" id="email" name="email" value="{{ old('email') }}" required
                         class="form-control">
                 </div>
@@ -88,25 +88,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="postalCode">Postcode:</label>
+                    <label for="postalCode">Postcode: <b>*</b></label>
                     <input type="text" id="postalCode" name="postalCode" value="{{ old('postalCode') }}" required
                         class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="houseNumber">Huisnummer:</label>
+                    <label for="houseNumber">Huisnummer: <b>*</b></label>
                     <input type="text" id="houseNumber" name="houseNumber" value="{{ old('houseNumber') }}" required
                         class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="street">Straat:</label>
+                    <label for="street">Straat: <b>*</b></label>
                     <input type="text" id="street" name="street" value="{{ old('street') }}" required
                         class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="city">Plaats:</label>
+                    <label for="city">Plaats: <b>*</b></label>
                     <input type="text" id="city" name="city" value="{{ old('city') }}" required
                         class="form-control">
                 </div>
@@ -118,9 +118,10 @@
 
                 <div class="form-group">
                     <label for="accept">Ik ga akkoord met de <a href="/algemene_voorwaarden">algemene
-                            voorwaarden</a>.</label>
+                            voorwaarden </a>. <b>*</b></label>
                     <input type="checkbox" id="accept" name="accept" required class="form-control">
                 </div>
+                <label><b>*</b> Verplicht veld</label>
 
                 <button type="submit" class="button green-button">Inschrijven</button>
             </form>

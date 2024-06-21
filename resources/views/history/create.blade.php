@@ -18,7 +18,7 @@
                 <input type="hidden" name="edit" value="{{ $edit ?? false }}">
                 <input type="hidden" name="id" value="{{ $historyItem->id ?? null }}">
                 <div class="form-group">
-                    <label for="header">Header:</label>
+                    <label for="header">Header: <b>*</b></label>
                     <input type="text" name="header" id="header" required class="form-control"
                         value="{{ old('header', $historyItem->header ?? null) }}">
                 </div>
@@ -70,6 +70,7 @@
                     <input type="checkbox" name="contribution" id="contribution"
                         {{ old('contribution', $historyItem->contribution ?? false) ? 'checked' : '' }}>
                 </div>
+                <label><b>*</b> Verplicht veld</label>
 
                 <button type="submit" class="button green-button"><i class="fa fa-check"></i>Bevestig </button>
             </form>

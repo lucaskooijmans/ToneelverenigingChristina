@@ -36,7 +36,7 @@
             <form id="myForm" action="{{ route('sponsors.store') }}" method="post" enctype="multipart/form-data" class="post-form">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Naam:</label>
+                    <label for="name">Naam: <b>*</b></label>
                     <input type="text" id="name" name="name" value="{{ old('name') }}" required class="form-control">
                 </div>
                 <div class="form-group">
@@ -44,11 +44,11 @@
                     <input type="url" id="url" name="url" value="{{ old('url') }}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="logo">Foto van sponsor:</label>
+                    <label for="logo">Foto van sponsor: <b>*</b></label>
                     <input type="file" id="logo" name="logo" accept="image/*" required class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="category_id">Categorie:</label>
+                    <label for="category_id">Categorie: <b>*</b></label>
                     <select id="category_id" name="category_id" required class="form-control">
                         <option value="">Selecteer een categorie</option>
                         @foreach ($categories as $category)
@@ -56,6 +56,7 @@
                         @endforeach
                     </select>
                 </div>
+                <label><b>*</b> Verplicht veld</label>
                 <div>
                     <button type="submit" class="button green-button"><i class="fas fa-check"></i> Opslaan</button>
                     <button type="button" onclick="window.history.back();" class="button gray-button"><i class="fas fa-times"></i> Annuleren</button>
