@@ -16,7 +16,7 @@ use Mollie\Api\Exceptions\ApiException;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PDFController;
 
-class DoneerController extends Controller
+class DonationController extends Controller
 {
 
 
