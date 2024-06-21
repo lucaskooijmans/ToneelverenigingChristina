@@ -57,7 +57,7 @@ class DoneerController extends Controller
         );
 
         // Send the email with the uploaded image
-        Mail::to('')->send(new DonationMail($data));
+        Mail::to(env('MAILTO', 'test@thover.eu'))->send(new DonationMail($data));
 
         // Redirect back with success message
         return redirect()->back()->with('success', 'Your donation has been submitted successfully!');
