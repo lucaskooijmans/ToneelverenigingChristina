@@ -71,7 +71,7 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="name">Naam: <b>*</b></label>
+                    <label for="name">Voor- en achternaam: <b>*</b></label>
                     <input type="text" id="name" name="name" value="{{ old('name') }}" required
                         class="form-control">
                 </div>
