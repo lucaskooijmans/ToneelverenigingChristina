@@ -65,7 +65,7 @@
                 <div class="form-group">
                     <label for="location">Locatie:</label>
                     <input type="text" id="location" name="location" class="form-control"
-                        value="{{ old('location', $performance->location ?? '') }}"
+                        value="{{ old('location', $performance->location ?? 'Dorpshuis de Rozenhoek') }}"
                         placeholder="Laat leeg voor 'Dorpshuis de Rozenhoek'">
                 </div>
                 <div class="form-group">

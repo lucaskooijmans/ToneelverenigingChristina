@@ -772,6 +772,7 @@ h1 {
     border-radius: 5px;
     box-shadow: #1d1d1b 0px 0px 10px;
     max-height: 30rem;
+    width: 100%;
 }
 
 .post-content {
@@ -1115,7 +1116,6 @@ textarea {
     border-radius: 5px;
     box-shadow: #1d1d1b 0px 0px 10px;
     min-width: 300px;
-    width: 100%;
     position: relative;
 }
 

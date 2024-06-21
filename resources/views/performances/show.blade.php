@@ -138,7 +138,7 @@
                 </div>
 
                 <div class="checkout">
-                    @if ($performance->tickets_remaining > 0)
+                    @if ($performance->tickets_remaining > 0 && $performance->starttime > now())
                         <form action="{{ route('payment.prepare', ['id' => $performance->id]) }}" method="POST"
                             class="post-form">
                             @csrf
@@ -161,6 +161,10 @@
 
                             <button type="submit" class="blue-button button">Afrekenen</button>
                         </form>
+                    @elseif ($performance->starttime < now())
+                        <div class="alert alert-warning">
+                            <p>Deze voorstelling is al geweest en kan niet meer geboekt worden.</p>
+                        </div>
                     @else
                         <div class="alert alert-warning">
                             <p>Helaas, er zijn geen tickets meer beschikbaar voor deze voorstelling.</p>
